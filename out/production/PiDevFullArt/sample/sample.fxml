@@ -17,7 +17,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-            <Button mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
+            <Button mnemonicParsing="false" text="Moemen" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
