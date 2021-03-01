@@ -1,17 +1,30 @@
 package Controller;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import util.ConnectionUtil;
+import javafx.scene.control.Label;
 
-public class LoginController {
+public class LoginController implements Initializable{
+
 
     @FXML
     private Button btnlogin;
-
-
 
     @FXML
     private TextField txtlogin;
@@ -23,5 +36,27 @@ public class LoginController {
     void login(ActionEvent event) {
 
     }
+    @FXML
+    private Label lblErrors;
 
+    Connection conn =null;
+
+
+@Override
+    public void initialize(URL url, ResourceBundle rb) {
+ conn=ConnectionUtil.conDB();
+        if (conn == null) {
+            lblErrors.setTextFill(Color.TOMATO);
+            lblErrors.setText("Server Error : Check");
+        } else {
+            lblErrors.setTextFill(Color.GREEN);
+            lblErrors.setText("Server is up : Good to go");
+        }
+    }
+
+    private void setLblError(Color color, String text) {
+        lblErrors.setTextFill(color);
+        lblErrors.setText(text);
+        System.out.println(text);
+    }
 }

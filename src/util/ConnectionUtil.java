@@ -3,18 +3,28 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectionUtil {
-    Connection conn = null;
+
+
+
+    public Connection conn ;
     public static Connection conDB()
     {
+        String dbName="fullart";
+        String userName="root";
+        String password="";
+
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("http://localhost/phpmyadmin/db_structure.php?server=1&db=fullart", "root", "");
-            return con;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/"+"fullart","root", "");
+            return conn;
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("ConnectionUtil : "+ex.getMessage());
             return null;
         }
     }
-}
+
+    }

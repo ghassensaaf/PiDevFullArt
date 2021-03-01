@@ -1,16 +1,10 @@
 package entite;
 
-public class client {
+import java.util.Objects;
+
+public class client extends user{
 
     private int id_client;
-    private String login;
-    private String nom;
-    private String prenom;
-    private String adresse;
-    private String mail;
-    private int tel;
-    private String pwd;
-    private String photo;
 
 
     public int getId_client() {
@@ -21,83 +15,17 @@ public class client {
         this.id_client = id_client;
     }
 
-    public String getLogin() {
-        return login;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        client client = (client) o;
+        return id_client == client.id_client;
     }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public int getTel() {
-        return tel;
-    }
-
-    public void setTel(int tel) {
-        this.tel = tel;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
 
     @Override
-    public String toString() {
-        return "client{" +
-                "id_client=" + id_client +
-                ", login='" + login + '\'' +
-                ", nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", mail='" + mail + '\'' +
-                ", tel=" + tel +
-                ", pwd='" + pwd + '\'' +
-                ", photo='" + photo + '\'' +
-                '}';
+    public int hashCode() {
+        return Objects.hash(id_client);
     }
 }
+

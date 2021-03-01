@@ -15,7 +15,7 @@
          <children>
             <ImageView fitHeight="400.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/0edd7689bc37b5aa527557a0785911e5.jpg" />
+                  <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/0edd7689bc37b5aa527557a0785911e5.jpg" />
                </image>
             </ImageView>
          </children>
@@ -26,15 +26,16 @@
          <children>
             <ImageView fitHeight="46.0" fitWidth="43.0" layoutX="179.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../images/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png" />
+                  <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/0117cb0129593faa02646a8277ca80e3-security-lock-icon-by-vexels.png" />
                </image>
             </ImageView>
             <Label layoutX="26.0" layoutY="131.0" text="Username" />
             <Label layoutX="27.0" layoutY="179.0" text="Password" />
-            <Button fx:id="btnlogin" layoutX="68.0" layoutY="252.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="272.0" style="-fx-background-color: #DAA520;" text="Login" />
+            <Button fx:id="btnlogin" layoutX="68.0" layoutY="252.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="272.0" style="-fx-background-color: #DAA520;" text="Login" />
             <Button layoutX="69.0" layoutY="296.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="272.0" style="-fx-background-color: #DAA520;" text="Cancel" />
             <TextField fx:id="txtlogin" layoutX="113.0" layoutY="120.0" prefHeight="26.0" prefWidth="219.0" promptText="Username" />
             <PasswordField fx:id="pwd" layoutX="113.0" layoutY="167.0" prefHeight="26.0" prefWidth="222.0" promptText="Password" />
+            <Label fx:id="lblErrors" layoutX="133.0" layoutY="200.0" prefHeight="18.0" prefWidth="187.0" />
          </children>
       </AnchorPane>
    </right>
