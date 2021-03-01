@@ -1,4 +1,4 @@
-package sample;
+package Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +10,11 @@ public class LoginController {
 
     @FXML
     private Button btnlogin;
+
+    @FXML
+    private Button cancelbtn;
+
+
 
     @FXML
     private TextField txtlogin;
