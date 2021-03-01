@@ -13,7 +13,7 @@ public class ConnectionUtil {
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3308/"+"fullart","root", "");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/"+"fullart","root", "");
             return conn;
         } catch (ClassNotFoundException | SQLException ex) {
             System.err.println("ConnectionUtil : "+ex.getMessage());
