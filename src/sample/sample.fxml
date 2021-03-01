@@ -16,11 +16,7 @@
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <center>
-<<<<<<< Updated upstream
-            <Button mnemonicParsing="false" text="kj,ljk" BorderPane.alignment="CENTER" />
-=======
             <Button mnemonicParsing="false" text="Moemen" BorderPane.alignment="CENTER" />
->>>>>>> Stashed changes
          </center>
       </BorderPane>
    </children>
