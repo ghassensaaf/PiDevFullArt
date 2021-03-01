@@ -11,9 +11,6 @@ public class LoginController {
     @FXML
     private Button btnlogin;
 
-    @FXML
-    private Button cancelbtn;
-
 
 
     @FXML
