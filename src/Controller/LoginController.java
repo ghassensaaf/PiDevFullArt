@@ -28,26 +28,34 @@ public class LoginController implements Initializable{
 
     }
     @FXML
-    private Label lblErrors;
+    private Label lblDB;
+    @FXML
+    private RadioButton rd_artiste;
+
+    @FXML
+    private RadioButton rd_client;
+
+    @FXML
+    private RadioButton rd_admin;
+
+
+
+
 
     Connection conn =null;
 
-
+    
 @Override
     public void initialize(URL url, ResourceBundle rb) {
         conn=ConnectionUtil.conDB();
         if (conn == null) {
-            lblErrors.setTextFill(Color.TOMATO);
-            lblErrors.setText("Server Error : Check");
+            lblDB.setTextFill(Color.TOMATO);
+            lblDB.setText("Server Error : Check");
         } else {
-            lblErrors.setTextFill(Color.GREEN);
-            lblErrors.setText("Server is up : Good to go");
+            lblDB.setTextFill(Color.GREEN);
+            lblDB.setText("Server is up : Good to go");
         }
     }
 
-    private void setLblError(Color color, String text) {
-        lblErrors.setTextFill(color);
-        lblErrors.setText(text);
-        System.out.println(text);
-    }
+
 }
