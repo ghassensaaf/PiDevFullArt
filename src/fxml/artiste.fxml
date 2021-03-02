@@ -63,7 +63,7 @@
                         <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
                         <TextField layoutX="572.0" layoutY="25.0" />
-                        <Label layoutX="504.0" layoutY="29.0" text="Rechercher" />
+                        <Label layoutX="492.0" layoutY="29.0" text="Rechercher" />
                      </children>
                   </AnchorPane>
             </content>
