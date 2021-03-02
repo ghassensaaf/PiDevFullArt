@@ -53,6 +53,10 @@ public class artisteController implements Initializable {
     private TableColumn<publication, Integer> col_like;
 
     @FXML
+
+    private TextField idpub;
+
+    @FXML
     private Button addpub;
 
     @FXML
@@ -63,7 +67,7 @@ public class artisteController implements Initializable {
     @FXML
     private Label artistlogin;
 
-    private Connection conn=null;
+    private Connection conn = null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
     private ObservableList<publication> list;
@@ -84,12 +88,11 @@ public class artisteController implements Initializable {
     }
 
     private void populateTablePublication() throws SQLException {
-        list= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM publication";
-        resultSet=conn.createStatement().executeQuery(sql);
-        while(resultSet.next())
-        {
-            publication pub=new publication(resultSet.getInt("id_pub"),resultSet.getInt("id_artiste"),resultSet.getInt("id_type"),resultSet.getString("titre"),resultSet.getString("contenu"),resultSet.getTimestamp("date_pub"),resultSet.getInt("nb_like"));
+        list = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM publication";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            publication pub = new publication(resultSet.getInt("id_pub"), resultSet.getInt("id_artiste"), resultSet.getInt("id_type"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date_pub"), resultSet.getInt("nb_like"));
             list.add(pub);
         }
         colid.setCellValueFactory(new PropertyValueFactory<>("id_pub"));
@@ -104,14 +107,24 @@ public class artisteController implements Initializable {
 
     @FXML
     void btnaction(ActionEvent event) {
-        if(event.getSource()==addpub)
-        {
+        if (event.getSource() == addpub) {
             try {
                 addPub();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            } finally {
+                txttypepub.getAccessibleText();
+                txttitrepub.setText("");
+                txtcontenupub.setText("");
             }
-            finally {
+        }
+        else if (event.getSource()==deletepub)
+        {
+            try {
+                deletePub();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
                 txttypepub.getAccessibleText();
                 txttitrepub.setText("");
                 txtcontenupub.setText("");
@@ -120,6 +133,7 @@ public class artisteController implements Initializable {
 
 
     }
+
     private void addPub() throws SQLException {
         String sql = "INSERT into publication ( id_artiste, id_type, titre, contenu,nb_like) " +
                 "values (?,?,?,?,?) ";
@@ -137,5 +151,30 @@ public class artisteController implements Initializable {
         }
         populateTablePublication();
     }
+
+    @FXML
+    void select(MouseEvent event) {
+        publication p = tabpub.getSelectionModel().getSelectedItem();
+        if (p != null) {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            idpub.setText(String.valueOf(p.getId_pub()));
+            txttitrepub.setText(p.getTitre());
+            txtcontenupub.setText(p.getContenu());
+        }
     }
+
+        private void deletePub() throws SQLException {
+            String sql = "delete from publication where id_pub = ?";
+            try {
+                preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setString(1, idpub.getText());
+                preparedStatement.executeUpdate();
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+            }
+            populateTablePublication();
+        }
+
+    }
+
 
