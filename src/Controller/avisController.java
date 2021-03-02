@@ -69,6 +69,6 @@ public class avisController implements Initializable {
     }
 
 
-    public ObservableList<avis>get
+
 
 }
