@@ -29,10 +29,10 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="652.0">
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
+                        <Button layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <Button layoutX="590.0" layoutY="74.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
-                        <Button layoutX="590.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
-                        <Button layoutX="590.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
+                        <Button layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
+                        <Button layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
                         <TableView fx:id="tableAnnonce" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />

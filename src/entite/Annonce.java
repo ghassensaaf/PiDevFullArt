@@ -17,6 +17,32 @@ public class Annonce {
     private int nb_candidature;
     private int id_type_eve;
 
+    public Annonce(int id_annonce, int id_client, String titre, String description, int prix_min, int prix_max, Date date, String adresse, boolean etat, Timestamp date_annonce, int nb_candidature, int id_type_eve) {
+        this.id_annonce = id_annonce;
+        this.id_client = id_client;
+        this.titre = titre;
+        this.description = description;
+        this.prix_min = prix_min;
+        this.prix_max = prix_max;
+        this.date = date;
+        this.adresse = adresse;
+        this.etat = etat;
+        this.date_annonce = date_annonce;
+        this.nb_candidature = nb_candidature;
+        this.id_type_eve = id_type_eve;
+    }
+    public Annonce( int id_client, String titre, String description, int prix_min, int prix_max, Date date, String adresse, boolean etat,  int nb_candidature, int id_type_eve) {
+        this.id_client = id_client;
+        this.titre = titre;
+        this.description = description;
+        this.prix_min = prix_min;
+        this.prix_max = prix_max;
+        this.date = date;
+        this.adresse = adresse;
+        this.etat = etat;
+        this.nb_candidature = nb_candidature;
+        this.id_type_eve = id_type_eve;
+    }
     public int getId_annonce() {
         return id_annonce;
     }
