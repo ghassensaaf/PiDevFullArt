@@ -23,7 +23,19 @@
         <tabs>
           <Tab text="Acceuil">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0">
+                     <children>
+                        <TableView fx:id="tabpub" layoutX="38.0" layoutY="90.0" prefHeight="302.0" prefWidth="658.0">
+                           <columns>
+                              <TableColumn fx:id="colid2" prefWidth="23.0" text="id" />
+                              <TableColumn fx:id="coltype" prefWidth="83.0" text="type" />
+                              <TableColumn fx:id="coltitre2" prefWidth="74.0" text="titre" />
+                              <TableColumn fx:id="colcontenu" prefWidth="304.0" text="Contenu" />
+                              <TableColumn fx:id="coldate" prefWidth="120.0" text="date pub" />
+                              <TableColumn fx:id="col_like" prefWidth="53.0" text="nb like" />
+                           </columns>
+                        </TableView>
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab text="Mes annonces">
@@ -31,11 +43,11 @@
               <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="652.0">
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
-                        <Button fx:id="add" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
+                        <Button fx:id="add" layoutX="609.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <Button fx:id="edit" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
-                        <Button fx:id="delete" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                        <TableView fx:id="tableAnnonce" layoutX="20.0" layoutY="221.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="550.0">
+                        <Button fx:id="edit" layoutX="609.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
+                        <Button fx:id="delete" layoutX="608.0" layoutY="155.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
+                        <TableView fx:id="tableAnnonce" layoutX="9.0" layoutY="221.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
@@ -43,9 +55,9 @@
                               <TableColumn fx:id="colprixmax" prefWidth="75.0" text="prix max" />
                               <TableColumn fx:id="coletat" prefWidth="75.0" text="etat" />
                               <TableColumn fx:id="colnbcandidat" prefWidth="99.0" text="nb candidature" />
+                              <TableColumn fx:id="colconsulter" prefWidth="75.0" text="Consulter" />
                           </columns>
                         </TableView>
-                        <Button layoutX="590.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: F1C232;" styleClass="v" text="Consulter" />
                         <VBox layoutX="51.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
                            <children>
                               <Label text="Titre" />
@@ -59,7 +71,7 @@
                         <VBox layoutX="187.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
                               <TextField fx:id="txttitre" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
-                              <ComboBox fx:id="txteve" prefWidth="150.0" />
+                              <ComboBox fx:id="txteve" prefHeight="25.0" prefWidth="113.0" />
                               <TextField fx:id="txtprixmin" promptText="Prix min" />
                               <TextField fx:id="txtprixmax" promptText="Prix max" />
                               <DatePicker fx:id="txtdate" promptText="Date" />

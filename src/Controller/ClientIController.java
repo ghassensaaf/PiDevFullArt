@@ -1,41 +1,28 @@
 package Controller;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import entite.Annonce;
+import entite.publication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import util.ConnectionUtil;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Observable;
-import java.util.ResourceBundle;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-public class ClientIController implements Initializable {
-    @FXML
-    private Button add;
 
-    @FXML
-    private Button edit;
+import java.net.URL;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+
+public class ClientIController implements Initializable {
+    @FXML private Button add;
+
+    @FXML private Button edit;
 
     @FXML
     private Button delete;
@@ -83,17 +70,40 @@ public class ClientIController implements Initializable {
 
     @FXML
     private TableColumn<Annonce, Integer> colnbcandidat;
+    @FXML
+    private TableColumn<Annonce, String> colconsulter;
+    @FXML
+    private TableView<publication> tabpub;
 
+    @FXML
+    private TableColumn<publication, Integer> colid2;
+
+    @FXML
+    private TableColumn<publication, Integer> coltype;
+
+    @FXML
+    private TableColumn<publication, String> coltitre2;
+
+    @FXML
+    private TableColumn<publication, String> colcontenu;
+
+    @FXML
+    private TableColumn<publication, Timestamp> coldate;
+
+    @FXML
+    private TableColumn<publication, Integer> col_like;
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
     private ObservableList <Annonce> list;
+    private ObservableList <publication> list2;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
         try {
             populateTableAnnonce();
+            populateTablePublication();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -115,7 +125,32 @@ public class ClientIController implements Initializable {
         coletat.setCellValueFactory(new PropertyValueFactory<>("etat"));
         colnbcandidat.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
         tableAnnonce.setItems(list);
-
+//        Button row
+        javafx.util.Callback<TableColumn<Annonce,String>, TableCell<Annonce,String>> cellFactory=(param)->{
+            final TableCell<Annonce,String> cell= new TableCell<Annonce,String>(){
+                @Override
+                public void updateItem(String item,boolean empty){
+                    super.updateItem(item,empty);
+                    if(empty){
+                        setGraphic(null);
+                        setText(null);
+                    }
+                    else {
+                        final Button btnconsulter=new Button("Consulter");
+                        btnconsulter.setOnAction(event -> {
+                            Annonce a=getTableView().getItems().get(getIndex());
+                            Alert aa=new Alert(Alert.AlertType.INFORMATION);
+                            aa.setContentText("titre: "+ a.getTitre()+ "\ndescription : "+a.getDescription());
+                            aa.show();
+                        });
+                        setGraphic(btnconsulter);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        colconsulter.setCellFactory(cellFactory);
     }
     @FXML
     void btnaction(ActionEvent event) {
@@ -123,6 +158,9 @@ public class ClientIController implements Initializable {
             {
                 try {
                     addAnnonce();
+                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Annonce ajoutée");
+                    aa.show();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -140,6 +178,9 @@ public class ClientIController implements Initializable {
             {
                 try {
                     deleteAnnonce();
+                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Annonce supprimée");
+                    aa.show();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -157,6 +198,9 @@ public class ClientIController implements Initializable {
             {
                 try {
                     editAnnonce();
+                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Annonce modifiée");
+                    aa.show();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -242,6 +286,24 @@ public class ClientIController implements Initializable {
             System.err.println(ex.getMessage());
         }
         populateTableAnnonce();
+    }
+    private void populateTablePublication() throws SQLException {
+        list2= FXCollections.observableArrayList();
+        String sql ="SELECT * FROM publication";
+        resultSet=conn.createStatement().executeQuery(sql);
+        while(resultSet.next())
+        {
+            publication pub=new publication(resultSet.getInt("id_pub"),resultSet.getInt("id_artiste"),resultSet.getInt("id_type"),resultSet.getString("titre"),resultSet.getString("contenu"),resultSet.getTimestamp("date_pub"),resultSet.getInt("nb_like"));
+            list2.add(pub);
+        }
+        colid2.setCellValueFactory(new PropertyValueFactory<>("id_pub"));
+        coltitre2.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coltype.setCellValueFactory(new PropertyValueFactory<>("id_type"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
+        col_like.setCellValueFactory(new PropertyValueFactory<>("nb_like"));
+        tabpub.setItems(list2);
+
     }
 
 
