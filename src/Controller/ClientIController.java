@@ -1,5 +1,5 @@
 package Controller;
-
+import java.text.SimpleDateFormat;
 import entite.Annonce;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import util.ConnectionUtil;
 import javafx.scene.control.TextArea;
@@ -18,7 +19,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -56,7 +59,8 @@ public class ClientIController implements Initializable {
     private TextField txtadresse;
     @FXML
     private TextArea txtdesc;
-
+    @FXML
+    private TextField txtid;
     @FXML
     private TextField txtrecherche;
     @FXML
@@ -115,12 +119,23 @@ public class ClientIController implements Initializable {
     }
     @FXML
     void btnaction(ActionEvent event) {
+            if(event.getSource()==add)
+            {
+                try {
+                    addAnnonce();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                finally {
+                    txttitre.setText("");
+                    txtadresse.setText("");
+                    txtdate.setValue(LocalDate.now());
+                    txtdesc.setText("");
+                    txtprixmax.setText("");
+                    txtprixmin.setText("");
+                }
+            }
 
-        try {
-            addAnnonce();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
 
     }
     private void addAnnonce() throws SQLException {
@@ -146,6 +161,23 @@ public class ClientIController implements Initializable {
         }
         populateTableAnnonce();
     }
+    @FXML
+    void showselected(MouseEvent event) {
+        Annonce a=tableAnnonce.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+            txtid.setText(String.valueOf(a.getId_annonce()));
+            txttitre.setText(a.getTitre());
+            txtadresse.setText(a.getAdresse());
+            txtdate.setValue(LocalDate.parse(format.format(a.getDate())));
+            txtdesc.setText(a.getDescription());
+            txtprixmax.setText(String.valueOf(a.getPrix_max()));
+            txtprixmin.setText(String.valueOf(a.getPrix_min()));
+        }
+
+    }
+
 
 
 }
