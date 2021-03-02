@@ -1,8 +1,10 @@
 package Controller;
 
+import entite.Annonce;
 import entite.publication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,10 +14,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import util.ConnectionUtil;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class artisteController implements Initializable {
@@ -93,4 +100,41 @@ public class artisteController implements Initializable {
         tabpub.setItems(list);
 
     }
-}
+
+    @FXML
+    void btnaction(ActionEvent event) {
+        if(event.getSource()==addpub)
+        {
+            try {
+                addPub();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            finally {
+                txttypepub.getAccessibleText();
+                txttitrepub.setText("");
+                txtcontenupub.setText("");
+            }
+        }
+
+
+    }
+    private void addPub() throws SQLException {
+        String sql = "INSERT into publication ( id_artiste, id_type, titre, contenu,nb_like) " +
+                "values (?,?,?,?,?) ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "2");
+            preparedStatement.setString(2, "3");
+            preparedStatement.setString(3, txttitrepub.getText());
+            preparedStatement.setString(4, txtcontenupub.getText());
+            preparedStatement.setString(5, "0");
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablePublication();
+    }
+    }
+
