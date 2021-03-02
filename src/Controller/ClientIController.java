@@ -229,7 +229,14 @@ public class ClientIController implements Initializable {
         String sql="UPDATE annonce set  titre= ? , id_type_eve= ? , prix_min = ?, prix_max = ?, date= ?, adresse=?, description= ? where id_annonce=?";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, txtid.getText());
+            preparedStatement.setString(1, txttitre.getText());
+            preparedStatement.setString(2, "2");
+            preparedStatement.setString(3, txtprixmin.getText());
+            preparedStatement.setString(4, txtprixmax.getText());
+            preparedStatement.setString(5, txtdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            preparedStatement.setString(6, txtadresse.getText());
+            preparedStatement.setString(7, txtdesc.getText());
+            preparedStatement.setString(8, txtid.getText());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
