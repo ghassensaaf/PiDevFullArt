@@ -23,18 +23,21 @@ import java.util.ResourceBundle;
 
 public class ClientIController implements Initializable {
     /*************Bouton*******************/
-    @FXML private Button add;
+    @FXML
+    private Button add;
 
-    @FXML private Button edit;
+    @FXML
+    private Button edit;
 
-    @FXML private Label clientlogin;
+    @FXML
+    private Label clientlogin;
 
     @FXML
     private Button delete;
 
     @FXML
     private Button add_rec;
- /************TEXT FIELD/AREA***************/
+    /************TEXT FIELD/AREA***************/
     @FXML
     private TextField txttitre;
 
@@ -80,7 +83,7 @@ public class ClientIController implements Initializable {
     private TableColumn<Annonce, Integer> colprixmax;
 
     @FXML
-    private TableColumn<Annonce, String > coletat;
+    private TableColumn<Annonce, String> coletat;
 
     @FXML
     private TableColumn<Annonce, Integer> colnbcandidat;
@@ -114,7 +117,7 @@ public class ClientIController implements Initializable {
     private TableColumn<reclamation, Integer> colidrec;
 
     @FXML
-    private TableColumn<reclamation,Integer> colid_artiste_rec;
+    private TableColumn<reclamation, Integer> colid_artiste_rec;
 
     @FXML
     private TableColumn<reclamation, String> colTitre_rec;
@@ -130,21 +133,22 @@ public class ClientIController implements Initializable {
 
     /*******************************************************************/
 
-    private Connection conn=null;
+    private Connection conn = null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
-    private ObservableList <Annonce> list;
-    private ObservableList <publication> list2;
-<<<<<<< Updated upstream
-    public String initData(String login)
-    {
+    private ObservableList<Annonce> list;
+    private ObservableList<publication> list2;
+
+
+    public String initData(String login) {
         clientlogin.setText(login);
         return login;
     }
-=======
-    private ObservableList <reclamation> list3;
 
->>>>>>> Stashed changes
+    private ObservableList<reclamation> list3;
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
@@ -156,14 +160,14 @@ public class ClientIController implements Initializable {
             throwables.printStackTrace();
         }
     }
+
     /************************ANNONCES***************************/
     private void populateTableAnnonce() throws SQLException {
-        list= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM annonce";
-        resultSet=conn.createStatement().executeQuery(sql);
-        while(resultSet.next())
-        {
-            Annonce annonce=new Annonce(resultSet.getInt("id_annonce"),resultSet.getInt("id_client"),resultSet.getString("titre"),resultSet.getString("description"),resultSet.getInt("prix_min"),resultSet.getInt("prix_max"),resultSet.getDate("date"),resultSet.getString("adresse"),resultSet.getBoolean("etat"),resultSet.getTimestamp("date_annonce"),resultSet.getInt("nb_candidature"),resultSet.getInt("id_type_eve"));
+        list = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM annonce";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            Annonce annonce = new Annonce(resultSet.getInt("id_annonce"), resultSet.getInt("id_client"), resultSet.getString("titre"), resultSet.getString("description"), resultSet.getInt("prix_min"), resultSet.getInt("prix_max"), resultSet.getDate("date"), resultSet.getString("adresse"), resultSet.getBoolean("etat"), resultSet.getTimestamp("date_annonce"), resultSet.getInt("nb_candidature"), resultSet.getInt("id_type_eve"));
             list.add(annonce);
         }
         colid.setCellValueFactory(new PropertyValueFactory<>("id_annonce"));
@@ -174,21 +178,20 @@ public class ClientIController implements Initializable {
         colnbcandidat.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
         tableAnnonce.setItems(list);
 //        Button row
-        javafx.util.Callback<TableColumn<Annonce,String>, TableCell<Annonce,String>> cellFactory=(param)->{
-            final TableCell<Annonce,String> cell= new TableCell<Annonce,String>(){
+        javafx.util.Callback<TableColumn<Annonce, String>, TableCell<Annonce, String>> cellFactory = (param) -> {
+            final TableCell<Annonce, String> cell = new TableCell<Annonce, String>() {
                 @Override
-                public void updateItem(String item,boolean empty){
-                    super.updateItem(item,empty);
-                    if(empty){
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
                         setGraphic(null);
                         setText(null);
-                    }
-                    else {
-                        final Button btnconsulter=new Button("Consulter");
+                    } else {
+                        final Button btnconsulter = new Button("Consulter");
                         btnconsulter.setOnAction(event -> {
-                            Annonce a=getTableView().getItems().get(getIndex());
-                            Alert aa=new Alert(Alert.AlertType.INFORMATION);
-                            aa.setContentText("titre: "+ a.getTitre()+ "\ndescription : "+a.getDescription());
+                            Annonce a = getTableView().getItems().get(getIndex());
+                            Alert aa = new Alert(Alert.AlertType.INFORMATION);
+                            aa.setContentText("titre: " + a.getTitre() + "\ndescription : " + a.getDescription());
                             aa.show();
                         });
                         setGraphic(btnconsulter);
@@ -200,71 +203,65 @@ public class ClientIController implements Initializable {
         };
         colconsulter.setCellFactory(cellFactory);
     }
+
     @FXML
     void btnaction(ActionEvent event) {
-            if(event.getSource()==add)
-            {
-                try {
-                    addAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce ajoutée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
+        if (event.getSource() == add) {
+            try {
+                addAnnonce();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("Annonce ajoutée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtid.setText("");
+                txttitre.setText("");
+                txtadresse.setText("");
+                txtdate.setValue(LocalDate.now());
+                txtdesc.setText("");
+                txtprixmax.setText("");
+                txtprixmin.setText("");
             }
-            else if(event.getSource()==delete)
-            {
-                try {
-                    deleteAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce supprimée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
+        } else if (event.getSource() == delete) {
+            try {
+                deleteAnnonce();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("Annonce supprimée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtid.setText("");
+                txttitre.setText("");
+                txtadresse.setText("");
+                txtdate.setValue(LocalDate.now());
+                txtdesc.setText("");
+                txtprixmax.setText("");
+                txtprixmin.setText("");
             }
-            else if(event.getSource()==edit)
-            {
-                try {
-                    editAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce modifiée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
+        } else if (event.getSource() == edit) {
+            try {
+                editAnnonce();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("Annonce modifiée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtid.setText("");
+                txttitre.setText("");
+                txtadresse.setText("");
+                txtdate.setValue(LocalDate.now());
+                txtdesc.setText("");
+                txtprixmax.setText("");
+                txtprixmin.setText("");
             }
+        }
 
 
     }
+
     /*********************AJOUTER ANNONCE****************************/
     private void addAnnonce() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
@@ -289,12 +286,12 @@ public class ClientIController implements Initializable {
         }
         populateTableAnnonce();
     }
+
     @FXML
     void showselected(MouseEvent event) {
-        Annonce a=tableAnnonce.getSelectionModel().getSelectedItem();
-        if(a!=null)
-        {
-            DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+        Annonce a = tableAnnonce.getSelectionModel().getSelectedItem();
+        if (a != null) {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             txtid.setText(String.valueOf(a.getId_annonce()));
             txttitre.setText(a.getTitre());
             txtadresse.setText(a.getAdresse());
@@ -305,10 +302,11 @@ public class ClientIController implements Initializable {
         }
 
     }
+
     /************************SUPPRIMER ANNONCE**********************************/
     private void deleteAnnonce() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-        String sql="delete from annonce where id_annonce = ?";
+        String sql = "delete from annonce where id_annonce = ?";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txtid.getText());
@@ -318,10 +316,11 @@ public class ClientIController implements Initializable {
         }
         populateTableAnnonce();
     }
+
     /*********************MODIFIER ANNONCE**************************************/
     private void editAnnonce() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-        String sql="UPDATE annonce set  titre= ? , id_type_eve= ? , prix_min = ?, prix_max = ?, date= ?, adresse=?, description= ? where id_annonce=?";
+        String sql = "UPDATE annonce set  titre= ? , id_type_eve= ? , prix_min = ?, prix_max = ?, date= ?, adresse=?, description= ? where id_annonce=?";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txttitre.getText());
@@ -338,14 +337,14 @@ public class ClientIController implements Initializable {
         }
         populateTableAnnonce();
     }
+
     /************************PUBLICATION*****************/
     private void populateTablePublication() throws SQLException {
-        list2= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM publication";
-        resultSet=conn.createStatement().executeQuery(sql);
-        while(resultSet.next())
-        {
-            publication pub=new publication(resultSet.getInt("id_pub"),resultSet.getInt("id_artiste"),resultSet.getInt("id_type"),resultSet.getString("titre"),resultSet.getString("contenu"),resultSet.getTimestamp("date_pub"),resultSet.getInt("nb_like"));
+        list2 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM publication";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            publication pub = new publication(resultSet.getInt("id_pub"), resultSet.getInt("id_artiste"), resultSet.getInt("id_type"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date_pub"), resultSet.getInt("nb_like"));
             list2.add(pub);
         }
         colid2.setCellValueFactory(new PropertyValueFactory<>("id_pub"));
@@ -357,77 +356,64 @@ public class ClientIController implements Initializable {
         tabpub.setItems(list2);
 
     }
-      /************************************************RECLAMATION******************************************/
-                                         /***********1) AFFICHAGE***********/
+    /************************************************RECLAMATION******************************************/
+    /***********1) AFFICHAGE***********/
 
-      private void populateTablereclamation() throws SQLException{
-              list3= FXCollections.observableArrayList();
-              String sql ="SELECT * FROM reclamation";
-    resultSet=conn.createStatement().executeQuery(sql);
-        while(resultSet.next())
-    {
-        reclamation rec=new reclamation(resultSet.getInt("id_reclamation"),resultSet.getString("titre"),resultSet.getString("contenu"),resultSet.getTimestamp("date"),resultSet.getInt("etat"),resultSet.getInt("id_artiste"));
-        list3.add(rec);
-    }
+    private void populateTablereclamation() throws SQLException {
+        list3 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM reclamation";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
+            list3.add(rec);
+        }
         colidrec.setCellValueFactory(new PropertyValueFactory<>("id_reclamation"));
         colTitre_rec.setCellValueFactory(new PropertyValueFactory<>("titre"));
         colContenu_rec.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         colDate_rec.setCellValueFactory(new PropertyValueFactory<>("date"));
         coletat_rec.setCellValueFactory(new PropertyValueFactory<>("etat"));
-        colid_artiste_rec.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
         tableReclamation.setItems(list3);
 
-}
-                                  /***********2) AJOUTER RECLAMATION**************/
+    }
 
-       private void ajouterReclamation() throws SQLException {
+    /***********2) AJOUTER RECLAMATION**************/
+
+    private void ajouterReclamation() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-           String sql = "INSERT into reclamation (titre, contenu,etat,id_artiste,id_client) " +
+        String sql = "INSERT into reclamation (titre, contenu,etat,id_artiste,id_client) " +
 //                "values (1,'salem','sbe5ir',10,25,'2020-12-12','azefazef',true,0,4) ";
-                   "values (?,?,?,?,?) ";
-           try {
-               preparedStatement = conn.prepareStatement(sql);
-               preparedStatement.setString(1, txttitrerec.getText());
-               preparedStatement.setString(2, txtdescrec.getText());
-               preparedStatement.setString(3,"0");
-               preparedStatement.setString(4, "2");
-               preparedStatement.setString(5, "1");
-               preparedStatement.executeUpdate();
-           } catch (SQLException ex) {
-               System.err.println(ex.getMessage());
-           }
-           populateTablereclamation();
-       }
-       @FXML
+                "values (?,?,?,?,?) ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txttitrerec.getText());
+            preparedStatement.setString(2, txtdescrec.getText());
+            preparedStatement.setString(3, "0");
+            preparedStatement.setString(4, "2");
+            preparedStatement.setString(5, "1");
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablereclamation();
+    }
+
+    @FXML
     void bnt_rec(ActionEvent event) {
-        if(event.getSource()==add_rec)
-        {
+        if (event.getSource() == add_rec) {
             try {
                 ajouterReclamation();
-                Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
                 aa.setContentText("reclamation ajoutée");
                 aa.show();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }
-            finally {
+            } finally {
                 txttitrerec.setText("");
                 txtdescrec.setText("");
 
             }
         }
-       }
-       /**************************** SUPPRIMER ******************/
-       private void delete_Reclamation() throws SQLException {
-//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-                           String sql="delete from reclamation where id_reclamation = ?";
-                           try {
-                               preparedStatement = conn.prepareStatement(sql);
-                               preparedStatement.setString(1, txtid.getText());
-                               preparedStatement.executeUpdate();
-                           } catch (SQLException ex) {
-                               System.err.println(ex.getMessage());
-                           }
-                           populateTableAnnonce();
-                       }
+    }
+    /**************************** SUPPRIMER ******************/
 }
+

@@ -60,13 +60,13 @@ public class reclamation {
         this.id_artiste = id_artiste;
         this.id_client = id_client;
     }
-    public reclamation(int id_reclamation, String titre, String contenu, Timestamp date, int etat, int id_artiste) {
+    public reclamation(int id_reclamation, String titre, String contenu, Timestamp date, int etat) {
         this.id_reclamation = id_reclamation;
         this.titre = titre;
         this.contenu = contenu;
         this.date = date;
         this.etat = etat;
-        this.id_artiste = id_artiste;
+
 
     }
 

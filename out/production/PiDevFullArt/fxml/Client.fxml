@@ -43,7 +43,10 @@
               <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="652.0">
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
+                        <Button fx:id="add" layoutX="609.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
+                        <Button fx:id="edit" layoutX="609.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
+                        <Button fx:id="delete" layoutX="608.0" layoutY="155.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
                         <TableView fx:id="tableAnnonce" layoutX="9.0" layoutY="221.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
@@ -91,13 +94,6 @@
                               <TextArea fx:id="txtdesc" prefHeight="101.0" prefWidth="207.0" promptText="Description" />
                            </children>
                         </VBox>
-                        <VBox layoutX="572.0" layoutY="57.0" prefHeight="148.0" prefWidth="149.0" spacing="25.0">
-                           <children>
-                              <Button fx:id="add" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
-                              <Button fx:id="edit" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Modifier" />
-                              <Button fx:id="delete" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                           </children>
-                        </VBox>
                      </children>
                   </AnchorPane>
             </content>
@@ -110,17 +106,16 @@
                            <children>
                               <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" promptText="Recherche" />
                               <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                              <Button fx:id="add_rec" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#bnt_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
+                              <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
+                              <TableView fx:id="tableAnnonce1" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
                                  <columns>
-                                    <TableColumn fx:id="colidrec" prefWidth="75.0" text="id" />
-                                    <TableColumn fx:id="colid_artiste_rec" prefWidth="75.0" text="id_artiste" />
-                                    <TableColumn fx:id="colTitre_rec" prefWidth="49.5999755859375" text="Titre" />
-                                    <TableColumn fx:id="colContenu_rec" prefWidth="174.4000244140625" text="Contenu" />
-                                    <TableColumn fx:id="coletat_rec" prefWidth="76.00006103515625" text="etat" />
-                                    <TableColumn fx:id="colDate_rec" prefWidth="100.79998779296875" text="Date" />
+                                    <TableColumn fx:id="colid1" prefWidth="75.0" text="id" />
+                                    <TableColumn fx:id="colprixmin1" prefWidth="49.5999755859375" text="Titre" />
+                                    <TableColumn fx:id="colprixmax1" prefWidth="228.79998779296875" text="Contenu" />
+                                    <TableColumn fx:id="coletat1" prefWidth="69.60003662109375" text="etat" />
+                                    <TableColumn fx:id="colnbcandidat1" prefWidth="127.2000732421875" text="Date" />
                                  </columns>
                               </TableView>
                               <VBox layoutX="55.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
@@ -131,8 +126,8 @@
                               </VBox>
                               <VBox layoutX="187.0" layoutY="23.0" prefHeight="200.0" prefWidth="187.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="txttitrerec" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
-                                    <TextArea fx:id="txtdescrec" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
+                                    <TextField fx:id="txttitre1" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
+                                    <TextArea fx:id="txtdesc1" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
                                  </children>
                               </VBox>
                            </children>
@@ -142,7 +137,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label fx:id="clientlogin" layoutX="644.0" layoutY="9.0" text="Happy User">
+      <Label layoutX="644.0" layoutY="9.0" text="Happy User">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
