@@ -110,17 +110,16 @@
                            <children>
                               <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" promptText="Recherche" />
                               <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                              <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
-                              <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
-                              <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                              <TableView fx:id="tableAnnonce1" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
+                              <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
+                              <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
+                              <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
+                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
                                  <columns>
-                                    <TableColumn fx:id="colid1" prefWidth="75.0" text="id" />
-                                    <TableColumn fx:id="coltitre1" prefWidth="75.0" text="id_artiste" />
-                                    <TableColumn fx:id="colprixmin1" prefWidth="49.5999755859375" text="Titre" />
-                                    <TableColumn fx:id="colprixmax1" prefWidth="174.4000244140625" text="Contenu" />
-                                    <TableColumn fx:id="coletat1" prefWidth="76.00006103515625" text="etat" />
-                                    <TableColumn fx:id="colnbcandidat1" prefWidth="100.79998779296875" text="Date" />
+                                    <TableColumn fx:id="colid_rec" prefWidth="75.0" text="id" />
+                                    <TableColumn fx:id="coltitre_rec" prefWidth="49.5999755859375" text="Titre" />
+                                    <TableColumn fx:id="colcontenu_rec" prefWidth="174.4000244140625" text="Contenu" />
+                                    <TableColumn fx:id="coletat_rec" prefWidth="76.00006103515625" text="etat" />
+                                    <TableColumn fx:id="coldate_rec" prefWidth="100.79998779296875" text="Date" />
                                  </columns>
                               </TableView>
                               <VBox layoutX="55.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
@@ -131,8 +130,8 @@
                               </VBox>
                               <VBox layoutX="187.0" layoutY="23.0" prefHeight="200.0" prefWidth="187.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="txttitre1" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
-                                    <TextArea fx:id="txtdesc1" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
+                                    <TextField fx:id="txttitre_rec" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
+                                    <TextArea fx:id="txtdesc_rec" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
                                  </children>
                               </VBox>
                            </children>

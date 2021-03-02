@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import entite.Annonce;
 import entite.client;
 import entite.publication;
+import entite.reclamation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -95,11 +96,46 @@ public class ClientIController implements Initializable {
 
     @FXML
     private TableColumn<publication, Integer> col_like;
+
+    @FXML
+    private Button btn_ajouter;
+
+    @FXML
+    private Button btn_modifier;
+
+    @FXML
+    private Button btn_supprimer;
+
+    @FXML
+    private TableView<reclamation> tableReclamation;
+
+    @FXML
+    private TableColumn<reclamation, Integer> colid_rec;
+
+    @FXML
+    private TableColumn<reclamation, String> coltitre_rec;
+
+    @FXML
+    private TableColumn<reclamation, String> colcontenu_rec;
+
+    @FXML
+    private TableColumn<reclamation, Integer> coletat_rec;
+
+    @FXML
+    private TableColumn<reclamation, Timestamp> coldate_rec;
+
+    @FXML
+    private TextField txttitre_rec;
+
+    @FXML
+    private TextArea txtdesc_rec;
+
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
     private ObservableList <Annonce> list;
     private ObservableList <publication> list2;
+    private ObservableList <reclamation> list3;
     public String initData(String login)
     {
         clientlogin.setText(login);
@@ -111,6 +147,7 @@ public class ClientIController implements Initializable {
         try {
             populateTableAnnonce();
             populateTablePublication();
+            populateTablereclamation();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -313,6 +350,59 @@ public class ClientIController implements Initializable {
 
     }
 
+/*****************************************RECLAMATION**********************/
+private void populateTablereclamation() throws SQLException {
+    list3 = FXCollections.observableArrayList();
+    String sql = "SELECT * FROM reclamation";
+    resultSet = conn.createStatement().executeQuery(sql);
+    while (resultSet.next()) {
+        reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
+        list3.add(rec);
+    }
+    colid_rec.setCellValueFactory(new PropertyValueFactory<>("id_reclamation"));
+    coltitre_rec.setCellValueFactory(new PropertyValueFactory<>("titre"));
+    colcontenu_rec.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+    coldate_rec.setCellValueFactory(new PropertyValueFactory<>("date"));
+    coletat_rec.setCellValueFactory(new PropertyValueFactory<>("etat"));
+    tableReclamation.setItems(list3);
 
+}
+/*************************AJOUTER RECLAMATION*****************/
+private void ajouterReclamation() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+    String sql = "INSERT into reclamation (titre, contenu,etat,id_artiste,id_client) " +
+//                "values (1,'salem','sbe5ir',10,25,'2020-12-12','azefazef',true,0,4) ";
+            "values (?,?,?,?,?) ";
+    try {
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1, txttitre_rec.getText());
+        preparedStatement.setString(2, txtdesc_rec.getText());
+        preparedStatement.setString(3, "0");
+        preparedStatement.setString(4, "2");
+        preparedStatement.setString(5, "1");
+        preparedStatement.executeUpdate();
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
+    populateTablereclamation();
+}
+
+    @FXML
+    void Action_rec(ActionEvent event) {
+        if (event.getSource() == btn_ajouter) {
+            try {
+                ajouterReclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation ajoutée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+
+            }
+        }
+    }
 
 }
