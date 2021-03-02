@@ -17,7 +17,6 @@ package Controller;
         import javafx.stage.Stage;
         import util.ConnectionUtil;
 
-        import javax.swing.*;
         import java.io.IOException;
         import java.net.URL;
         import java.sql.Connection;
@@ -103,7 +102,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) node.getScene().getWindow();
                 //stage.setMaximized(true);
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/interaction.fxml")));
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/avis.fxml")));
                 stage.setScene(scene);
                 stage.show();
 
@@ -132,7 +131,7 @@ public class LoginController implements Initializable {
                 preparedStatement.setString(2, mdp);
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
-                    setLblError(Color.TOMATO, "Enter Correct Email/Password");
+                    setLblError(Color.TOMATO, "Enter Correct Login/Password");
                 } else {
                     setLblError(Color.GREEN, "Login Successful..Redirecting..");
                     return "admin";
