@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.artisteController">
+   <children>
+      <TabPane layoutY="42.0" prefHeight="525.0" prefWidth="815.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Accueil">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Mes publications">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="42.0" layoutY="14.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
+                           <children>
+                              <Label text="Type publication" />
+                              <Label text="Titre" />
+                              <Label text="Contenu" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="206.0" layoutY="14.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
+                           <children>
+                              <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
+                              <TextField fx:id="txttitrepub" promptText="Titre">
+                                 <VBox.margin>
+                                    <Insets top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <TextArea fx:id="txtcontenupub" prefHeight="200.0" prefWidth="200.0" promptText="Contenu">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </TextArea>
+                           </children>
+                        </VBox>
+                        <TableView fx:id="tabpub" layoutX="40.0" layoutY="255.0" prefHeight="200.0" prefWidth="493.0">
+                          <columns>
+                            <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
+                            <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
+                              <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
+                              <TableColumn fx:id="colcontenu" prefWidth="75.0" text="Contenu" />
+                              <TableColumn fx:id="coldate" prefWidth="75.0" text="date pub" />
+                              <TableColumn fx:id="col_like" prefWidth="75.0" text="nb like" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="614.0" layoutY="115.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
+                        <Button layoutX="614.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button layoutX="614.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
+                        <TextField layoutX="572.0" layoutY="25.0" />
+                        <Label layoutX="504.0" layoutY="29.0" text="Rechercher" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
