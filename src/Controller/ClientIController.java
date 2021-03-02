@@ -149,6 +149,15 @@ public class ClientIController implements Initializable {
 
 
 
+    private ObservableList <Annonce> list;
+    private ObservableList <publication> list2;
+    public String initData(String login)
+    {
+        clientlogin.setText(login);
+        return login;
+    }
+    private ObservableList <reclamation> list3;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();

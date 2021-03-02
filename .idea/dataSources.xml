@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-<<<<<<< Updated upstream
-    <data-source source="LOCAL" name="fullart@localhost" uuid="3a0c78cb-3375-40d5-a579-9c686f86ae23">
-=======
-    <data-source source="LOCAL" name="fullart@localhost" uuid="2dddf81b-c78a-4cb9-b9e5-9db163bc01ee">
->>>>>>> Stashed changes
+    <data-source source="LOCAL" name="fullart@localhost" uuid="6a10a365-e031-4de6-bb1b-ef6c428b5241">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/fullart</jdbc-url>
-<<<<<<< Updated upstream
-=======
       <working-dir>$ProjectFileDir$</working-dir>
->>>>>>> Stashed changes
       <driver-properties>
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
