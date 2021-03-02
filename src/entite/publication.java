@@ -1,5 +1,6 @@
 package entite;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class publication {
@@ -8,10 +9,10 @@ public class publication {
     private int id_type;
     private String titre;
     private String contenu;
-    private Date date_pub;
+    private Timestamp date_pub;
     private int nb_like;
 
-    public publication(int id_pub, int id_artiste, int id_type, String titre, String contenu, Date date_pub, int nb_like) {
+    public publication(int id_pub, int id_artiste, int id_type, String titre, String contenu, Timestamp date_pub, int nb_like) {
         this.id_pub = id_pub;
         this.id_artiste = id_artiste;
         this.id_type = id_type;
@@ -21,12 +22,11 @@ public class publication {
         this.nb_like = nb_like;
     }
 
-    public publication(int id_artiste, int id_type, String titre, String contenu, Date date_pub, int nb_like) {
+    public publication(int id_artiste, int id_type, String titre, String contenu,int nb_like) {
         this.id_artiste = id_artiste;
         this.id_type = id_type;
         this.titre = titre;
         this.contenu = contenu;
-        this.date_pub = date_pub;
         this.nb_like = nb_like;
     }
 
@@ -70,11 +70,11 @@ public class publication {
         this.contenu = contenu;
     }
 
-    public Date getDate_pub() {
+    public Timestamp getDate_pub() {
         return date_pub;
     }
 
-    public void setDate_pub(Date date_pub) {
+    public void setDate_pub(Timestamp date_pub) {
         this.date_pub = date_pub;
     }
 

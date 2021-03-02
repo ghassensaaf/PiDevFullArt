@@ -58,9 +58,9 @@
                               <TableColumn fx:id="col_like" prefWidth="75.0" text="nb like" />
                           </columns>
                         </TableView>
-                        <Button layoutX="614.0" layoutY="115.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
-                        <Button layoutX="614.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button layoutX="614.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
+                        <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
                         <TextField layoutX="572.0" layoutY="25.0" />
                         <Label layoutX="504.0" layoutY="29.0" text="Rechercher" />
