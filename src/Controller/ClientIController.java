@@ -127,6 +127,41 @@ public class ClientIController implements Initializable {
                     throwables.printStackTrace();
                 }
                 finally {
+                    txtid.setText("");
+                    txttitre.setText("");
+                    txtadresse.setText("");
+                    txtdate.setValue(LocalDate.now());
+                    txtdesc.setText("");
+                    txtprixmax.setText("");
+                    txtprixmin.setText("");
+                }
+            }
+            else if(event.getSource()==delete)
+            {
+                try {
+                    deleteAnnonce();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                finally {
+                    txtid.setText("");
+                    txttitre.setText("");
+                    txtadresse.setText("");
+                    txtdate.setValue(LocalDate.now());
+                    txtdesc.setText("");
+                    txtprixmax.setText("");
+                    txtprixmin.setText("");
+                }
+            }
+            else if(event.getSource()==edit)
+            {
+                try {
+                    editAnnonce();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+                finally {
+                    txtid.setText("");
                     txttitre.setText("");
                     txtadresse.setText("");
                     txtdate.setValue(LocalDate.now());
@@ -176,6 +211,30 @@ public class ClientIController implements Initializable {
             txtprixmin.setText(String.valueOf(a.getPrix_min()));
         }
 
+    }
+    private void deleteAnnonce() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+        String sql="delete from annonce where id_annonce = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtid.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTableAnnonce();
+    }
+    private void editAnnonce() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+        String sql="UPDATE annonce set  titre= ? , id_type_eve= ? , prix_min = ?, prix_max = ?, date= ?, adresse=?, description= ? where id_annonce=?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtid.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTableAnnonce();
     }
 
 
