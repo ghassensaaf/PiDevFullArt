@@ -6,6 +6,7 @@ package Controller;
         import javafx.fxml.FXMLLoader;
         import javafx.fxml.Initializable;
         import javafx.scene.Node;
+        import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.scene.control.Button;
         import javafx.scene.control.Label;
@@ -79,13 +80,16 @@ public class LoginController implements Initializable {
         else if(logIn().equals("client"))
         {
             try {
+                FXMLLoader loader=new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/Client.fxml"));
+                Parent p=loader.load();
+                Scene scene=new Scene(p);
 
-                //add you loading or delays - ;-)
+                ClientIController controller = loader.getController();
+                controller.initData(txtlogin.getText());
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
-                //stage.setMaximized(true);
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Client.fxml")));
                 stage.setScene(scene);
                 stage.show();
 
@@ -97,12 +101,16 @@ public class LoginController implements Initializable {
         {
             try {
 
-                //add you loading or delays - ;-)
+                FXMLLoader loader=new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/artiste.fxml"));
+                Parent p=loader.load();
+                Scene scene=new Scene(p);
+
+                artisteController controller = loader.getController();
+                controller.initData(txtlogin.getText());
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
-                //stage.setMaximized(true);
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/artiste.fxml")));
                 stage.setScene(scene);
                 stage.show();
 

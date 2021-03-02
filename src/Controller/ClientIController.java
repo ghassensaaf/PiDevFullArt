@@ -2,6 +2,7 @@ package Controller;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import entite.Annonce;
+import entite.client;
 import entite.publication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,8 @@ public class ClientIController implements Initializable {
     @FXML private Button add;
 
     @FXML private Button edit;
+
+    @FXML private Label clientlogin;
 
     @FXML
     private Button delete;
@@ -97,7 +100,11 @@ public class ClientIController implements Initializable {
     PreparedStatement preparedStatement = null;
     private ObservableList <Annonce> list;
     private ObservableList <publication> list2;
-
+    public String initData(String login)
+    {
+        clientlogin.setText(login);
+        return login;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();

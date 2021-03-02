@@ -7,12 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import util.ConnectionUtil;
@@ -65,12 +60,18 @@ public class artisteController implements Initializable {
 
     @FXML
     private Button deletepub;
+    @FXML
+    private Label artistlogin;
 
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
     private ObservableList<publication> list;
-
+    public String initData(String login)
+    {
+        artistlogin.setText(login);
+        return login;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();

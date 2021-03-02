@@ -43,10 +43,7 @@
               <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="652.0">
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
-                        <Button fx:id="add" layoutX="609.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <Button fx:id="edit" layoutX="609.0" layoutY="114.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
-                        <Button fx:id="delete" layoutX="608.0" layoutY="155.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
                         <TableView fx:id="tableAnnonce" layoutX="9.0" layoutY="221.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
@@ -94,6 +91,13 @@
                               <TextArea fx:id="txtdesc" prefHeight="101.0" prefWidth="207.0" promptText="Description" />
                            </children>
                         </VBox>
+                        <VBox layoutX="572.0" layoutY="57.0" prefHeight="148.0" prefWidth="149.0" spacing="25.0">
+                           <children>
+                              <Button fx:id="add" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
+                              <Button fx:id="edit" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Modifier" />
+                              <Button fx:id="delete" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Supprimer" />
+                           </children>
+                        </VBox>
                      </children>
                   </AnchorPane>
             </content>
@@ -138,7 +142,7 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label layoutX="644.0" layoutY="9.0" text="Happy User">
+      <Label fx:id="clientlogin" layoutX="644.0" layoutY="9.0" text="Happy User">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
