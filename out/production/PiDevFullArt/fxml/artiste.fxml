@@ -12,12 +12,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<<<<<<< Updated upstream
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
-=======
-<?import javafx.scene.text.Text?>
->>>>>>> Stashed changes
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.artisteController">
    <children>
@@ -32,22 +28,14 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="723.0">
                      <children>
-<<<<<<< Updated upstream
                         <VBox layoutX="14.0" layoutY="18.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
-=======
-                        <VBox layoutX="42.0" layoutY="63.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
->>>>>>> Stashed changes
                            <children>
                               <Label text="Type publication" />
                               <Label text="Titre" />
                               <Label text="Contenu" />
                            </children>
                         </VBox>
-<<<<<<< Updated upstream
                         <VBox layoutX="178.0" layoutY="18.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
-=======
-                        <VBox layoutX="206.0" layoutY="59.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
->>>>>>> Stashed changes
                            <children>
                               <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
                               <TextField fx:id="txttitrepub" promptText="Titre">
@@ -62,7 +50,7 @@
                               </TextArea>
                            </children>
                         </VBox>
-                        <TableView fx:id="tabpub" layoutX="40.0" layoutY="285.0" onMouseClicked="#select" prefHeight="200.0" prefWidth="493.0">
+                        <TableView fx:id="tabpub" layoutX="40.0" layoutY="255.0" prefHeight="200.0" prefWidth="493.0">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
@@ -74,17 +62,10 @@
                         </TableView>
                         <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
                         <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
-<<<<<<< Updated upstream
                         <TextField layoutX="561.0" layoutY="14.0" />
                         <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
-=======
-                        <TextField layoutX="657.0" layoutY="25.0" />
-                        <Label layoutX="595.0" layoutY="29.0" text="Rechercher" />
-                        <TextField fx:id="idpub" disable="true" layoutX="206.0" layoutY="16.0" prefHeight="26.0" prefWidth="186.0" promptText="id_pub" />
-                        <Text layoutX="40.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
->>>>>>> Stashed changes
                      </children>
                   </AnchorPane>
             </content>
