@@ -1,6 +1,7 @@
 package Controller;
 
 import entite.Annonce;
+import entite.concert;
 import entite.publication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,12 +66,46 @@ public class artisteController implements Initializable {
     private Button deletepub;
     @FXML
     private Label artistlogin;
+    @FXML
+    private TextField idconcert;
+
+    @FXML
+    private TextField lieuconcert;
+
+    @FXML
+    private DatePicker dateconcert;
+
+    @FXML
+    private TableView<concert> tabconcert;
+
+    @FXML
+    private TableColumn<concert, Integer> colconcert;
+
+    @FXML
+    private TableColumn<concert, Integer> colartiste;
+
+    @FXML
+    private TableColumn<concert, String> colplace;
+
+    @FXML
+    private Button addconcert;
+
+    @FXML
+    private Button editconcert;
+
+    @FXML
+    private Button deleteconcert;
+
+    @FXML
+    private Button consulterconcert;
+
 
     private Connection conn = null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
     PreparedStatement preparedStatement1 = null;
     private ObservableList<publication> list;
+    private ObservableList<concert> list1;
 
     public String initData(String login) {
         artistlogin.setText(login);
@@ -82,6 +117,7 @@ public class artisteController implements Initializable {
         conn = ConnectionUtil.conDB();
         try {
             populateTablePublication();
+            afficherconcert();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -212,5 +248,22 @@ public class artisteController implements Initializable {
         }
         populateTablePublication();
     }
+
+    private void afficherconcert() throws SQLException {
+        list1 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM concert";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"));
+            list1.add(crt);
+        }
+        colconcert.setCellValueFactory(new PropertyValueFactory<>("id_concert"));
+        colartiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
+        colplace.setCellValueFactory(new PropertyValueFactory<>("lieu"));
+        coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tabconcert.setItems(list1);
+
+    }
+
 }
 
