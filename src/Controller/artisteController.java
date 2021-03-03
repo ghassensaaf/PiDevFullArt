@@ -69,6 +69,7 @@ public class artisteController implements Initializable {
     private Connection conn = null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
+    PreparedStatement preparedStatement1 = null;
     private ObservableList<publication> list;
 
     public String initData(String login) {
@@ -130,6 +131,24 @@ public class artisteController implements Initializable {
             }
         }
 
+        else if(event.getSource()==editpub)
+        {
+            try {
+                modifierpub();
+                Alert al=new Alert(Alert.AlertType.CONFIRMATION);
+                al.setContentText("publication bien modifié");
+                al.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            finally {
+                txttypepub.getAccessibleText();
+                txttitrepub.setText("");
+                txtcontenupub.setText("");
+            }
+        }
+
+
 
     }
 
@@ -164,9 +183,29 @@ public class artisteController implements Initializable {
 
     private void supprimerpub() throws SQLException {
         String sql="delete from publication where id_pub = ?";
+        String sql1="delete from jaime where id_pub= ?";
         try {
             preparedStatement = conn.prepareStatement(sql);
+            preparedStatement1 = conn.prepareStatement(sql1);
             preparedStatement.setString(1, idpub.getText());
+            preparedStatement1.setString(1, idpub.getText());
+            preparedStatement1.executeUpdate();
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablePublication();
+    }
+
+    private void modifierpub() throws SQLException {
+        String sql="UPDATE publication set  id_type= ? , titre= ? , contenu = ?  where id_pub= ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "3");
+            preparedStatement.setString(2, txttitrepub.getText());
+            preparedStatement.setString(3, txtcontenupub.getText());
+            preparedStatement.setString(4, idpub.getText());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
