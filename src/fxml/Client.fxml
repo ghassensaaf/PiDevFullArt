@@ -25,7 +25,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0">
                      <children>
-                        <TableView fx:id="tabpub" layoutX="17.0" layoutY="92.0" prefHeight="302.0" prefWidth="707.0">
+                        <TableView fx:id="tabpub" layoutX="17.0" layoutY="92.0" onMouseClicked="#showselectedpub" prefHeight="302.0" prefWidth="707.0">
                            <columns>
                               <TableColumn fx:id="colid2" prefWidth="23.0" text="id" />
                               <TableColumn fx:id="coltype" prefWidth="54.0" text="type" />
@@ -36,7 +36,9 @@
                               <TableColumn fx:id="jaime" prefWidth="97.0" text="j'aime" />
                            </columns>
                         </TableView>
-                        <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Consulter" />
+                        <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnconsulterpub" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Consulter" />
+                        <TextField fx:id="txtid_pub" disable="true" layoutX="503.0" layoutY="43.0" prefHeight="25.0" prefWidth="38.0" />
+                        <Label layoutX="480.0" layoutY="47.0" text="ID" />
                      </children></AnchorPane>
             </content>
           </Tab>
