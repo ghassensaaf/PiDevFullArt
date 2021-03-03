@@ -30,6 +30,8 @@ import java.util.ResourceBundle;
 public class ClientIController implements Initializable {
     @FXML private Button add;
 
+    @FXML private TextField txtid_rec;
+
     @FXML private Button edit;
 
     @FXML private Label clientlogin;
@@ -451,9 +453,78 @@ private void ajouterReclamation() throws SQLException {
             } finally {
                 txttitre_rec.setText("");
                 txtdesc_rec.setText("");
+                txtdesc_rec.setText("");
 
             }
         }
+        if (event.getSource() == btn_modifier) {
+            try {
+                editReclamation();
+                populateTablereclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation modifiée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+                txtid_rec.setText("");
+
+            }
+        }
+        if (event.getSource() == btn_supprimer) {
+            try {
+                deleteReclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation supprimée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+                txtid_rec.setText("");
+
+            }
+        }
+    }
+    @FXML
+    void showselectedrec(MouseEvent event) {
+        reclamation a=tableReclamation.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            txtdesc_rec.setText(String.valueOf(a.getContenu()));
+            txttitre_rec.setText(a.getTitre());
+            txtid_rec.setText(String.valueOf(a.getId_reclamation()));
+
+        }
+
+    }
+    private void editReclamation() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+        String sql="UPDATE reclamation set  titre= ? , contenu= ?  where id_reclamation=?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txttitre_rec.getText());
+            preparedStatement.setString(2, txtdesc_rec.getText());
+            preparedStatement.setString(3, txtid_rec.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    private void deleteReclamation() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+        String sql="delete from reclamation where id_reclamation = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtid_rec.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablereclamation();
     }
 
 }

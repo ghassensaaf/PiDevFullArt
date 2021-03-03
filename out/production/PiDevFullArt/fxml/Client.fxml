@@ -69,7 +69,7 @@
                         </VBox>
                         <VBox layoutX="187.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                            <children>
-                              <TextField fx:id="txttitre" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
+                              <TextField fx:id="txttitre" prefHeight="25.0" prefWidth="20.0" promptText="Titre" />
                               <ComboBox fx:id="txteve" prefHeight="25.0" prefWidth="113.0" />
                               <TextField fx:id="txtprixmin" promptText="Prix min" />
                               <TextField fx:id="txtprixmax" promptText="Prix max" />
@@ -115,7 +115,7 @@
                               <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="221.0" prefHeight="206.0" prefWidth="550.0">
+                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="221.0" onMouseClicked="#showselectedrec" prefHeight="206.0" prefWidth="550.0">
                                  <columns>
                                     <TableColumn fx:id="colid_rec" prefWidth="75.0" text="id" />
                                     <TableColumn fx:id="coltitre_rec" prefWidth="49.5999755859375" text="Titre" />
@@ -126,12 +126,14 @@
                               </TableView>
                               <VBox layoutX="55.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
                                  <children>
+                                    <Label text="ID" />
                                     <Label text="Titre" />
                                     <Label text="Contenu" />
                                  </children>
                               </VBox>
                               <VBox layoutX="187.0" layoutY="23.0" prefHeight="200.0" prefWidth="187.0" spacing="10.0">
                                  <children>
+                                    <TextField fx:id="txtid_rec" disable="true" prefHeight="25.0" prefWidth="78.0" promptText="ID" />
                                     <TextField fx:id="txttitre_rec" prefHeight="18.0" prefWidth="146.0" promptText="Titre" />
                                     <TextArea fx:id="txtdesc_rec" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
                                  </children>
