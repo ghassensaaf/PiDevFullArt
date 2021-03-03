@@ -25,14 +25,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0">
                      <children>
-                        <TableView fx:id="tabpub" layoutX="38.0" layoutY="90.0" prefHeight="302.0" prefWidth="658.0">
+                        <TableView fx:id="tabpub" layoutX="17.0" layoutY="92.0" prefHeight="302.0" prefWidth="707.0">
                            <columns>
                               <TableColumn fx:id="colid2" prefWidth="23.0" text="id" />
-                              <TableColumn fx:id="coltype" prefWidth="83.0" text="type" />
-                              <TableColumn fx:id="coltitre2" prefWidth="74.0" text="titre" />
-                              <TableColumn fx:id="colcontenu" prefWidth="304.0" text="Contenu" />
-                              <TableColumn fx:id="coldate" prefWidth="120.0" text="date pub" />
-                              <TableColumn fx:id="col_like" prefWidth="53.0" text="nb like" />
+                              <TableColumn fx:id="coltype" prefWidth="54.0" text="type" />
+                              <TableColumn fx:id="coltitre2" prefWidth="64.0" text="titre" />
+                              <TableColumn fx:id="colcontenu" prefWidth="98.0" text="Contenu" />
+                              <TableColumn fx:id="coldate" minWidth="0.0" prefWidth="131.0" text="date pub" />
+                              <TableColumn fx:id="col_like" minWidth="0.0" prefWidth="147.0" text="nb like" />
+                              <TableColumn fx:id="consulter_pub" prefWidth="75.0" text="consulter" />
+                              <TableColumn fx:id="jaime" prefWidth="97.0" text="j'aime" />
                            </columns>
                         </TableView>
                      </children></AnchorPane>

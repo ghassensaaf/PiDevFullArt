@@ -1,4 +1,5 @@
 package Controller;
+import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import entite.Annonce;
@@ -8,11 +9,16 @@ import entite.reclamation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import util.ConnectionUtil;
 
 import java.net.URL;
@@ -122,7 +128,12 @@ public class ClientIController implements Initializable {
     private TableColumn<reclamation, Integer> coletat_rec;
 
     @FXML
-    private TableColumn<reclamation, Timestamp> coldate_rec;
+    private TableColumn<publication, Timestamp> coldate_rec;
+    @FXML
+    private TableColumn<publication, String> consulter_pub;
+
+    @FXML
+    private TableColumn<publication, String> jaime;
 
     @FXML
     private TextField txttitre_rec;
@@ -347,6 +358,41 @@ public class ClientIController implements Initializable {
         coldate.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
         col_like.setCellValueFactory(new PropertyValueFactory<>("nb_like"));
         tabpub.setItems(list2);
+        javafx.util.Callback<TableColumn<publication,String>, TableCell<publication,String>> cellFactory=(param)->{
+            final TableCell<publication,String> cell= new TableCell<publication,String>(){
+                @Override
+                public void updateItem(String item,boolean empty){
+                    super.updateItem(item,empty);
+                    if(empty){
+                        setGraphic(null);
+                        setText(null);
+                    }
+                    else {
+                        final Button btnconsulter=new Button("Consulter");
+                        btnconsulter.setOnAction(event -> {
+                            publication pub=getTableView().getItems().get(getIndex());
+                            try {
+                                Node node = (Node) event.getSource();
+                                Stage stage = (Stage) node.getScene().getWindow();
+                                //stage.setMaximized(true);
+                                stage.close();
+                                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/detailPub.fxml")));
+                                stage.setScene(scene);
+                                stage.show();
+
+
+                            } catch (IOException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+                        });
+                        setGraphic(btnconsulter);
+                        setText(null);
+                    }
+                }
+            };
+            return cell;
+        };
+        consulter_pub.setCellFactory(cellFactory);
 
     }
 
