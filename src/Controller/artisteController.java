@@ -183,6 +183,18 @@ public class artisteController implements Initializable {
                 txtcontenupub.setText("");
             }
         }
+        else if (event.getSource() == addconcert) {
+            try {
+                ajouterconcert();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                lieuconcert.setText("");
+                dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                txtcontenupub.setText("");
+            }
+        }
 
 
 
@@ -263,6 +275,21 @@ public class artisteController implements Initializable {
         coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
         tabconcert.setItems(list1);
 
+    }
+
+    private void ajouterconcert() throws SQLException {
+        String sql = "INSERT into concert ( id_artiste, lieu, date) " +
+                "values (?,?,?) ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "2");
+            preparedStatement.setString(2,lieuconcert.getText());
+            preparedStatement.setString(3, dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        afficherconcert();
     }
 
 }

@@ -100,7 +100,7 @@
                               <TableColumn fx:id="coldate" prefWidth="75.0" text="date" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="ajouter" />
+                        <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" text="ajouter" />
                         <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Modifier" />
                         <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Supprimer" />
                         <TextField layoutX="535.0" layoutY="34.0" />

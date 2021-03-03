@@ -100,12 +100,12 @@
                               <TableColumn fx:id="coldate" prefWidth="75.0" text="date" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="ajouter" />
-                        <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Modifier" />
-                        <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" text="Supprimer" />
+                        <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="ajouter" />
+                        <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <TextField layoutX="535.0" layoutY="34.0" />
                         <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
-                        <Button fx:id="consulterconcert" layoutX="549.0" layoutY="346.0" mnemonicParsing="false" text="Consulter" />
+                        <Button fx:id="consulterconcert" layoutX="549.0" layoutY="346.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
                      </children>
                   </AnchorPane>
               </content>
