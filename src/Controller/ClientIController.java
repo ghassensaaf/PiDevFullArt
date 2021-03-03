@@ -129,8 +129,6 @@ public class ClientIController implements Initializable {
 
     @FXML
     private TableColumn<publication, Timestamp> coldate_rec;
-    @FXML
-    private TableColumn<publication, String> consulter_pub;
 
     @FXML
     private TableColumn<publication, String> jaime;
@@ -144,6 +142,7 @@ public class ClientIController implements Initializable {
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
+    PreparedStatement preparedStatement1 = null;
     private ObservableList <Annonce> list;
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
@@ -368,31 +367,37 @@ public class ClientIController implements Initializable {
                         setText(null);
                     }
                     else {
-                        final Button btnconsulter=new Button("Consulter");
+                        final Button btnconsulter=new Button("j'aime");
                         btnconsulter.setOnAction(event -> {
                             publication pub=getTableView().getItems().get(getIndex());
+                            String sql="UPDATE publication set  nb_like = nb_like+1 where id_pub=?";
+                            String sql1="INSERT into jaime (id_artiste, id_client, id_pub, id_commentaire) values (null,1,?,null)";
                             try {
-                                Node node = (Node) event.getSource();
-                                Stage stage = (Stage) node.getScene().getWindow();
-                                //stage.setMaximized(true);
-                                stage.close();
-                                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/detailPub.fxml")));
-                                stage.setScene(scene);
-                                stage.show();
-
-
-                            } catch (IOException ex) {
+                                preparedStatement = conn.prepareStatement(sql);
+                                preparedStatement1 = conn.prepareStatement(sql1);
+                                preparedStatement.setString(1, String.valueOf(pub.getId_pub()));
+                                preparedStatement1.setString(1, String.valueOf(pub.getId_pub()));
+                                preparedStatement.executeUpdate();
+                                preparedStatement1.executeUpdate();
+                            } catch (SQLException ex) {
                                 System.err.println(ex.getMessage());
                             }
+                            try {
+                                populateTablePublication();
+                            } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                            }
+
                         });
                         setGraphic(btnconsulter);
                         setText(null);
                     }
+
                 }
             };
             return cell;
         };
-        consulter_pub.setCellFactory(cellFactory);
+        jaime.setCellFactory(cellFactory);
 
     }
 

@@ -33,10 +33,10 @@
                               <TableColumn fx:id="colcontenu" prefWidth="98.0" text="Contenu" />
                               <TableColumn fx:id="coldate" minWidth="0.0" prefWidth="131.0" text="date pub" />
                               <TableColumn fx:id="col_like" minWidth="0.0" prefWidth="147.0" text="nb like" />
-                              <TableColumn fx:id="consulter_pub" prefWidth="75.0" text="consulter" />
                               <TableColumn fx:id="jaime" prefWidth="97.0" text="j'aime" />
                            </columns>
                         </TableView>
+                        <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Consulter" />
                      </children></AnchorPane>
             </content>
           </Tab>
