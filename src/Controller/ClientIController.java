@@ -29,9 +29,9 @@ import java.util.ResourceBundle;
 
 public class ClientIController implements Initializable {
     @FXML private Button add;
-
+    @FXML private TextField txtid_pub;
     @FXML private TextField txtid_rec;
-
+    @FXML private Button consult_pub;
     @FXML private Button edit;
 
     @FXML private Label clientlogin;
@@ -459,8 +459,7 @@ private void ajouterReclamation() throws SQLException {
         }
         if (event.getSource() == btn_modifier) {
             try {
-                editReclamation();
-                populateTablereclamation();
+                modifierReclamation();
                 Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
                 aa.setContentText("reclamation modifiée");
                 aa.show();
@@ -501,18 +500,18 @@ private void ajouterReclamation() throws SQLException {
         }
 
     }
-    private void editReclamation() throws SQLException {
-//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-        String sql="UPDATE reclamation set  titre= ? , contenu= ?  where id_reclamation=?";
+    private void modifierReclamation() throws SQLException {
+        String sql="UPDATE reclamation set  titre= ? , contenu= ?  where id_reclamation= ?";
         try {
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, txttitre_rec.getText());
-            preparedStatement.setString(2, txtdesc_rec.getText());
-            preparedStatement.setString(3, txtid_rec.getText());
-            preparedStatement.executeUpdate();
+            preparedStatement1 = conn.prepareStatement(sql);
+            preparedStatement1.setString(1, txttitre_rec.getText());
+            preparedStatement1.setString(2, txtdesc_rec.getText());
+            preparedStatement1.setString(3, txtid_rec.getText());
+            preparedStatement1.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        populateTablereclamation();
     }
     private void deleteReclamation() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
@@ -526,5 +525,34 @@ private void ajouterReclamation() throws SQLException {
         }
         populateTablereclamation();
     }
+/*****************************************publication**********************/
+    @FXML
+    void showselectedpub(MouseEvent event) {
+        publication a=tabpub.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            txtid_pub.setText(String.valueOf(a.getId_pub()));
+        }
 
+    }
+    @FXML
+    void btnconsulterpub(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/detailPub.fxml"));
+            Parent p=loader.load();
+            Scene scene=new Scene(p);
+
+            detailPubController controller = loader.getController();
+            controller.initData(Integer.parseInt(txtid_pub.getText()),clientlogin.getText());
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 }
