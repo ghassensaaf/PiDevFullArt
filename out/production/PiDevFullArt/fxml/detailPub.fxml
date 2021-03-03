@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="448.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailPubController">
+<AnchorPane onMouseMoved="#refresh" prefHeight="448.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailPubController">
    <children>
-      <TableView layoutX="435.0" layoutY="149.0" prefHeight="241.0" prefWidth="134.0">
+      <TableView fx:id="tab_commentaire" layoutX="20.0" layoutY="164.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="417.0">
         <columns>
-          <TableColumn prefWidth="134.0" text="id artist" />
+          <TableColumn fx:id="colid_com" prefWidth="75.0" text="id" />
+          <TableColumn fx:id="colContenu_com" prefWidth="142.4000015258789" text="contenu" />
+            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="104.79998779296875" text="nb like" />
         </columns>
       </TableView>
-      <TableView layoutX="569.0" layoutY="149.0" prefHeight="241.0" prefWidth="134.0">
-         <columns>
-            <TableColumn prefWidth="134.0" text="id client" />
-         </columns>
-      </TableView>
-      <TableView layoutX="20.0" layoutY="149.0" prefHeight="241.0" prefWidth="389.0">
+      <Label fx:id="login" layoutX="635.0" layoutY="22.0" prefHeight="18.0" prefWidth="56.0" />
+      <Label fx:id="idPub" layoutX="55.0" layoutY="23.0" text="Id Pub : " />
+      <TextField fx:id="detailpub" disable="true" layoutX="111.0" layoutY="19.0" prefHeight="25.0" prefWidth="33.0" />
+      <TableView fx:id="tabJaimeArtiste" layoutX="452.0" layoutY="164.0" prefHeight="242.0" prefWidth="122.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="id" />
-          <TableColumn prefWidth="173.0" text="contenu" />
-            <TableColumn minWidth="4.0" prefWidth="96.0" text="nb like" />
+          <TableColumn fx:id="coljaimeArtiste" prefWidth="113.59998168945313" text="id_Artiste" />
         </columns>
       </TableView>
-      <Label fx:id="login" layoutX="600.0" layoutY="14.0" />
-      <Label fx:id="idPub" layoutX="38.0" layoutY="23.0" text="Id Pub : " />
-      <TextField fx:id="detailpub" disable="true" layoutX="82.0" layoutY="19.0" prefHeight="25.0" prefWidth="33.0" />
+      <TableView fx:id="tableJaimeClient" layoutX="580.0" layoutY="164.0" prefHeight="242.0" prefWidth="130.0">
+        <columns>
+          <TableColumn fx:id="coljaimeClient" prefWidth="128.79995727539062" text="id_Client" />
+        </columns>
+      </TableView>
+      <Label layoutX="21.0" layoutY="59.0" text="Commentaire" />
+      <TextArea fx:id="txt_com" layoutX="121.0" layoutY="55.0" prefHeight="90.0" prefWidth="209.0" promptText="Ajouter un commentaire..." />
+      <Button fx:id="btn_supprimer_com" layoutX="346.0" layoutY="115.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
+      <Button fx:id="btn_modifier_com" layoutX="346.0" layoutY="81.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Modifier" />
+      <Button fx:id="btn_ajouter_com" layoutX="346.0" layoutY="47.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
+      <Label layoutX="168.0" layoutY="23.0" text="ID commentaire:" />
+      <TextField fx:id="id_comm" disable="true" layoutX="285.0" layoutY="18.0" prefHeight="18.0" prefWidth="34.0" />
    </children>
 </AnchorPane>

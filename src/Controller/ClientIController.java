@@ -512,6 +512,7 @@ private void ajouterReclamation() throws SQLException {
             System.err.println(ex.getMessage());
         }
         populateTablereclamation();
+        tableReclamation.refresh();
     }
     private void deleteReclamation() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
@@ -540,11 +541,13 @@ private void ajouterReclamation() throws SQLException {
         try {
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/detailPub.fxml"));
-            Parent p=loader.load();
-            Scene scene=new Scene(p);
 
+            Parent p=loader.load();
+
+            Scene scene=new Scene(p);
             detailPubController controller = loader.getController();
             controller.initData(Integer.parseInt(txtid_pub.getText()),clientlogin.getText());
+
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
