@@ -1138,7 +1138,7 @@ APPLICATION_PASSWORD_ADMIN,AUDIT_ADMIN,BACKUP_ADMIN,BINLOG_ADMIN,BINLOG_ENCRYPTI
       <ColNames>id_annonce</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="341" parent="292" name="id_client3">
+    <foreign-key id="341" parent="292" name="id_client8">
       <ColNames>id_client</ColNames>
       <RefTableName>client</RefTableName>
       <RefColNames>id_client</RefColNames>
@@ -1280,8 +1280,9 @@ tel</ColNames>
     </column>
     <column id="368" parent="295" name="etat">
       <Position>5</Position>
-      <DataType>tinyint(1)|0s</DataType>
+      <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
     </column>
     <column id="369" parent="295" name="id_artiste">
       <Position>6</Position>

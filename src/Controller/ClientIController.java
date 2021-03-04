@@ -145,7 +145,7 @@ public class ClientIController implements Initializable {
 
     @FXML
     private Button btnretour;
-
+private client client1;
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
@@ -154,6 +154,10 @@ public class ClientIController implements Initializable {
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
     private Annonce a;
+
+    public ClientIController() throws SQLException {
+    }
+
     public String initData(String login)
     {
         clientlogin.setText(login);
@@ -163,7 +167,7 @@ public class ClientIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
         try {
-            populateTableAnnonce();
+
             populateTablePublication();
             populateTablereclamation();
         } catch (SQLException throwables) {
@@ -173,8 +177,14 @@ public class ClientIController implements Initializable {
 
     private void populateTableAnnonce() throws SQLException {
         list= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM annonce";
-        resultSet=conn.createStatement().executeQuery(sql);
+        String sql ="SELECT * FROM annonce where id_client = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(client1.getId_client()));
+            resultSet=preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
         while(resultSet.next())
         {
             Annonce annonce=new Annonce(resultSet.getInt("id_annonce"),resultSet.getInt("id_client"),resultSet.getString("titre"),resultSet.getString("description"),resultSet.getInt("prix_min"),resultSet.getInt("prix_max"),resultSet.getDate("date"),resultSet.getString("adresse"),resultSet.getBoolean("etat"),resultSet.getTimestamp("date_annonce"),resultSet.getInt("nb_candidature"),resultSet.getInt("id_type_eve"));
@@ -576,5 +586,30 @@ private void ajouterReclamation() throws SQLException {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+    private client getClient() throws SQLException {
+        String sql ="SELECT * FROM client where login= ?";
+        client ccc=null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, clientlogin.getText());
+            System.out.println(preparedStatement.toString());
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        if (resultSet.next())
+        {
+            ccc = new client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9));
+            System.out.println(ccc.toString());
+        }
+        System.out.println("salem");
+        return ccc;
+    }
+    @FXML
+    void refresh(MouseEvent event) throws SQLException {
+        client1=getClient();
+        populateTableAnnonce();
     }
 }
