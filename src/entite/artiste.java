@@ -2,8 +2,15 @@ package entite;
 
 import java.util.Objects;
 
-public class artiste extends user{
-
+public class artiste {
+    private String login;
+    private String pwd;
+    private String nom;
+    private String prenom;
+    private String mail;
+    private int tel;
+    private String adresse;
+    private String photo;
     private int id_artiste;
     private String description;
     private String couverture;
@@ -32,10 +39,101 @@ public class artiste extends user{
         this.couverture = couverture;
     }
 
+    public artiste(int id_artiste) {
+        this.id_artiste = id_artiste;
+    }
+
+    public artiste(String pwd, String nom, String prenom, String mail, int tel, String adresse, String photo, int id_artiste, String description, String couverture) {
+        this.pwd = pwd;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.adresse = adresse;
+        this.photo = photo;
+        this.id_artiste = id_artiste;
+        this.description = description;
+        this.couverture = couverture;
+    }
+
+    public artiste( int id_artiste ,String nom, String prenom,String adresse, String mail, int tel, String description) {
+        this.id_artiste = id_artiste;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.mail = mail;
+        this.tel = tel;
+        this.description = description;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public int getTel() {
+        return tel;
+    }
+
+    public void setTel(int tel) {
+        this.tel = tel;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof artiste)) return false;
         artiste artiste = (artiste) o;
         return id_artiste == artiste.id_artiste;
     }

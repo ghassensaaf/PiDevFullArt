@@ -144,6 +144,35 @@ public class ClientIController implements Initializable {
 
     @FXML
     private Button btnretour;
+    @FXML
+    private TableView<artiste> tab_con_art;
+
+    @FXML
+    private TableColumn<artiste, Integer> tab_con_art_id;
+
+    @FXML
+    private TableColumn<artiste, String> tab_con_art_nom;
+
+    @FXML
+    private TableColumn<artiste, String> tab_con_art_pre;
+
+    @FXML
+    private TableColumn<artiste, String> tab_con_art_adresse;
+
+    @FXML
+    private TableColumn<artiste, String> tab_con_art_mail;
+
+    @FXML
+    private TableColumn<artiste, Integer> tab_con_art_tel;
+
+    @FXML
+    private TableColumn<artiste, String> tab_con_art_desc;
+
+    @FXML
+    private Button Contacter_art;
+
+    @FXML
+    private TextField txtid_art;
 private client client1;
     private Connection conn=null;
     ResultSet resultSet = null;
@@ -152,6 +181,7 @@ private client client1;
     private ObservableList <Annonce> list;
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
+    private ObservableList <artiste> list4;
     private Annonce a;
     private evenement event;
 
@@ -161,6 +191,7 @@ private client client1;
     public String initData(String login)
     {
         clientlogin.setText(login);
+
         return login;
     }
     @Override
@@ -174,6 +205,7 @@ private client client1;
             }
             populateTablePublication();
             populateTablereclamation();
+            populateTableArtiste();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -626,5 +658,57 @@ private void ajouterReclamation() throws SQLException {
             lista.add(e);
         }
         return lista;
+    }
+    /**************************** MESSAGE ***********************/
+    private void populateTableArtiste() throws SQLException {
+        list4 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM artiste";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            artiste rec = new artiste(resultSet.getInt("id_artiste"), resultSet.getString("nom"), resultSet.getString("prenom"), resultSet.getString("adresse"), resultSet.getString("mail"),resultSet.getInt("tel"),resultSet.getString("description")    );
+            list4.add(rec);
+        }
+        tab_con_art_id.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
+        tab_con_art_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        tab_con_art_pre.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        tab_con_art_adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+        tab_con_art_mail.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        tab_con_art_tel.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        tab_con_art_desc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        tab_con_art.setItems(list4);
+
+    }
+
+    @FXML
+    void showselectedartiste(MouseEvent event) {
+        artiste a=tab_con_art.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            txtid_art.setText(String.valueOf(a.getId_artiste()));
+        }
+
+    }
+
+    @FXML
+    void btn_contacter(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/Contacte.fxml"));
+
+            Parent p=loader.load();
+
+            Scene scene=new Scene(p);
+            ContacteController controller = loader.getController();
+            controller.initData(Integer.parseInt(txtid_art.getText()),clientlogin.getText());
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
 }

@@ -7,15 +7,15 @@
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
-    <schema id="2" parent="1" name="fullart">
+    <schema id="2" parent="1" name="club_esprit">
+      <Collation>utf8mb4_0900_ai_ci</Collation>
+    </schema>
+    <schema id="3" parent="1" name="fullart">
       <Current>1</Current>
       <Collation>utf8mb4_0900_ai_ci</Collation>
     </schema>
-    <schema id="3" parent="1" name="information_schema">
+    <schema id="4" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="4" parent="1" name="moemen">
-      <Collation>utf8mb4_0900_ai_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="mysql">
       <Collation>utf8mb4_0900_ai_ci</Collation>
@@ -910,59 +910,59 @@ SELECT|sys.sys_config
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE,CREATE ROLE,DROP ROLE!
 </ObjectGrants>
     </user>
-    <table id="285" parent="2" name="admin"/>
-    <table id="286" parent="2" name="annonce">
+    <table id="285" parent="3" name="admin"/>
+    <table id="286" parent="3" name="annonce">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="287" parent="2" name="artiste">
+    <table id="287" parent="3" name="artiste">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="288" parent="2" name="avis">
+    <table id="288" parent="3" name="avis">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="289" parent="2" name="candidature">
+    <table id="289" parent="3" name="candidature">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="290" parent="2" name="categorie">
+    <table id="290" parent="3" name="categorie">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="291" parent="2" name="categorie_annonce">
+    <table id="291" parent="3" name="categorie_annonce">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="292" parent="2" name="client">
+    <table id="292" parent="3" name="client">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="293" parent="2" name="commentaire">
+    <table id="293" parent="3" name="commentaire">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="294" parent="2" name="concert">
+    <table id="294" parent="3" name="concert">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="295" parent="2" name="jaime">
+    <table id="295" parent="3" name="jaime">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="296" parent="2" name="message">
+    <table id="296" parent="3" name="message">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="297" parent="2" name="publication">
+    <table id="297" parent="3" name="publication">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="298" parent="2" name="reclamation">
+    <table id="298" parent="3" name="reclamation">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="299" parent="2" name="service">
+    <table id="299" parent="3" name="service">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="300" parent="2" name="type_evenement">
+    <table id="300" parent="3" name="type_evenement">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="301" parent="2" name="type_groupe">
+    <table id="301" parent="3" name="type_groupe">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="302" parent="2" name="type_musique">
+    <table id="302" parent="3" name="type_musique">
       <Engine>InnoDB</Engine>
     </table>
-    <table id="303" parent="2" name="type_pub">
+    <table id="303" parent="3" name="type_pub">
       <Engine>InnoDB</Engine>
     </table>
     <column id="304" parent="285" name="id_admin">

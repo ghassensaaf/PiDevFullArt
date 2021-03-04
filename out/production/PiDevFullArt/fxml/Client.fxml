@@ -21,7 +21,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="735.0" />
-      <TabPane layoutY="42.0" onMouseMoved="#refresh" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="42.0" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Acceuil">
             <content>
@@ -146,6 +146,36 @@
                         </AnchorPane>
                      </children></AnchorPane>
               </content>
+            </Tab>
+            <Tab text="Liste Artiste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
+                           <children>
+                              <Button fx:id="Contacter_art" layoutX="568.0" layoutY="73.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #F1C232;" text="Contacter" />
+                              <VBox fx:id="tab_artiste" layoutX="34.0" layoutY="128.0" prefHeight="263.0" prefWidth="640.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="tab_con_art" onMouseClicked="#showselectedartiste" prefHeight="262.0" prefWidth="611.0">
+                                      <columns>
+                                        <TableColumn fx:id="tab_con_art_id" prefWidth="75.0" text="id_artiste" />
+                                        <TableColumn fx:id="tab_con_art_nom" prefWidth="75.0" text="Nom" />
+                                          <TableColumn fx:id="tab_con_art_pre" prefWidth="75.0" text="Prenom" />
+                                          <TableColumn fx:id="tab_con_art_adresse" prefWidth="75.0" text="Adresse" />
+                                          <TableColumn fx:id="tab_con_art_mail" prefWidth="75.0" text="Mail" />
+                                          <TableColumn fx:id="tab_con_art_tel" prefWidth="75.0" text="Telphone" />
+                                          <TableColumn fx:id="tab_con_art_desc" prefWidth="75.0" text="Description" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Label layoutX="501.0" layoutY="78.0" text="ID" />
+                              <TextField fx:id="txtid_art" disable="true" layoutX="523.0" layoutY="74.0" prefHeight="25.0" prefWidth="32.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
         </tabs>
       </TabPane>
