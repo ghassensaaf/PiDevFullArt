@@ -2,6 +2,8 @@ package Controller;
 
 import entite.Annonce;
 import entite.concert;
+import entite.evenement;
+import entite.type_pub;
 import entite.publication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,18 +15,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import util.ConnectionUtil;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class artisteController implements Initializable {
 
     @FXML
-    private ComboBox<?> txttypepub;
+    private ComboBox<Integer> txttypepub;
 
     @FXML
     private TextField txttitrepub;
@@ -73,6 +78,9 @@ public class artisteController implements Initializable {
     private TextField lieuconcert;
 
     @FXML
+    private TextField idrecherche;
+
+    @FXML
     private DatePicker dateconcert;
 
     @FXML
@@ -116,6 +124,12 @@ public class artisteController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
         try {
+            ArrayList <type_pub> listepub=gettypepub();
+            for (type_pub p: listepub)
+            {
+                txttypepub.getItems().add(p.getId_type());
+            }
+
             afficherPublication();
             afficherconcert();
         } catch (SQLException throwables) {
@@ -233,9 +247,10 @@ public class artisteController implements Initializable {
         String sql = "INSERT into publication ( id_artiste, id_type, titre, contenu,nb_like) " +
                 "values (?,?,?,?,?) ";
         try {
+
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, "2");
-            preparedStatement.setString(2, "3");
+            preparedStatement.setString(2, txttypepub.getValue().toString());
             preparedStatement.setString(3, txttitrepub.getText());
             preparedStatement.setString(4, txtcontenupub.getText());
             preparedStatement.setString(5, "0");
@@ -361,6 +376,16 @@ public class artisteController implements Initializable {
         afficherconcert();
     }
 
-
+    ArrayList<type_pub> gettypepub() throws SQLException {
+        ArrayList<type_pub>  liste = new ArrayList<>();
+        String sql =" select * from type_pub ";
+        resultSet=conn.createStatement().executeQuery(sql);
+        while(resultSet.next())
+        {
+            type_pub p=new type_pub(resultSet.getInt(1),resultSet.getString(2));
+            liste.add(p);
+        }
+        return liste;
+    }
 }
 

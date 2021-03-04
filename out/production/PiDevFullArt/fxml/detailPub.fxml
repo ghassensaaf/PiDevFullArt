@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane onMouseMoved="#refresh" prefHeight="466.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailPubController">
    <children>
@@ -38,5 +39,6 @@
       <Label layoutX="176.0" layoutY="59.0" text="ID commentaire:" />
       <TextField fx:id="id_comm" disable="true" layoutX="293.0" layoutY="54.0" prefHeight="18.0" prefWidth="34.0" />
       <Button fx:id="btnretour" layoutX="19.0" layoutY="7.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #DAA520;" text="Retour" />
+      <Circle fill="GOLDENROD" layoutX="591.0" layoutY="31.0" radius="17.0" stroke="WHITE" strokeType="INSIDE" />
    </children>
 </AnchorPane>
