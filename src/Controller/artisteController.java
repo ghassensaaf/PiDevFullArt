@@ -116,7 +116,7 @@ public class artisteController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
         try {
-            populateTablePublication();
+            afficherPublication();
             afficherconcert();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -124,7 +124,7 @@ public class artisteController implements Initializable {
 
     }
 
-    private void populateTablePublication() throws SQLException {
+    private void afficherPublication() throws SQLException {
         list = FXCollections.observableArrayList();
         String sql = "SELECT * FROM publication";
         resultSet = conn.createStatement().executeQuery(sql);
@@ -244,7 +244,7 @@ public class artisteController implements Initializable {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        populateTablePublication();
+        afficherPublication();
     }
 
     @FXML
@@ -272,7 +272,7 @@ public class artisteController implements Initializable {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        populateTablePublication();
+        afficherPublication();
     }
 
     private void modifierpub() throws SQLException {
@@ -287,7 +287,7 @@ public class artisteController implements Initializable {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        populateTablePublication();
+        afficherPublication();
     }
 
     private void afficherconcert() throws SQLException {
