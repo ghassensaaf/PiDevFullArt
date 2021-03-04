@@ -87,12 +87,12 @@
                         </VBox>
                         <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
                            <children>
-                              <TextField fx:id="idconcert" />
+                              <TextField fx:id="idconcert" disable="true" editable="false" />
                               <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" />
                               <DatePicker fx:id="dateconcert" />
                            </children>
                         </VBox>
-                        <TableView fx:id="tabconcert" layoutX="93.0" layoutY="246.0" prefHeight="200.0" prefWidth="394.0">
+                        <TableView fx:id="tabconcert" layoutX="93.0" layoutY="246.0" onMouseClicked="#click1" prefHeight="200.0" prefWidth="394.0">
                           <columns>
                             <TableColumn fx:id="colconcert" prefWidth="96.7999267578125" text="id concert" />
                               <TableColumn fx:id="colartiste" prefWidth="104.79998168945315" text="id_artiste" />
@@ -101,8 +101,8 @@
                           </columns>
                         </TableView>
                         <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="ajouter" />
-                        <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <TextField layoutX="535.0" layoutY="34.0" />
                         <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
                         <Button fx:id="consulterconcert" layoutX="549.0" layoutY="346.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />

@@ -196,6 +196,35 @@ public class artisteController implements Initializable {
             }
         }
 
+        else if (event.getSource() == deleteconcert) {
+            try {
+                supprimerconcert();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                lieuconcert.setText("");
+                dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                txtcontenupub.setText("");
+            }
+        }
+        else if(event.getSource()==editconcert)
+        {
+            try {
+                modifierconcert();
+                Alert al=new Alert(Alert.AlertType.CONFIRMATION);
+                al.setContentText("Concert bien modifié");
+                al.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            finally {
+
+                lieuconcert.setText("");
+                dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                txtcontenupub.setText("");
+            }
+        }
+
 
 
     }
@@ -291,6 +320,47 @@ public class artisteController implements Initializable {
         }
         afficherconcert();
     }
+
+    @FXML
+    void click1(MouseEvent event) {
+        concert c = tabconcert.getSelectionModel().getSelectedItem();
+        if (c != null) {
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            idconcert.setText(String.valueOf(c.getId_concert()));
+            lieuconcert.setText(c.getLieu());
+            dateconcert.setValue(LocalDate.parse(format.format(c.getDate())));
+        }
+    }
+
+    private void supprimerconcert() throws SQLException {
+        String sql="delete from concert where id_concert = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idconcert.getText());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        afficherconcert();
+    }
+
+
+    private void modifierconcert() throws SQLException {
+        String sql="UPDATE concert set  id_artiste= ? , lieu= ? , date = ?  where id_concert= ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "2");
+            preparedStatement.setString(2, lieuconcert.getText());
+            preparedStatement.setString(3, dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            preparedStatement.setString(4, idconcert.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        afficherconcert();
+    }
+
 
 }
 
