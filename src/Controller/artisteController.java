@@ -103,6 +103,11 @@ public class artisteController implements Initializable {
     @FXML
     private Button consulterconcert;
 
+    @FXML
+    private TextField mourad;
+
+    artiste aa=null;
+
 
     private Connection conn = null;
     ResultSet resultSet = null;
@@ -126,8 +131,7 @@ public class artisteController implements Initializable {
                 txttypepub.getItems().add(p.getId_type());
             }
 
-            afficherPublication();
-            afficherconcert();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -136,8 +140,14 @@ public class artisteController implements Initializable {
 
     private void afficherPublication() throws SQLException {
         list = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM publication";
-        resultSet = conn.createStatement().executeQuery(sql);
+        String sql = "SELECT * FROM publication where id_artiste=?";
+        try {
+            preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1,mourad.getText());
+            resultSet=preparedStatement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         while (resultSet.next()) {
             publication pub = new publication(resultSet.getInt("id_pub"), resultSet.getInt("id_artiste"), resultSet.getInt("id_type"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date_pub"), resultSet.getInt("nb_like"));
             list.add(pub);
@@ -245,7 +255,7 @@ public class artisteController implements Initializable {
         try {
 
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, "2");
+            preparedStatement.setString(1, mourad.getText());
             preparedStatement.setString(2, txttypepub.getValue().toString());
             preparedStatement.setString(3, txttitrepub.getText());
             preparedStatement.setString(4, txtcontenupub.getText());
@@ -303,8 +313,14 @@ public class artisteController implements Initializable {
 
     private void afficherconcert() throws SQLException {
         list1 = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM concert";
-        resultSet = conn.createStatement().executeQuery(sql);
+        String sql = "SELECT * FROM concert where id_artiste=?";
+        try {
+            preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1,mourad.getText());
+            resultSet=preparedStatement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         while (resultSet.next()) {
             concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"));
             list1.add(crt);
@@ -322,7 +338,7 @@ public class artisteController implements Initializable {
                 "values (?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, "2");
+            preparedStatement.setString(1, mourad.getText());
             preparedStatement.setString(2,lieuconcert.getText());
             preparedStatement.setString(3, dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             preparedStatement.executeUpdate();
@@ -400,6 +416,15 @@ public class artisteController implements Initializable {
             a = new artiste(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9),resultSet.getString(10),resultSet.getString(11));
         }
         return a;
+    }
+
+    @FXML
+    void refresh(MouseEvent event) throws SQLException {
+        aa=getartisteid();
+        mourad.setText(String.valueOf(aa.getId_artiste()));
+        afficherPublication();
+        afficherconcert();
+
     }
 }
 

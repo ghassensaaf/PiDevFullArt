@@ -19,7 +19,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.artisteController">
    <children>
-      <TabPane layoutY="42.0" prefHeight="525.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="42.0" onMouseMoved="#refresh" prefHeight="525.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Accueil">
             <content>
@@ -118,5 +118,6 @@
          </font>
       </Label>
       <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField fx:id="mourad" layoutX="524.0" layoutY="17.0" prefHeight="26.0" prefWidth="54.0" />
    </children>
 </AnchorPane>
