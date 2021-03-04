@@ -384,7 +384,7 @@ public class artisteController implements Initializable {
         return liste;
     }
 
-    private client getartisteid() throws SQLException {
+    private artiste getartisteid() throws SQLException {
         String sql ="SELECT * FROM artiste where login= ?";
         artiste a=null;
         try {
