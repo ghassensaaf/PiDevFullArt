@@ -121,5 +121,6 @@
          </font>
       </Label>
       <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="btnretour" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
    </children>
 </AnchorPane>
