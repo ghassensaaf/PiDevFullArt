@@ -14,12 +14,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.artisteController">
    <children>
-      <TabPane layoutY="42.0" onMouseMoved="#refresh" prefHeight="525.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <TextField fx:id="mourad" layoutX="528.0" layoutY="7.0" prefHeight="26.0" prefWidth="54.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="-1.0" stroke="#ffffff00" strokeType="INSIDE" width="724.0" />
+      <TabPane layoutY="44.0" onMouseMoved="#refresh" prefHeight="523.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Accueil">
             <content>
@@ -118,6 +121,5 @@
          </font>
       </Label>
       <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-      <TextField fx:id="mourad" layoutX="524.0" layoutY="17.0" prefHeight="26.0" prefWidth="54.0" />
    </children>
 </AnchorPane>
