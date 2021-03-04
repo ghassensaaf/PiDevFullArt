@@ -37,5 +37,7 @@
         </columns>
       </TableView>
       <Label layoutX="463.0" layoutY="158.0" text="Message Recu " />
+      <TextField fx:id="id_client" disable="true" layoutX="371.0" layoutY="97.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label layoutX="300.0" layoutY="101.0" text="ID client" />
    </children>
 </AnchorPane>

@@ -55,8 +55,12 @@ public class ContacteController implements Initializable {
 
     @FXML
     private TextField id_msg;
+    @FXML
+    private TextField id_client;
+
 
     private client client1;
+
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
@@ -111,13 +115,32 @@ public class ContacteController implements Initializable {
 
 
     }
+    private client getClient() throws SQLException {
+        String sql ="SELECT * FROM client where login= ?";
+        client ccc=null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, clientlogin.getText());
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        if (resultSet.next())
+        {
+            ccc = new client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9));
+        }
+        return ccc;
+    }
+
     private void ajouterMessage() throws SQLException {
-        String sql = "INSERT into message (contenu,id_artiste_dest) " +
-                "values (?,?) ";
+        String sql = "INSERT into message (contenu,id_artiste_dest,id_client_exp) " +
+                "values (?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txt_msg.getText());
             preparedStatement.setString(2, txtid_art.getText());
+            preparedStatement.setString(3, id_client.getText());
 
 
 
@@ -138,7 +161,7 @@ public class ContacteController implements Initializable {
             preparedStatement = conn.prepareStatement(sql);
 
             preparedStatement.setString(1, id_msg.getText());
-            System.out.println(preparedStatement.toString());
+
 
             preparedStatement.executeUpdate();
 
@@ -216,10 +239,13 @@ public class ContacteController implements Initializable {
 
 
 
+
     @FXML
     void refresh(MouseEvent event) throws SQLException {
 
         populateTablemessage();
+        client1=getClient();
+        id_client.setText(String.valueOf(client1.getId_client()));
 
     }
 

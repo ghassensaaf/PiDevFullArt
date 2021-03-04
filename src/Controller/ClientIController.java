@@ -172,8 +172,11 @@ public class ClientIController implements Initializable {
     private Button Contacter_art;
 
     @FXML
+    private TextField lotfi;
+
+    @FXML
     private TextField txtid_art;
-private client client1;
+    private client client1;
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
@@ -204,7 +207,7 @@ private client client1;
                 txteve.getItems().add(e.getNom());
             }
             populateTablePublication();
-            populateTablereclamation();
+
             populateTableArtiste();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -216,7 +219,7 @@ private client client1;
         String sql ="SELECT * FROM annonce where id_client = ?";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, String.valueOf(client1.getId_client()));
+            preparedStatement.setString(1,(lotfi.getText()));
             resultSet=preparedStatement.executeQuery();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -471,8 +474,15 @@ private client client1;
 /*****************************************RECLAMATION**********************/
 private void populateTablereclamation() throws SQLException {
     list3 = FXCollections.observableArrayList();
-    String sql = "SELECT * FROM reclamation";
-    resultSet = conn.createStatement().executeQuery(sql);
+    String sql = "SELECT * FROM reclamation where id_client=?";
+    try {
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1,lotfi.getText() );
+        resultSet=preparedStatement.executeQuery();
+
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+    }
     while (resultSet.next()) {
         reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
         list3.add(rec);
@@ -488,16 +498,15 @@ private void populateTablereclamation() throws SQLException {
 /*************************AJOUTER RECLAMATION*****************/
 private void ajouterReclamation() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
-    String sql = "INSERT into reclamation (titre, contenu,etat,id_artiste,id_client) " +
+    String sql = "INSERT into reclamation (titre, contenu,etat,id_client) " +
 //                "values (1,'salem','sbe5ir',10,25,'2020-12-12','azefazef',true,0,4) ";
-            "values (?,?,?,?,?) ";
+            "values (?,?,?,?) ";
     try {
         preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setString(1, txttitre_rec.getText());
         preparedStatement.setString(2, txtdesc_rec.getText());
         preparedStatement.setString(3, "0");
-        preparedStatement.setString(4, "2");
-        preparedStatement.setString(5, "1");
+        preparedStatement.setString(4, "1");
         preparedStatement.executeUpdate();
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
@@ -641,13 +650,14 @@ private void ajouterReclamation() throws SQLException {
         return ccc;
     }
     @FXML
-    void refresh(MouseEvent event) throws SQLException {
+    void refresh1(MouseEvent event) throws SQLException {
         client1=getClient();
+        lotfi.setText(String.valueOf(client1.getId_client()));
         populateTableAnnonce();
-
-
-
+        populateTablereclamation();
     }
+
+
     ArrayList<evenement> gettypeeve() throws SQLException {
         ArrayList<evenement>  lista = new ArrayList<>();
         String sql =" select * from type_evenement ";
