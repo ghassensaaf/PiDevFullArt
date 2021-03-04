@@ -21,7 +21,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="735.0" />
-      <TabPane layoutY="42.0" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="42.0" onMouseMoved="#refresh1" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Acceuil">
             <content>

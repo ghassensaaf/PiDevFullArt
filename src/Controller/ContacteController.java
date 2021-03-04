@@ -96,7 +96,7 @@ public class ContacteController implements Initializable {
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txtid_art.getText());
-
+            System.out.println(preparedStatement.toString());
 
             resultSet=preparedStatement.executeQuery();
         } catch (SQLException ex) {
