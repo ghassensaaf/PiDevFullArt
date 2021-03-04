@@ -50,7 +50,7 @@
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <TableView fx:id="tableAnnonce" layoutX="10.0" layoutY="264.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
+                        <TableView fx:id="tableAnnonce" layoutX="10.0" layoutY="264.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
