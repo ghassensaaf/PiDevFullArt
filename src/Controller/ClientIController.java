@@ -513,7 +513,7 @@ private void ajouterReclamation() throws SQLException {
     }
     populateTablereclamation();
 }
-
+    /*************************ACTION RECLAMATION*****************/
     @FXML
     void Action_rec(ActionEvent event) {
         if (event.getSource() == btn_ajouter) {
@@ -562,6 +562,7 @@ private void ajouterReclamation() throws SQLException {
             }
         }
     }
+    /*************************MOUSE  RECLAMATION*****************/
     @FXML
     void showselectedrec(MouseEvent event) {
         reclamation a=tableReclamation.getSelectionModel().getSelectedItem();
@@ -574,6 +575,7 @@ private void ajouterReclamation() throws SQLException {
         }
 
     }
+    /*************************MODIFIER RECLAMATION*****************/
     private void modifierReclamation() throws SQLException {
         String sql="UPDATE reclamation set  titre= ? , contenu= ?  where id_reclamation= ?";
         try {
@@ -588,6 +590,7 @@ private void ajouterReclamation() throws SQLException {
         populateTablereclamation();
         tableReclamation.refresh();
     }
+    /*************************DELETE  RECLAMATION*****************/
     private void deleteReclamation() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
         String sql="delete from reclamation where id_reclamation = ?";
