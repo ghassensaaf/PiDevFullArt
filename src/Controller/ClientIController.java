@@ -140,6 +140,11 @@ public class ClientIController implements Initializable {
 
     @FXML
     private TextArea txtdesc_rec;
+    @FXML
+    private Button consulter;
+
+    @FXML
+    private Button btnretour;
 
     private Connection conn=null;
     ResultSet resultSet = null;
@@ -148,6 +153,7 @@ public class ClientIController implements Initializable {
     private ObservableList <Annonce> list;
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
+    private Annonce a;
     public String initData(String login)
     {
         clientlogin.setText(login);
@@ -182,31 +188,6 @@ public class ClientIController implements Initializable {
         colnbcandidat.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
         tableAnnonce.setItems(list);
 //        Button row
-        javafx.util.Callback<TableColumn<Annonce,String>, TableCell<Annonce,String>> cellFactory=(param)->{
-            final TableCell<Annonce,String> cell= new TableCell<Annonce,String>(){
-                @Override
-                public void updateItem(String item,boolean empty){
-                    super.updateItem(item,empty);
-                    if(empty){
-                        setGraphic(null);
-                        setText(null);
-                    }
-                    else {
-                        final Button btnconsulter=new Button("Consulter");
-                        btnconsulter.setOnAction(event -> {
-                            Annonce a=getTableView().getItems().get(getIndex());
-                            Alert aa=new Alert(Alert.AlertType.INFORMATION);
-                            aa.setContentText("titre: "+ a.getTitre()+ "\ndescription : "+a.getDescription());
-                            aa.show();
-                        });
-                        setGraphic(btnconsulter);
-                        setText(null);
-                    }
-                }
-            };
-            return cell;
-        };
-        colconsulter.setCellFactory(cellFactory);
     }
     @FXML
     void btnaction(ActionEvent event) {
@@ -270,6 +251,44 @@ public class ClientIController implements Initializable {
                     txtprixmin.setText("");
                 }
             }
+            else if(event.getSource()==consulter)
+            {
+                try {
+                    FXMLLoader loader=new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/fxml/detailAnnonce.fxml"));
+
+                    Parent p=loader.load();
+
+                    Scene scene=new Scene(p);
+                    detailAnnonceController controller = loader.getController();
+                    controller.initData(a,clientlogin.getText());
+
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            else if (event.getSource()==btnretour)
+            {
+                try {
+
+                    //add you loading or delays - ;-)
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    //stage.setMaximized(true);
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/login.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
+            }
 
 
     }
@@ -298,7 +317,7 @@ public class ClientIController implements Initializable {
     }
     @FXML
     void showselected(MouseEvent event) {
-        Annonce a=tableAnnonce.getSelectionModel().getSelectedItem();
+        a=tableAnnonce.getSelectionModel().getSelectedItem();
         if(a!=null)
         {
             DateFormat format= new SimpleDateFormat("yyyy-MM-dd");

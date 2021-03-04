@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="fullart@localhost" uuid="d0e9a072-66d8-4b1d-b6f1-71c81e7e01f6">
+    <data-source source="LOCAL" name="fullart@localhost" uuid="0cfb75d3-321a-4229-9c6f-8273c5a45f4e">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/fullart</jdbc-url>
-      <driver-properties>
-        <property name="serverTimezone" value="UTC" />
-      </driver-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>

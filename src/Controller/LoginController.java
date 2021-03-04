@@ -1,6 +1,8 @@
 
 package Controller;
 
+        import entite.artiste;
+        import entite.client;
         import javafx.event.ActionEvent;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -57,7 +59,6 @@ public class LoginController implements Initializable {
     Connection conn=null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-
     @FXML
     void login(ActionEvent event) {
         if(logIn().equals("admin"))

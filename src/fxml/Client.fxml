@@ -15,11 +15,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
    <children>
-      <TabPane layoutY="36.0" prefHeight="470.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="735.0" />
+      <TabPane layoutY="42.0" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Acceuil">
             <content>
@@ -44,11 +46,11 @@
           </Tab>
           <Tab text="Mes annonces">
             <content>
-              <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="652.0">
+              <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="735.0">
                      <children>
                         <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <TableView fx:id="tableAnnonce" layoutX="9.0" layoutY="221.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
+                        <TableView fx:id="tableAnnonce" layoutX="10.0" layoutY="264.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
@@ -56,10 +58,9 @@
                               <TableColumn fx:id="colprixmax" prefWidth="75.0" text="prix max" />
                               <TableColumn fx:id="coletat" prefWidth="75.0" text="etat" />
                               <TableColumn fx:id="colnbcandidat" prefWidth="99.0" text="nb candidature" />
-                              <TableColumn fx:id="colconsulter" prefWidth="75.0" text="Consulter" />
                           </columns>
                         </TableView>
-                        <VBox layoutX="51.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
+                        <VBox layoutX="51.0" layoutY="14.0" prefHeight="236.0" prefWidth="100.0" spacing="20.0">
                            <children>
                               <Label text="Titre" />
                               <Label text="Type évenement" />
@@ -69,7 +70,7 @@
                               <Label text="Adresse" />
                            </children>
                         </VBox>
-                        <VBox layoutX="187.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                        <VBox layoutX="187.0" layoutY="14.0" prefHeight="239.0" prefWidth="100.0" spacing="10.0">
                            <children>
                               <TextField fx:id="txttitre" prefHeight="25.0" prefWidth="20.0" promptText="Titre" />
                               <ComboBox fx:id="txteve" prefHeight="25.0" prefWidth="113.0" />
@@ -79,7 +80,7 @@
                               <TextField fx:id="txtadresse" promptText="Adresse" />
                            </children>
                         </VBox>
-                        <VBox layoutX="310.0" layoutY="12.0" prefHeight="200.0" prefWidth="207.0" spacing="15.0">
+                        <VBox layoutX="310.0" layoutY="12.0" prefHeight="246.0" prefWidth="207.0" spacing="25.0">
                            <children>
                               <HBox prefHeight="29.0" prefWidth="151.0" spacing="20.0">
                                  <children>
@@ -92,14 +93,15 @@
                                  </children>
                               </HBox>
                               <Label text="Description" />
-                              <TextArea fx:id="txtdesc" prefHeight="101.0" prefWidth="207.0" promptText="Description" />
+                              <TextArea fx:id="txtdesc" prefHeight="106.0" prefWidth="207.0" promptText="Description" />
                            </children>
                         </VBox>
-                        <VBox layoutX="572.0" layoutY="57.0" prefHeight="148.0" prefWidth="149.0" spacing="25.0">
+                        <VBox layoutX="572.0" layoutY="57.0" prefHeight="191.0" prefWidth="149.0" spacing="25.0">
                            <children>
                               <Button fx:id="add" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="edit" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="delete" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Supprimer" />
+                              <Button fx:id="consulter" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Consulter" />
                            </children>
                         </VBox>
                      </children>
@@ -147,11 +149,12 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Label fx:id="clientlogin" layoutX="644.0" layoutY="9.0" text="Happy User">
+      <Label fx:id="clientlogin" layoutX="646.0" layoutY="13.0" text="Happy User">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Circle fill="#f1c232" layoutX="620.0" layoutY="18.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#f1c232" layoutX="620.0" layoutY="22.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="btnretour" layoutX="20.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Logout" />
    </children>
 </AnchorPane>
