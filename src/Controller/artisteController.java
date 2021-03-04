@@ -1,10 +1,6 @@
 package Controller;
 
-import entite.Annonce;
-import entite.concert;
-import entite.evenement;
-import entite.type_pub;
-import entite.publication;
+import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -386,6 +382,24 @@ public class artisteController implements Initializable {
             liste.add(p);
         }
         return liste;
+    }
+
+    private client getartisteid() throws SQLException {
+        String sql ="SELECT * FROM artiste where login= ?";
+        artiste a=null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, artistlogin.getText());
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        if (resultSet.next())
+        {
+            a = new artiste(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getInt(8),resultSet.getString(9),resultSet.getString(10),resultSet.getString(11));
+        }
+        return a;
     }
 }
 

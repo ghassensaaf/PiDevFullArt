@@ -43,19 +43,19 @@ public class artiste {
         this.id_artiste = id_artiste;
     }
 
-    public artiste(String pwd, String nom, String prenom, String mail, int tel, String adresse, String photo, int id_artiste, String description, String couverture) {
-        this.pwd = pwd;
+    public artiste(int id_artiste, String login, String nom, String prenom, String adresse, String mail, int tel, String pwd, String description, String photo, String couverture) {
+        this.id_artiste = id_artiste;
+        this.login = login;
         this.nom = nom;
         this.prenom = prenom;
+        this.adresse = adresse;
         this.mail = mail;
         this.tel = tel;
-        this.adresse = adresse;
-        this.photo = photo;
-        this.id_artiste = id_artiste;
+        this.pwd = pwd;
         this.description = description;
+        this.photo = photo;
         this.couverture = couverture;
     }
-
     public artiste( int id_artiste ,String nom, String prenom,String adresse, String mail, int tel, String description) {
         this.id_artiste = id_artiste;
         this.nom = nom;
