@@ -2,10 +2,8 @@ package Controller;
 import java.io.IOException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import entite.Annonce;
-import entite.client;
-import entite.publication;
-import entite.reclamation;
+
+import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +23,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ClientIController implements Initializable {
@@ -43,7 +42,7 @@ public class ClientIController implements Initializable {
     private TextField txttitre;
 
     @FXML
-    private ComboBox<?> txteve;
+    private ComboBox<String> txteve;
 
     @FXML
     private TextField txtprixmin;
@@ -154,6 +153,7 @@ private client client1;
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
     private Annonce a;
+    private evenement event;
 
     public ClientIController() throws SQLException {
     }
@@ -167,7 +167,11 @@ private client client1;
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
         try {
-
+            ArrayList <evenement> listeve=gettypeeve();
+            for (evenement  e: listeve)
+            {
+                txteve.getItems().add(e.getNom());
+            }
             populateTablePublication();
             populateTablereclamation();
         } catch (SQLException throwables) {
@@ -593,7 +597,6 @@ private void ajouterReclamation() throws SQLException {
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, clientlogin.getText());
-            System.out.println(preparedStatement.toString());
             resultSet=preparedStatement.executeQuery();
 
         } catch (SQLException ex) {
@@ -611,5 +614,19 @@ private void ajouterReclamation() throws SQLException {
     void refresh(MouseEvent event) throws SQLException {
         client1=getClient();
         populateTableAnnonce();
+
+
+
+    }
+    ArrayList<evenement> gettypeeve() throws SQLException {
+        ArrayList<evenement>  lista = new ArrayList<>();
+        String sql =" select * from type_evenement ";
+        resultSet=conn.createStatement().executeQuery(sql);
+        while(resultSet.next())
+        {
+            evenement e=new evenement(resultSet.getInt(1),resultSet.getString(2));
+            lista.add(e);
+        }
+        return lista;
     }
 }
