@@ -605,9 +605,7 @@ private void ajouterReclamation() throws SQLException {
         if (resultSet.next())
         {
             ccc = new client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9));
-            System.out.println(ccc.toString());
         }
-        System.out.println("salem");
         return ccc;
     }
     @FXML
