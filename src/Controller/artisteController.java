@@ -69,7 +69,7 @@ public class artisteController implements Initializable {
     private TableColumn<publication, String> colcontenu;
 
     @FXML
-    private TableColumn<publication, Timestamp> coldate;
+    private TableColumn<publication, Timestamp> coldatepub;
 
     @FXML
     private TableColumn<publication, Integer> col_like;
@@ -112,6 +112,9 @@ public class artisteController implements Initializable {
     private TableColumn<concert, String> colplace;
 
     @FXML
+    private TableColumn<concert, Timestamp> coldate;
+
+    @FXML
     private Button addconcert;
 
     @FXML
@@ -128,6 +131,39 @@ public class artisteController implements Initializable {
 
     @FXML
     private TextField mourad;
+    @FXML
+    private TableView<Annonce> tabann;
+
+    @FXML
+    private TableColumn<Annonce, Integer> colidann;
+
+    @FXML
+    private TableColumn<Annonce, Integer> coltypeann;
+
+    @FXML
+    private TableColumn<Annonce, String> coltitreann;
+
+    @FXML
+    private TableColumn<Annonce, String> coldescann;
+
+    @FXML
+    private TableColumn<Annonce, Integer> colpminann;
+
+    @FXML
+    private TableColumn<Annonce, Integer> colpmaxann;
+
+    @FXML
+    private TableColumn<Annonce, Date> coldateann;
+
+    @FXML
+    private TableColumn<Annonce, Integer> colnbcand;
+    @FXML
+    private TableColumn<Annonce, Integer> colclientann;
+    @FXML
+    private TextField txtidann;
+
+    @FXML
+    private Button btnpostuler;
 
     artiste aa=null;
 
@@ -138,6 +174,8 @@ public class artisteController implements Initializable {
     PreparedStatement preparedStatement1 = null;
     private ObservableList<publication> list;
     private ObservableList<concert> list1;
+    private ObservableList<Annonce> list2;
+
 
     public String initData(String login) {
         artistlogin.setText(login);
@@ -153,6 +191,7 @@ public class artisteController implements Initializable {
             {
                 txttypepub.getItems().add(p.getId_type());
             }
+            populateTableAnnonce();
 
 
         } catch (SQLException throwables) {
@@ -179,7 +218,7 @@ public class artisteController implements Initializable {
         coltitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         colcontenu.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         coltype.setCellValueFactory(new PropertyValueFactory<>("id_type"));
-        coldate.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
+        coldatepub.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
         col_like.setCellValueFactory(new PropertyValueFactory<>("nb_like"));
         tabpub.setItems(list);
 
@@ -498,6 +537,7 @@ public class artisteController implements Initializable {
 
     @FXML
     void search1(KeyEvent event) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
         FilteredList filter = new FilteredList(list1, e->true);
         search1.textProperty().addListener((observable, oldValue, newValue )-> {
 
@@ -521,7 +561,42 @@ public class artisteController implements Initializable {
         tabconcert.setItems(sort);
 
     }
+    private void populateTableAnnonce() throws SQLException {
+        list2= FXCollections.observableArrayList();
+        String sql ="SELECT * FROM annonce where etat = true ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        while(resultSet.next())
+        {
+            Annonce annonce=new Annonce(resultSet.getInt("id_annonce"),resultSet.getInt("id_client"),resultSet.getString("titre"),resultSet.getString("description"),resultSet.getInt("prix_min"),resultSet.getInt("prix_max"),resultSet.getDate("date"),resultSet.getString("adresse"),resultSet.getBoolean("etat"),resultSet.getTimestamp("date_annonce"),resultSet.getInt("nb_candidature"),resultSet.getInt("id_type_eve"));
+            list2.add(annonce);
+        }
+        colidann.setCellValueFactory(new PropertyValueFactory<>("id_annonce"));
+        coltitreann.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        coldescann.setCellValueFactory(new PropertyValueFactory<>("description"));
+        coltypeann.setCellValueFactory(new PropertyValueFactory<>("id_type_eve"));
+        colpmaxann.setCellValueFactory(new PropertyValueFactory<>("prix_max"));
+        colpminann.setCellValueFactory(new PropertyValueFactory<>("prix_min"));
+        colnbcand.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
+        coldateann.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colclientann.setCellValueFactory(new PropertyValueFactory<>("id_client"));
+        tabann.setItems(list2);
+    }
+    @FXML
+    void showselectedannonce(MouseEvent event) {
+        Annonce a=tabann.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+            txtidann.setText(String.valueOf(a.getId_annonce()));
 
+        }
+
+    }
 
 }
 

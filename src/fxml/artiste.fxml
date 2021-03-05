@@ -84,7 +84,7 @@
                             <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
                               <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
                               <TableColumn fx:id="colcontenu" prefWidth="75.0" text="Contenu" />
-                              <TableColumn fx:id="coldate" prefWidth="75.0" text="date pub" />
+                              <TableColumn fx:id="coldatepub" prefWidth="75.0" text="date pub" />
                               <TableColumn fx:id="col_like" prefWidth="75.0" text="nb like" />
                           </columns>
                         </TableView>
