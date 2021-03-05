@@ -112,7 +112,7 @@ public class ContacteController implements Initializable {
             preparedStatement.setString(1, txtid_art.getText());
 
 
-            System.out.println(preparedStatement.toString());
+
 
             preparedStatement.setString(2, id_client.getText());
             resultSet=preparedStatement.executeQuery();

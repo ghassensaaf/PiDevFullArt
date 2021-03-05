@@ -46,7 +46,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Label layoutX="522.0" layoutY="31.0" text="Label" />
+                        <Label layoutX="522.0" layoutY="31.0" text="ID" />
                         <TextField fx:id="txtidann" disable="true" layoutX="565.0" layoutY="27.0" prefHeight="25.0" prefWidth="32.0" />
                         <Button fx:id="btnpostuler" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: F1C232;" text="Postuler" />
                      </children></AnchorPane>
@@ -63,7 +63,7 @@
                               <Label text="Contenu" />
                            </children>
                         </VBox>
-                        <VBox layoutX="181.0" layoutY="78.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
+                        <VBox layoutX="207.0" layoutY="65.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
                            <children>
                               <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
                               <TextField fx:id="txttitrepub" promptText="Titre">
@@ -71,30 +71,29 @@
                                     <Insets top="5.0" />
                                  </VBox.margin>
                               </TextField>
-                              <TextArea fx:id="txtcontenupub" prefHeight="200.0" prefWidth="200.0" promptText="Contenu">
+                              <TextArea fx:id="txtcontenupub" prefHeight="67.0" prefWidth="186.0" promptText="Contenu">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </TextArea>
                            </children>
                         </VBox>
-                        <TableView fx:id="tabpub" layoutX="91.0" layoutY="281.0" onMouseClicked="#click" prefHeight="200.0" prefWidth="449.0">
+                        <TableView fx:id="tabpub" layoutX="70.0" layoutY="248.0" onMouseClicked="#click" prefHeight="234.0" prefWidth="593.0">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
-                            <TableColumn fx:id="coltype" prefWidth="75.0" text="type" />
-                              <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
-                              <TableColumn fx:id="colcontenu" prefWidth="75.0" text="Contenu" />
-                              <TableColumn fx:id="coldatepub" prefWidth="75.0" text="date pub" />
-                              <TableColumn fx:id="col_like" prefWidth="75.0" text="nb like" />
+                            <TableColumn fx:id="coltype" prefWidth="51.199951171875" text="type" />
+                              <TableColumn fx:id="coltitre" prefWidth="72.0" text="titre" />
+                              <TableColumn fx:id="colcontenu" prefWidth="176.79998779296875" text="Contenu" />
+                              <TableColumn fx:id="coldatepub" prefWidth="106.39993286132812" text="date pub" />
+                              <TableColumn fx:id="col_like" prefWidth="112.79998779296875" text="nb like" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
-                        <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
-                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
+                        <Button fx:id="addpub" layoutX="551.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
+                        <Button fx:id="editpub" layoutX="551.0" layoutY="146.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deletepub" layoutX="551.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" prefHeight="26.0" prefWidth="124.0" promptText="Recherche" />
                         <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
-                        <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" promptText="ID" />
+                        <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
                         <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                      </children>
                   </AnchorPane>
@@ -114,24 +113,23 @@
                         <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
                            <children>
                               <TextField fx:id="idconcert" disable="true" editable="false" />
-                              <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" />
-                              <DatePicker fx:id="dateconcert" />
+                              <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" promptText="Lieu" />
+                              <DatePicker fx:id="dateconcert" promptText="Date" />
                            </children>
                         </VBox>
-                        <TableView fx:id="tabconcert" layoutX="93.0" layoutY="246.0" onMouseClicked="#click1" prefHeight="200.0" prefWidth="394.0">
+                        <TableView fx:id="tabconcert" layoutX="31.0" layoutY="211.0" onMouseClicked="#click1" prefHeight="235.0" prefWidth="456.0">
                           <columns>
                             <TableColumn fx:id="colconcert" prefWidth="96.7999267578125" text="id concert" />
-                              <TableColumn fx:id="colartiste" prefWidth="104.79998168945315" text="id_artiste" />
-                            <TableColumn fx:id="colplace" prefWidth="75.0" text="lieu" />
-                              <TableColumn fx:id="coldate" prefWidth="75.0" text="date" />
+                              <TableColumn fx:id="colartiste" prefWidth="112.79998779296875" text="id_artiste" />
+                            <TableColumn fx:id="colplace" prefWidth="130.4000244140625" text="lieu" />
+                              <TableColumn fx:id="coldate" prefWidth="116.0" text="date" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="ajouter" />
-                        <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <TextField fx:id="search1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search1" />
+                        <Button fx:id="addconcert" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
+                        <Button fx:id="editconcert" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deleteconcert" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <TextField fx:id="search1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
                         <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
-                        <Button fx:id="consulterconcert" layoutX="549.0" layoutY="346.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
                      </children>
                   </AnchorPane>
               </content>
@@ -144,6 +142,6 @@
          </font>
       </Label>
       <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btnretour" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
+      <Button fx:id="btnretour" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="137.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
    </children>
 </AnchorPane>

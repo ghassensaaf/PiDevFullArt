@@ -33,10 +33,10 @@
                               <TableColumn fx:id="colid2" prefWidth="23.0" text="id" />
                               <TableColumn fx:id="coltype" prefWidth="54.0" text="type" />
                               <TableColumn fx:id="coltitre2" prefWidth="64.0" text="titre" />
-                              <TableColumn fx:id="colcontenu" prefWidth="98.0" text="Contenu" />
-                              <TableColumn fx:id="coldate" minWidth="0.0" prefWidth="131.0" text="date pub" />
-                              <TableColumn fx:id="col_like" minWidth="0.0" prefWidth="147.0" text="nb like" />
-                              <TableColumn fx:id="jaime" prefWidth="97.0" text="j'aime" />
+                              <TableColumn fx:id="colcontenu" prefWidth="194.39996337890625" text="Contenu" />
+                              <TableColumn fx:id="coldate" minWidth="0.0" text="date pub" />
+                              <TableColumn fx:id="col_like" minWidth="0.0" prefWidth="109.5999755859375" text="nb like" />
+                              <TableColumn fx:id="jaime" prefWidth="126.4000244140625" text="j'aime" />
                            </columns>
                         </TableView>
                         <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnconsulterpub" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Consulter" />
@@ -115,18 +115,18 @@
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
                            <children>
-                              <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" onKeyPressed="#search1" promptText="Recherche" />
+                              <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="117.0" promptText="Recherche" />
                               <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
                               <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="221.0" onMouseClicked="#showselectedrec" prefHeight="206.0" prefWidth="550.0">
+                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="248.0" onMouseClicked="#showselectedrec" prefHeight="206.0" prefWidth="550.0">
                                  <columns>
                                     <TableColumn fx:id="colid_rec" prefWidth="75.0" text="id" />
                                     <TableColumn fx:id="coltitre_rec" prefWidth="49.5999755859375" text="Titre" />
-                                    <TableColumn fx:id="colcontenu_rec" prefWidth="174.4000244140625" text="Contenu" />
-                                    <TableColumn fx:id="coletat_rec" prefWidth="76.00006103515625" text="etat" />
-                                    <TableColumn fx:id="coldate_rec" prefWidth="100.79998779296875" text="Date" />
+                                    <TableColumn fx:id="colcontenu_rec" prefWidth="247.20001220703125" text="Contenu" />
+                                    <TableColumn fx:id="coletat_rec" prefWidth="72.0" text="etat" />
+                                    <TableColumn fx:id="coldate_rec" prefWidth="106.40008544921875" text="Date" />
                                  </columns>
                               </TableView>
                               <VBox layoutX="55.0" layoutY="27.0" prefHeight="200.0" prefWidth="100.0" spacing="14.0">
@@ -161,11 +161,11 @@
                                       <columns>
                                         <TableColumn fx:id="tab_con_art_id" prefWidth="75.0" text="id_artiste" />
                                         <TableColumn fx:id="tab_con_art_nom" prefWidth="75.0" text="Nom" />
-                                          <TableColumn fx:id="tab_con_art_pre" prefWidth="75.0" text="Prenom" />
-                                          <TableColumn fx:id="tab_con_art_adresse" prefWidth="75.0" text="Adresse" />
-                                          <TableColumn fx:id="tab_con_art_mail" prefWidth="75.0" text="Mail" />
-                                          <TableColumn fx:id="tab_con_art_tel" prefWidth="75.0" text="Telphone" />
-                                          <TableColumn fx:id="tab_con_art_desc" prefWidth="75.0" text="Description" />
+                                          <TableColumn fx:id="tab_con_art_pre" prefWidth="110.4000244140625" text="Prenom" />
+                                          <TableColumn fx:id="tab_con_art_adresse" prefWidth="99.99993896484375" text="Adresse" />
+                                          <TableColumn fx:id="tab_con_art_mail" prefWidth="68.800048828125" text="Mail" />
+                                          <TableColumn fx:id="tab_con_art_tel" prefWidth="70.4000244140625" text="Telphone" />
+                                          <TableColumn fx:id="tab_con_art_desc" prefWidth="139.2000732421875" text="Description" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -186,6 +186,6 @@
          </font>
       </Label>
       <Circle fill="#f1c232" layoutX="620.0" layoutY="22.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btnretour" layoutX="20.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
+      <Button fx:id="btnretour" layoutX="20.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
    </children>
 </AnchorPane>

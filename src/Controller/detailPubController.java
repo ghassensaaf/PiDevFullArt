@@ -64,6 +64,8 @@ public class detailPubController implements Initializable {
     private Label login;
     @FXML
     private TextField id_comm;
+    @FXML
+    private TableColumn<commentaire, String> collike_com;
 
 
     @FXML
@@ -77,6 +79,7 @@ public class detailPubController implements Initializable {
     private Connection conn;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
+    PreparedStatement preparedStatement1 = null;
     private ObservableList<commentaire> list;
     private ObservableList<jaime> list1;
 
@@ -121,7 +124,49 @@ public class detailPubController implements Initializable {
         colid_com.setCellValueFactory(new PropertyValueFactory<>("id_commentaire"));
         colContenu_com.setCellValueFactory(new PropertyValueFactory<>("contenu"));
         colnb_like_com.setCellValueFactory(new PropertyValueFactory<>("nb_like"));
+
+
+        javafx.util.Callback<TableColumn<commentaire,String>, TableCell<commentaire,String>> cellFactory=(param)->{
+            final TableCell<commentaire,String> cell= new TableCell<commentaire,String>(){
+                @Override
+                public void updateItem(String item,boolean empty){
+                    super.updateItem(item,empty);
+                    if(empty){
+                        setGraphic(null);
+                        setText(null);
+                    }
+                    else {
+                        final Button btnconsulter=new Button("j'aime");
+                        btnconsulter.setOnAction(event -> {
+                            commentaire pub=getTableView().getItems().get(getIndex());
+                            String sql="UPDATE commentaire set  nb_like = nb_like+1 where id_commentaire=?";
+                            try {
+                                preparedStatement = conn.prepareStatement(sql);
+                                preparedStatement.setString(1, String.valueOf(pub.getId_commentaire()));
+                                preparedStatement.executeUpdate();
+                            } catch (SQLException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+                            try {
+                                populateTablecommentaire();
+                            } catch (SQLException throwables) {
+                                throwables.printStackTrace();
+                            }
+
+                        });
+                        setGraphic(btnconsulter);
+                        setText(null);
+                    }
+
+                }
+            };
+            return cell;
+        };
+        collike_com.setCellFactory(cellFactory);
+
         tab_commentaire.setItems(list);
+
+
 
     }
 

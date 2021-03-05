@@ -14,8 +14,9 @@
       <TableView fx:id="tab_commentaire" layoutX="20.0" layoutY="199.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="417.0">
         <columns>
           <TableColumn fx:id="colid_com" prefWidth="75.0" text="id" />
-          <TableColumn fx:id="colContenu_com" prefWidth="142.4000015258789" text="contenu" />
-            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="104.79998779296875" text="nb like" />
+          <TableColumn fx:id="colContenu_com" prefWidth="150.4000015258789" text="contenu" />
+            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="88.79998779296875" text="nb like" />
+            <TableColumn fx:id="collike_com" minWidth="4.0" prefWidth="88.79998779296875" text="Like" />
         </columns>
       </TableView>
       <Label fx:id="login" layoutX="635.0" layoutY="22.0" prefHeight="18.0" prefWidth="56.0" />
