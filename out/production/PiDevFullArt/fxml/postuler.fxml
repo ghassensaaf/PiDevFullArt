@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="469.0" prefWidth="456.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.Postuler">
+<AnchorPane onMouseMoved="#refresh1" prefHeight="533.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.postulerController">
    <children>
-      <TableView fx:id="tabcandidature" layoutX="30.0" layoutY="242.0" onMouseMoved="#refresh1" prefHeight="227.0" prefWidth="634.0" stylesheets="@../table.css">
+      <TableView fx:id="tabcandidature" layoutX="29.0" layoutY="292.0" onMouseClicked="#showselected" prefHeight="227.0" prefWidth="634.0" stylesheets="@../table.css">
          <columns>
             <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="colartiste" prefWidth="75.0" text="Artiste" />
             <TableColumn fx:id="colcontenu" prefWidth="75.0" text="Contenu" />
             <TableColumn fx:id="colprix" prefWidth="75.0" text="Prix" />
             <TableColumn fx:id="coldate" prefWidth="75.0" text="Date" />
@@ -28,13 +28,36 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Button fx:id="btnretour" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Retour" />
       <Circle fill="#f1c232" layoutX="591.0" layoutY="34.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btnretour" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Retour" />
-      <TextField fx:id="txtidann" disable="true" layoutX="222.0" layoutY="21.0" prefHeight="25.0" prefWidth="43.0" />
-      <Label fx:id="lbltitreann" layoutX="282.0" layoutY="18.0" prefHeight="17.0" prefWidth="166.0" text="Annonce ouverte">
+      <TextField fx:id="txtidann" disable="true" layoutX="412.0" layoutY="90.0" prefHeight="25.0" prefWidth="43.0" />
+      <Label fx:id="lbltitreann" layoutX="282.0" layoutY="18.0" prefHeight="17.0" prefWidth="166.0" text="Titre annonce">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
+      <VBox layoutX="96.0" layoutY="92.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="61.0" text="ID">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="Contenu" />
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="prix" />
+         </children>
+      </VBox>
+      <VBox layoutX="182.0" layoutY="92.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+         <children>
+            <TextField fx:id="txtidcan" disable="true" />
+            <TextField fx:id="txtcontcan" />
+            <TextField fx:id="txtprix" />
+         </children>
+      </VBox>
+      <Label layoutX="322.0" layoutY="94.0" prefHeight="17.0" prefWidth="78.0" text="ID Annonce" />
+      <Button fx:id="btnaddann" layoutX="493.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
+      <Button fx:id="btneditann" layoutX="493.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Modifier" />
+      <Button fx:id="btndeleteann" layoutX="493.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Supprimer" />
+      <TextField fx:id="taher" layoutX="503.0" layoutY="22.0" prefHeight="25.0" prefWidth="72.0" />
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -345,6 +346,27 @@ public class artisteController implements Initializable {
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.close();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/login.fxml")));
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+        else if(event.getSource()==btnpostuler)
+        {
+            try {
+
+                FXMLLoader loader=new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/postuler.fxml"));
+                Parent p=loader.load();
+                Scene scene=new Scene(p);
+
+                postulerController controller = loader.getController();
+                controller.initData(Integer.parseInt(txtidann.getText()),artistlogin.getText());
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.close();
                 stage.setScene(scene);
                 stage.show();
 

@@ -70,7 +70,7 @@ public class LoginController implements Initializable {
                 Stage stage = (Stage) node.getScene().getWindow();
                 //stage.setMaximized(true);
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/reclamation.fxml")));
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../sarra/Project_1/build/classes/project_1/interfac/Typemusique.class")));
                 stage.setScene(scene);
                 stage.show();
 
