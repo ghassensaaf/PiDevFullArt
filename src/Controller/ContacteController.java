@@ -110,11 +110,7 @@ public class ContacteController implements Initializable {
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txtid_art.getText());
-
-
-
             preparedStatement.setString(2, id_client.getText());
-
             resultSet=preparedStatement.executeQuery();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());

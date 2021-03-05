@@ -26,7 +26,30 @@
         <tabs>
           <Tab text="Accueil">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tabann" layoutX="36.0" layoutY="102.0" onMouseClicked="#showselectedannonce" prefHeight="362.0" prefWidth="645.0">
+                          <columns>
+                            <TableColumn fx:id="colidann" prefWidth="43.0" text="id" />
+                              <TableColumn fx:id="colclientann" prefWidth="111.0" text="client" />
+                            <TableColumn fx:id="coltypeann" prefWidth="62.0" text="type" />
+                              <TableColumn fx:id="coltitreann" prefWidth="120.0" text="titre" />
+                              <TableColumn fx:id="coldescann" prefWidth="75.0" text="description" />
+                              <TableColumn fx:id="colpminann" prefWidth="75.0" text="prix min" />
+                              <TableColumn fx:id="colpmaxann" prefWidth="75.0" text="prix max" />
+                              <TableColumn fx:id="coldateann" prefWidth="40.0" text="date" />
+                              <TableColumn fx:id="colnbcand" prefWidth="95.0" text="nb candidature" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="36.0" layoutY="31.0" text="Annonces">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="522.0" layoutY="31.0" text="Label" />
+                        <TextField fx:id="txtidann" disable="true" layoutX="565.0" layoutY="27.0" prefHeight="25.0" prefWidth="32.0" />
+                        <Button fx:id="btnpostuler" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: F1C232;" text="Postuler" />
+                     </children></AnchorPane>
             </content>
           </Tab>
           <Tab text="Mes publications">

@@ -187,7 +187,14 @@ public class ClientIController implements Initializable {
     private ObservableList <artiste> list4;
     private Annonce a;
     private evenement event;
-
+//****************************Initialisation******************************************
+    @FXML
+    void refresh1(MouseEvent event) throws SQLException {
+        client1=getClient();
+        lotfi.setText(String.valueOf(client1.getId_client()));
+        populateTableAnnonce();
+        populateTablereclamation();
+    }
     public ClientIController() throws SQLException {
     }
 
@@ -213,7 +220,132 @@ public class ClientIController implements Initializable {
             throwables.printStackTrace();
         }
     }
+//****************************Action Buttons******************************************
+@FXML
+void btnaction(ActionEvent event) {
+    if(event.getSource()==add)
+    {
+        try {
+            addAnnonce();
+            Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+            aa.setContentText("Annonce ajoutée");
+            aa.show();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            txtid.setText("");
+            txttitre.setText("");
+            txtadresse.setText("");
+            txtdate.setValue(LocalDate.now());
+            txtdesc.setText("");
+            txtprixmax.setText("");
+            txtprixmin.setText("");
+            txteve.getSelectionModel().select(-1);
+        }
+    }
+    else if(event.getSource()==delete)
+    {
+        try {
+            deleteAnnonce();
+            Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+            aa.setContentText("Annonce supprimée");
+            aa.show();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            txtid.setText("");
+            txttitre.setText("");
+            txtadresse.setText("");
+            txtdate.setValue(LocalDate.now());
+            txtdesc.setText("");
+            txtprixmax.setText("");
+            txtprixmin.setText("");
+            txteve.getSelectionModel().select(-1);
+        }
+    }
+    else if(event.getSource()==edit)
+    {
+        try {
+            editAnnonce();
+            Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+            aa.setContentText("Annonce modifiée");
+            aa.show();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        finally {
+            txtid.setText("");
+            txttitre.setText("");
+            txtadresse.setText("");
+            txtdate.setValue(LocalDate.now());
+            txtdesc.setText("");
+            txtprixmax.setText("");
+            txtprixmin.setText("");
+            txteve.getSelectionModel().select(-1);
+        }
+    }
+    else if(event.getSource()==consulter)
+    {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/detailAnnonce.fxml"));
 
+            Parent p=loader.load();
+
+            Scene scene=new Scene(p);
+            detailAnnonceController controller = loader.getController();
+            controller.initData(a,clientlogin.getText());
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    else if (event.getSource()==btnretour)
+    {
+        try {
+
+            //add you loading or delays - ;-)
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            //stage.setMaximized(true);
+            stage.close();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/login.fxml")));
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+
+}
+//****************************Show selected table row******************************************
+@FXML
+void showselected(MouseEvent event) {
+    a=tableAnnonce.getSelectionModel().getSelectedItem();
+    if(a!=null)
+    {
+        DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
+        txtid.setText(String.valueOf(a.getId_annonce()));
+        txttitre.setText(a.getTitre());
+        txtadresse.setText(a.getAdresse());
+        txtdate.setValue(LocalDate.parse(format.format(a.getDate())));
+        txtdesc.setText(a.getDescription());
+        txtprixmax.setText(String.valueOf(a.getPrix_max()));
+        txtprixmin.setText(String.valueOf(a.getPrix_min()));
+        txteve.getSelectionModel().select(a.getId_type_eve()-1);
+    }
+
+}
+//****************************CRUD Annonce******************************************
     private void populateTableAnnonce() throws SQLException {
         list= FXCollections.observableArrayList();
         String sql ="SELECT * FROM annonce where id_client = ?";
@@ -236,111 +368,8 @@ public class ClientIController implements Initializable {
         coletat.setCellValueFactory(new PropertyValueFactory<>("etat"));
         colnbcandidat.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
         tableAnnonce.setItems(list);
-//        Button row
     }
-    @FXML
-    void btnaction(ActionEvent event) {
-            if(event.getSource()==add)
-            {
-                try {
-                    addAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce ajoutée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
-            }
-            else if(event.getSource()==delete)
-            {
-                try {
-                    deleteAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce supprimée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
-            }
-            else if(event.getSource()==edit)
-            {
-                try {
-                    editAnnonce();
-                    Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
-                    aa.setContentText("Annonce modifiée");
-                    aa.show();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                finally {
-                    txtid.setText("");
-                    txttitre.setText("");
-                    txtadresse.setText("");
-                    txtdate.setValue(LocalDate.now());
-                    txtdesc.setText("");
-                    txtprixmax.setText("");
-                    txtprixmin.setText("");
-                }
-            }
-            else if(event.getSource()==consulter)
-            {
-                try {
-                    FXMLLoader loader=new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/fxml/detailAnnonce.fxml"));
 
-                    Parent p=loader.load();
-
-                    Scene scene=new Scene(p);
-                    detailAnnonceController controller = loader.getController();
-                    controller.initData(a,clientlogin.getText());
-
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-                    stage.close();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-            else if (event.getSource()==btnretour)
-            {
-                try {
-
-                    //add you loading or delays - ;-)
-                    Node node = (Node) event.getSource();
-                    Stage stage = (Stage) node.getScene().getWindow();
-                    //stage.setMaximized(true);
-                    stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/login.fxml")));
-                    stage.setScene(scene);
-                    stage.show();
-
-                } catch (IOException ex) {
-                    System.err.println(ex.getMessage());
-                }
-            }
-
-
-    }
     private void addAnnonce() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
         String sql = "INSERT into annonce (id_client, titre, description, prix_min, prix_max, date, adresse, etat, nb_candidature, id_type_eve) " +
@@ -348,7 +377,7 @@ public class ClientIController implements Initializable {
                 "values (?,?,?,?,?,?,?,?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, "1");
+            preparedStatement.setString(1, lotfi.getText());
             preparedStatement.setString(2, txttitre.getText());
             preparedStatement.setString(3, txtdesc.getText());
             preparedStatement.setString(4, txtprixmin.getText());
@@ -357,29 +386,14 @@ public class ClientIController implements Initializable {
             preparedStatement.setString(7, txtadresse.getText());
             preparedStatement.setString(8, "1");
             preparedStatement.setString(9, "0");
-            preparedStatement.setString(10, "3");
+            preparedStatement.setString(10, String.valueOf((txteve.getSelectionModel().getSelectedIndex())+1));
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         populateTableAnnonce();
     }
-    @FXML
-    void showselected(MouseEvent event) {
-        a=tableAnnonce.getSelectionModel().getSelectedItem();
-        if(a!=null)
-        {
-            DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
-            txtid.setText(String.valueOf(a.getId_annonce()));
-            txttitre.setText(a.getTitre());
-            txtadresse.setText(a.getAdresse());
-            txtdate.setValue(LocalDate.parse(format.format(a.getDate())));
-            txtdesc.setText(a.getDescription());
-            txtprixmax.setText(String.valueOf(a.getPrix_max()));
-            txtprixmin.setText(String.valueOf(a.getPrix_min()));
-        }
 
-    }
     private void deleteAnnonce() throws SQLException {
 //        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
         String sql="delete from annonce where id_annonce = ?";
@@ -398,7 +412,7 @@ public class ClientIController implements Initializable {
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txttitre.getText());
-            preparedStatement.setString(2, "2");
+            preparedStatement.setString(2, String.valueOf((txteve.getSelectionModel().getSelectedIndex())+1));
             preparedStatement.setString(3, txtprixmin.getText());
             preparedStatement.setString(4, txtprixmax.getText());
             preparedStatement.setString(5, txtdate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
@@ -411,6 +425,8 @@ public class ClientIController implements Initializable {
         }
         populateTableAnnonce();
     }
+//****************************Affichage Table Pub******************************************
+
     private void populateTablePublication() throws SQLException {
         list2= FXCollections.observableArrayList();
         String sql ="SELECT * FROM publication";
@@ -652,13 +668,7 @@ private void ajouterReclamation() throws SQLException {
         }
         return ccc;
     }
-    @FXML
-    void refresh1(MouseEvent event) throws SQLException {
-        client1=getClient();
-        lotfi.setText(String.valueOf(client1.getId_client()));
-        populateTableAnnonce();
-        populateTablereclamation();
-    }
+
 
 
     ArrayList<evenement> gettypeeve() throws SQLException {

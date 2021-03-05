@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
 
@@ -104,6 +105,14 @@ public class detailAnnonceController implements Initializable {
         }
     }
     @FXML
+    void refresh(MouseEvent event) throws SQLException {
+        populateTableCandidature();
+    }
+    @FXML
+    void refresh1(MouseEvent event) throws SQLException {
+        populateTableCandidature();
+    }
+    @FXML
     void back_to_client_home(ActionEvent event) throws IOException {
         try {
             FXMLLoader loader=new FXMLLoader();
@@ -125,8 +134,14 @@ public class detailAnnonceController implements Initializable {
     }
     private void populateTableCandidature() throws SQLException {
         list= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM candidature";
-        resultSet=conn.createStatement().executeQuery(sql);
+        String sql ="SELECT * FROM candidature where id_annonce = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,txtidann.getText());
+            resultSet=preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
         while(resultSet.next())
         {
             Candidature candidature=new Candidature(resultSet.getInt("id_candidature"),resultSet.getInt("id_annonce"),resultSet.getString("contenu"),resultSet.getInt("prix"),resultSet.getInt("etat"),resultSet.getInt("id_artiste"),resultSet.getTimestamp("date"));

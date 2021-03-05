@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailAnnonceController">
+<AnchorPane onMouseMoved="#refresh" prefHeight="400.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailAnnonceController">
    <children>
-      <TableView fx:id="tabcandidature" layoutX="32.0" layoutY="175.0" prefHeight="200.0" prefWidth="646.0" stylesheets="@../table.css">
+      <TableView fx:id="tabcandidature" layoutX="32.0" layoutY="175.0" onMouseMoved="#refresh1" prefHeight="200.0" prefWidth="646.0" stylesheets="@../table.css">
         <columns>
           <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="colartiste" prefWidth="75.0" text="Artiste" />
@@ -33,7 +33,7 @@
       </Label>
       <Circle fill="#f1c232" layoutX="601.0" layoutY="24.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="btnretour" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: F1C232;" styleClass="v" text="Retour" />
-      <Label layoutX="33.0" layoutY="62.0" prefHeight="17.0" prefWidth="88.0" text="ID Annonce :" />
+      <Label layoutX="33.0" layoutY="62.0" prefHeight="17.0" prefWidth="75.0" text="ID Annonce :" />
       <TextField fx:id="txtidann" disable="true" layoutX="113.0" layoutY="58.0" prefHeight="25.0" prefWidth="43.0" />
       <Label fx:id="titreann" layoutX="188.0" layoutY="62.0" text="Titre : " />
       <Label layoutX="370.0" layoutY="61.0" text="Contenu" />
