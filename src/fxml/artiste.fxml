@@ -92,7 +92,7 @@
                         <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
                         <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
                         <Button layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
-                        <TextField layoutX="561.0" layoutY="14.0" />
+                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
                         <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
                         <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" promptText="ID" />
                         <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
@@ -129,7 +129,7 @@
                         <Button fx:id="addconcert" layoutX="601.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="ajouter" />
                         <Button fx:id="editconcert" layoutX="601.0" layoutY="164.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: #f1c232;" text="Modifier" />
                         <Button fx:id="deleteconcert" layoutX="601.0" layoutY="233.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <TextField layoutX="535.0" layoutY="34.0" />
+                        <TextField fx:id="search1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search1" />
                         <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
                         <Button fx:id="consulterconcert" layoutX="549.0" layoutY="346.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Consulter" />
                      </children>

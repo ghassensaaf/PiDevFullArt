@@ -1,8 +1,11 @@
 package Controller;
 
+import com.sun.media.sound.ModelDestination;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +14,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -26,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class artisteController implements Initializable {
 
@@ -37,6 +44,11 @@ public class artisteController implements Initializable {
 
     @FXML
     private TextField idpub;
+    @FXML
+    private TextField search;
+
+    @FXML
+    private TextField search1;
 
     @FXML
     private TextArea txtcontenupub;
@@ -82,6 +94,9 @@ public class artisteController implements Initializable {
     private TextField idrecherche;
 
     @FXML
+    private TextField searchfield;
+
+    @FXML
     private DatePicker dateconcert;
 
     @FXML
@@ -115,40 +130,6 @@ public class artisteController implements Initializable {
     private TextField mourad;
 
     artiste aa=null;
-    @FXML
-    private TableView<Annonce> tabann;
-
-    @FXML
-    private TableColumn<Annonce, Integer> colidann;
-
-    @FXML
-    private TableColumn<Annonce, Integer> coltypeann;
-
-    @FXML
-    private TableColumn<Annonce, String> coltitreann;
-
-    @FXML
-    private TableColumn<Annonce, String> coldescann;
-
-    @FXML
-    private TableColumn<Annonce, Integer> colpminann;
-
-    @FXML
-    private TableColumn<Annonce, Integer> colpmaxann;
-
-    @FXML
-    private TableColumn<Annonce, Date> coldateann;
-
-    @FXML
-    private TableColumn<Annonce, Integer> colnbcand;
-    @FXML
-    private TableColumn<Annonce, Integer> colclientann;
-    @FXML
-    private TextField txtidann;
-
-    @FXML
-    private Button btnpostuler;
-
 
 
     private Connection conn = null;
@@ -157,7 +138,6 @@ public class artisteController implements Initializable {
     PreparedStatement preparedStatement1 = null;
     private ObservableList<publication> list;
     private ObservableList<concert> list1;
-    private ObservableList<Annonce> list2;
 
     public String initData(String login) {
         artistlogin.setText(login);
@@ -171,7 +151,6 @@ public class artisteController implements Initializable {
             ArrayList <type_pub> listepub=gettypepub();
             for (type_pub p: listepub)
             {
-                populateTableAnnonce();
                 txttypepub.getItems().add(p.getId_type());
             }
 
@@ -203,6 +182,38 @@ public class artisteController implements Initializable {
         coldate.setCellValueFactory(new PropertyValueFactory<>("date_pub"));
         col_like.setCellValueFactory(new PropertyValueFactory<>("nb_like"));
         tabpub.setItems(list);
+
+
+
+    }
+
+    @FXML
+    void search(KeyEvent event) {
+        FilteredList filter = new FilteredList(list, e->true);
+        search.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+        filter.setPredicate((Predicate<? super publication>) (publication publication)->{
+            if(newValue.isEmpty() || newValue==null) {
+                return true;
+            }
+            else if(publication.getTitre().contains(newValue)) {
+                return true;
+            }
+            else if(publication.getContenu().contains(newValue)) {
+                return true;
+            }
+            else if(publication.getDate_pub().equals(newValue)) {
+                return true;
+            }
+
+            return false;
+        });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tabpub.comparatorProperty());
+        tabpub.setItems(sort);
 
     }
 
@@ -484,41 +495,33 @@ public class artisteController implements Initializable {
         afficherconcert();
 
     }
-    private void populateTableAnnonce() throws SQLException {
-        list2= FXCollections.observableArrayList();
-        String sql ="SELECT * FROM annonce where etat = true ";
-        try {
-            preparedStatement = conn.prepareStatement(sql);
-            resultSet=preparedStatement.executeQuery();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        while(resultSet.next())
-        {
-            Annonce annonce=new Annonce(resultSet.getInt("id_annonce"),resultSet.getInt("id_client"),resultSet.getString("titre"),resultSet.getString("description"),resultSet.getInt("prix_min"),resultSet.getInt("prix_max"),resultSet.getDate("date"),resultSet.getString("adresse"),resultSet.getBoolean("etat"),resultSet.getTimestamp("date_annonce"),resultSet.getInt("nb_candidature"),resultSet.getInt("id_type_eve"));
-            list2.add(annonce);
-        }
-        colidann.setCellValueFactory(new PropertyValueFactory<>("id_annonce"));
-        coltitreann.setCellValueFactory(new PropertyValueFactory<>("titre"));
-        coldescann.setCellValueFactory(new PropertyValueFactory<>("description"));
-        coltypeann.setCellValueFactory(new PropertyValueFactory<>("id_type_eve"));
-        colpmaxann.setCellValueFactory(new PropertyValueFactory<>("prix_max"));
-        colpminann.setCellValueFactory(new PropertyValueFactory<>("prix_min"));
-        colnbcand.setCellValueFactory(new PropertyValueFactory<>("nb_candidature"));
-        coldateann.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colclientann.setCellValueFactory(new PropertyValueFactory<>("id_client"));
-        tabann.setItems(list2);
-    }
+
     @FXML
-    void showselectedannonce(MouseEvent event) {
-        Annonce a=tabann.getSelectionModel().getSelectedItem();
-        if(a!=null)
-        {
-            DateFormat format= new SimpleDateFormat("yyyy-MM-dd");
-            txtidann.setText(String.valueOf(a.getId_annonce()));
+    void search1(KeyEvent event) {
+        FilteredList filter = new FilteredList(list1, e->true);
+        search1.textProperty().addListener((observable, oldValue, newValue )-> {
 
-        }
+
+            filter.setPredicate((Predicate<? super concert>) (concert concert)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(concert.getLieu().contains(newValue)) {
+                    return true;
+                }
+                else if(concert.getDate().equals(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tabconcert.comparatorProperty());
+        tabconcert.setItems(sort);
 
     }
+
+
 }
 
