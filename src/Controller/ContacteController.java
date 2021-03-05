@@ -132,6 +132,7 @@ public class ContacteController implements Initializable {
 
 
     }
+
     /**************************** MESSAGE RECU ***********************/
     private void  populateTablemessage_recu() throws SQLException {
         list1 = FXCollections.observableArrayList();
@@ -158,6 +159,7 @@ public class ContacteController implements Initializable {
 
 
     }
+
     /**************************** GET CLIENT  ***********************/
     private client getClient() throws SQLException {
         String sql ="SELECT * FROM client where login= ?";

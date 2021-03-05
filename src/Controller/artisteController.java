@@ -537,7 +537,7 @@ public class artisteController implements Initializable {
 
     @FXML
     void search1(KeyEvent event) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+
         FilteredList filter = new FilteredList(list1, e->true);
         search1.textProperty().addListener((observable, oldValue, newValue )-> {
 

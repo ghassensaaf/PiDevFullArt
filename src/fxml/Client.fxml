@@ -115,7 +115,7 @@
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
                            <children>
-                              <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" promptText="Recherche" />
+                              <TextField fx:id="txtrecherche" layoutX="572.0" layoutY="16.0" onKeyPressed="#search1" promptText="Recherche" />
                               <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
                               <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />

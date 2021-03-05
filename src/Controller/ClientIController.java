@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
@@ -25,6 +28,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class ClientIController implements Initializable {
     @FXML private Button add;
@@ -733,5 +737,30 @@ private void ajouterReclamation() throws SQLException {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+    @FXML
+    void search1(KeyEvent event) {
+        FilteredList filter = new FilteredList(list3, e->true);
+        txtrecherche.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+            filter.setPredicate((Predicate<? super reclamation>) (reclamation reclamation)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(reclamation.getTitre().contains(newValue)) {
+                    return true;
+                }
+                else if(reclamation.getContenu().contains(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tableReclamation.comparatorProperty());
+        tableReclamation.setItems(sort);
+
     }
 }
