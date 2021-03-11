@@ -179,6 +179,9 @@ public class ClientIController implements Initializable {
     private TextField lotfi;
 
     @FXML
+    private Button btn_avis;
+
+    @FXML
     private TextField txtid_art;
     private client client1;
     private Connection conn=null;
@@ -461,12 +464,15 @@ void showselected(MouseEvent event) {
                         btnconsulter.setOnAction(event -> {
                             publication pub=getTableView().getItems().get(getIndex());
                             String sql="UPDATE publication set  nb_like = nb_like+1 where id_pub=?";
-                            String sql1="INSERT into jaime (id_artiste, id_client, id_pub, id_commentaire) values (null,1,?,null)";
+                            String sql1="INSERT into jaime (id_artiste, id_client, id_pub, id_commentaire) values (null,?,?,null)";
                             try {
                                 preparedStatement = conn.prepareStatement(sql);
                                 preparedStatement1 = conn.prepareStatement(sql1);
                                 preparedStatement.setString(1, String.valueOf(pub.getId_pub()));
-                                preparedStatement1.setString(1, String.valueOf(pub.getId_pub()));
+                                preparedStatement1.setString(1, lotfi.getText());
+                                preparedStatement1.setString(2, String.valueOf(pub.getId_pub()));
+                                System.out.println(preparedStatement1.toString());
+
                                 preparedStatement.executeUpdate();
                                 preparedStatement1.executeUpdate();
                             } catch (SQLException ex) {
@@ -643,7 +649,7 @@ private void ajouterReclamation() throws SQLException {
 
             Scene scene=new Scene(p);
             detailPubController controller = loader.getController();
-            controller.initData(Integer.parseInt(txtid_pub.getText()),clientlogin.getText());
+            controller.initData(Integer.parseInt(txtid_pub.getText()),clientlogin.getText(),lotfi.getText());
 
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
@@ -726,6 +732,29 @@ private void ajouterReclamation() throws SQLException {
 
             Scene scene=new Scene(p);
             ContacteController controller = loader.getController();
+            controller.initData(Integer.parseInt(txtid_art.getText()),clientlogin.getText());
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void btn_avis(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/avis.fxml"));
+
+            Parent p=loader.load();
+
+            Scene scene=new Scene(p);
+            avisController controller = loader.getController();
             controller.initData(Integer.parseInt(txtid_art.getText()),clientlogin.getText());
 
             Node node = (Node) event.getSource();

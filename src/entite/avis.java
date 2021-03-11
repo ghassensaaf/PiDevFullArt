@@ -32,6 +32,12 @@ public class avis {
         this.contenu = contenu;
     }
 
+    public avis(int id_avis, int note, String contenu) {
+        this.id_avis = id_avis;
+        this.note = note;
+        this.contenu = contenu;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

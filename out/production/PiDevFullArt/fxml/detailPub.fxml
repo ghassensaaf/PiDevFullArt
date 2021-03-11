@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
 <AnchorPane onMouseMoved="#refresh" prefHeight="466.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.detailPubController">
    <children>
-      <TableView fx:id="tab_commentaire" layoutX="20.0" layoutY="199.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="417.0">
+      <TextField fx:id="lotfi" layoutX="159.0" layoutY="117.0" opacity="0.2" prefHeight="26.0" prefWidth="66.0" />
+      <ImageView fitHeight="425.0" fitWidth="724.0" layoutY="46.0" pickOnBounds="true">
+         <image>
+            <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/ecouteurs-blancs-disque-vinyle-fond-noir_23-2147889874.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="txt_com" layoutX="129.0" layoutY="91.0" opacity="0.87" prefHeight="90.0" prefWidth="213.0" promptText="Ajouter un commentaire..." />
+      <TableView fx:id="tab_commentaire" layoutX="20.0" layoutY="199.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="417.0" style="-fx-background-color: #F5F5DC;">
         <columns>
           <TableColumn fx:id="colid_com" prefWidth="75.0" text="id" />
           <TableColumn fx:id="colContenu_com" prefWidth="150.4000015258789" text="contenu" />
-            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="88.79998779296875" text="nb like" />
-            <TableColumn fx:id="collike_com" minWidth="4.0" prefWidth="88.79998779296875" text="Like" />
+            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="103.2000732421875" text="nb like" />
+            <TableColumn fx:id="collike_com" minWidth="4.0" prefWidth="87.199951171875" text="Like" />
         </columns>
       </TableView>
       <Label fx:id="login" layoutX="635.0" layoutY="22.0" prefHeight="18.0" prefWidth="56.0" />
-      <Label fx:id="idPub" layoutX="63.0" layoutY="59.0" text="Id Pub : " />
+      <Label fx:id="idPub" layoutX="63.0" layoutY="59.0" text="Id Pub : " textFill="WHITE" />
       <TextField fx:id="detailpub" disable="true" layoutX="119.0" layoutY="55.0" prefHeight="25.0" prefWidth="33.0" />
-      <TableView fx:id="tabJaimeArtiste" layoutX="452.0" layoutY="199.0" prefHeight="242.0" prefWidth="122.0">
+      <TableView fx:id="tabJaimeArtiste" layoutX="452.0" layoutY="199.0" prefHeight="242.0" prefWidth="122.0" style="-fx-background-color: #F5F5DC;">
         <columns>
-          <TableColumn fx:id="coljaimeArtiste" prefWidth="113.59998168945313" text="id_Artiste" />
+          <TableColumn fx:id="coljaimeArtiste" prefWidth="119.99996948242188" text="id_Artiste" />
         </columns>
       </TableView>
-      <TableView fx:id="tableJaimeClient" layoutX="580.0" layoutY="199.0" prefHeight="242.0" prefWidth="130.0">
+      <TableView fx:id="tableJaimeClient" layoutX="580.0" layoutY="199.0" prefHeight="242.0" prefWidth="130.0" style="-fx-background-color: #F5F5DC;">
         <columns>
           <TableColumn fx:id="coljaimeClient" prefWidth="128.79995727539062" text="id_Client" />
         </columns>
       </TableView>
-      <Label layoutX="21.0" layoutY="95.0" text="Commentaire" />
-      <TextArea fx:id="txt_com" layoutX="129.0" layoutY="91.0" prefHeight="90.0" prefWidth="209.0" promptText="Ajouter un commentaire..." />
+      <Label layoutX="21.0" layoutY="95.0" text="Commentaire" textFill="WHITE" />
       <Button fx:id="btn_supprimer_com" layoutX="346.0" layoutY="151.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
       <Button fx:id="btn_modifier_com" layoutX="346.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Modifier" />
       <Button fx:id="btn_ajouter_com" layoutX="346.0" layoutY="83.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
-      <Label layoutX="176.0" layoutY="59.0" text="ID commentaire:" />
+      <Label layoutX="176.0" layoutY="59.0" text="ID commentaire:" textFill="WHITE" />
       <TextField fx:id="id_comm" disable="true" layoutX="293.0" layoutY="54.0" prefHeight="18.0" prefWidth="34.0" />
       <Button fx:id="btnretour" layoutX="19.0" layoutY="7.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #DAA520;" text="Retour" />
-      <Circle fill="GOLDENROD" layoutX="591.0" layoutY="31.0" radius="17.0" stroke="WHITE" strokeType="INSIDE" />
+      <Circle fill="GOLDENROD" layoutX="591.0" layoutY="26.0" radius="17.0" stroke="WHITE" strokeType="INSIDE" />
+      <Label layoutX="422.0" layoutY="57.0" text="Recherche commentaire" textFill="WHITE" />
+      <TextField fx:id="recherche_com" layoutX="592.0" layoutY="54.0" onKeyPressed="#search2" opacity="0.77" prefHeight="26.0" prefWidth="112.0" promptText="Recherche">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextField>
    </children>
 </AnchorPane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.avisController">
+   <children>
+      <AnchorPane onMouseMoved="#refresh" prefHeight="476.0" prefWidth="734.0">
+         <children>
+            <ImageView fitHeight="422.0" fitWidth="748.0" layoutY="53.0" pickOnBounds="true">
+               <image>
+                  <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
+               </image>
+            </ImageView>
+            <TextField fx:id="lotfi" layoutX="513.0" layoutY="11.0" prefHeight="26.0" prefWidth="34.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1.0" layoutY="3.0" stroke="WHITE" strokeType="INSIDE" width="734.0" />
+            <TableView fx:id="tab_avis" layoutX="358.0" layoutY="217.0" onMouseClicked="#showselected" opacity="0.9" prefHeight="242.0" prefWidth="353.0">
+               <columns>
+                  <TableColumn fx:id="colid_avis" prefWidth="75.0" text="id" />
+                  <TableColumn fx:id="colContenu_avis" prefWidth="183.19998168945312" text="contenu" />
+                  <TableColumn fx:id="colnote_avis" minWidth="4.0" prefWidth="95.20001220703125" text="Note" />
+               </columns>
+            </TableView>
+            <Label fx:id="clientlogin" layoutX="635.0" layoutY="15.0" prefHeight="18.0" prefWidth="56.0" />
+            <Label fx:id="id_artiste" layoutX="64.0" layoutY="69.0" text="Id Artiste " textFill="WHITE" />
+            <TextField fx:id="txtid_art" disable="true" layoutX="130.0" layoutY="65.0" prefHeight="25.0" prefWidth="33.0" />
+            <Label layoutX="19.0" layoutY="219.0" text="Votre Avis" textFill="WHITE" />
+            <TextArea fx:id="txt_avis" layoutX="94.0" layoutY="217.0" opacity="0.9" prefHeight="146.0" prefWidth="246.0" promptText="Ajouter un commentaire..." />
+            <Label layoutX="263.0" layoutY="68.0" text="ID Avis" textFill="WHITE" />
+            <TextField fx:id="id_avis" disable="true" layoutX="311.0" layoutY="64.0" prefHeight="18.0" prefWidth="34.0" />
+            <Button fx:id="btnretour" layoutX="19.0" layoutY="7.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #DAA520;" text="Retour" />
+            <Circle fill="GOLDENROD" layoutX="591.0" layoutY="23.0" radius="17.0" stroke="WHITE" strokeType="INSIDE" />
+            <Slider fx:id="note" blockIncrement="0.0" cache="true" layoutX="100.0" layoutY="153.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onDragDetected="#harek" onDragDone="#harek" onDragDropped="#harek" onMouseClicked="#harek" onMouseDragged="#harek" onMouseMoved="#harek" onScroll="#harek" prefHeight="38.0" prefWidth="227.0" showTickLabels="true" showTickMarks="true">
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="0.21" />
+               </effect></Slider>
+            <Label layoutX="17.0" layoutY="152.0" text="Votre Note" textFill="WHITE" />
+            <Label layoutX="351.0" layoutY="152.0" />
+            <Label fx:id="label" layoutX="344.0" layoutY="152.0" opacity="0.9" prefHeight="18.0" prefWidth="51.0" style="-fx-background-color: white;" textFill="#461b1b" />
+            <Button fx:id="btn_ajouter_avis" layoutX="17.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
+            <Button fx:id="btn_modifier_avis" layoutX="126.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #DAA520;" text="Modifier" />
+            <Button fx:id="btn_supprimer_avis" layoutX="233.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
+            <Label layoutX="499.0" layoutY="68.0" text="Recherche" textFill="WHITE" />
+            <TextField fx:id="recherche_avis" layoutX="568.0" layoutY="64.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

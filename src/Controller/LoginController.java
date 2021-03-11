@@ -209,5 +209,26 @@ public class LoginController implements Initializable {
         lblErrors.setText(text);
         System.out.println(text);
     }
+
+    @FXML
+    void Action_inscription(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/Cnx_Client.fxml"));
+            Parent p=loader.load();
+            Scene scene=new Scene(p);
+
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+    }
 }
 

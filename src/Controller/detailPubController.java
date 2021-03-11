@@ -4,6 +4,8 @@ import com.sun.org.apache.bcel.internal.generic.INEG;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
@@ -28,8 +31,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 public class detailPubController implements Initializable {
+   private client client1;
     @FXML
     private TableView<jaime> tabJaimeArtiste;
 
@@ -57,6 +62,8 @@ public class detailPubController implements Initializable {
 
     @FXML
     private Button btn_ajouter_com;
+    @FXML
+    private TextField recherche_com;
 
     @FXML
     private TextField detailpub;
@@ -76,6 +83,8 @@ public class detailPubController implements Initializable {
     private TableColumn<commentaire, Integer> coljaimeClient;
     @FXML
     private Label idPub;
+    @FXML
+    private TextField lotfi;
     private Connection conn;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
@@ -84,9 +93,11 @@ public class detailPubController implements Initializable {
     private ObservableList<jaime> list1;
 
 
-    public void initData(int i, String ll) {
+    public void initData(int i, String ll, String j) {
         detailpub.setText(String.valueOf(i));
+        lotfi.setText(j);
         login.setText(ll);
+
 
     }
 
@@ -299,6 +310,23 @@ public class detailPubController implements Initializable {
 
     }
 
+    private client getClient() throws SQLException {
+        String sql ="SELECT * FROM client ";
+        client ccc=null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        if (resultSet.next())
+        {
+            ccc = new client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9));
+        }
+        return ccc;
+    }
+
     private void populateTablejaimeClient() throws SQLException {
         list1 = FXCollections.observableArrayList();
         String sql = "SELECT * FROM jaime WHERE id_pub=? and id_client IS NOT NULL ";
@@ -347,6 +375,33 @@ public class detailPubController implements Initializable {
         populateTablejaimeArtiste();
         populateTablecommentaire();
         populateTablejaimeClient();
+
+
+    }
+
+
+    @FXML
+    void search2(KeyEvent event) {
+        FilteredList filter = new FilteredList(list, e->true);
+        recherche_com.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+            filter.setPredicate((Predicate<? super commentaire>) (commentaire commentaire)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(commentaire.getContenu().contains(newValue)) {
+                    return true;
+                }
+
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tab_commentaire.comparatorProperty());
+        tab_commentaire.setItems(sort);
+
 
     }
 }
