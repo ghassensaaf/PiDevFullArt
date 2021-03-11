@@ -221,7 +221,6 @@ public class ClientIController implements Initializable {
                 txteve.getItems().add(e.getNom());
             }
             populateTablePublication();
-
             populateTableArtiste();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
