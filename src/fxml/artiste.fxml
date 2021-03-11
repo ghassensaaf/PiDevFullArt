@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -88,10 +91,11 @@
                               <TableColumn fx:id="col_like" prefWidth="112.79998779296875" text="nb like" />
                           </columns>
                         </TableView>
-                        <Button fx:id="addpub" layoutX="551.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
-                        <Button fx:id="editpub" layoutX="551.0" layoutY="146.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deletepub" layoutX="551.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" prefHeight="26.0" prefWidth="124.0" promptText="Recherche" />
+                        <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
+                        <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <Button fx:id="stat" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Statistique" />
+                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
                         <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
                         <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
                         <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
@@ -133,6 +137,28 @@
                      </children>
                   </AnchorPane>
               </content>
+            </Tab>
+            <Tab text="statistique">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <BarChart fx:id="barChart" layoutX="46.0" layoutY="76.0" prefHeight="400.0" prefWidth="595.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <Text layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publication/Artiste">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="load" layoutX="46.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Load" />
+                     </children>
+                  </AnchorPane>
+               </content>
             </Tab>
         </tabs>
       </TabPane>

@@ -22,7 +22,13 @@ public class publication {
         this.nb_like = nb_like;
     }
 
-    public publication(int id_artiste, int id_type, String titre, String contenu,int nb_like) {
+    public publication(int id_pub, int id_artiste, int nb_like) {
+        this.id_pub = id_pub;
+        this.id_artiste = id_artiste;
+        this.nb_like = nb_like;
+    }
+
+    public publication(int id_artiste, int id_type, String titre, String contenu, int nb_like) {
         this.id_artiste = id_artiste;
         this.id_type = id_type;
         this.titre = titre;
