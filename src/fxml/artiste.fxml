@@ -4,6 +4,8 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -22,215 +24,240 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.artisteController">
-   <children>
-      <TextField fx:id="mourad" layoutX="528.0" layoutY="7.0" prefHeight="26.0" prefWidth="54.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="-1.0" stroke="#ffffff00" strokeType="INSIDE" width="724.0" />
-      <TabPane layoutY="44.0" onMouseMoved="#refresh" prefHeight="523.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Accueil">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tabann" layoutX="36.0" layoutY="102.0" onMouseClicked="#showselectedannonce" prefHeight="362.0" prefWidth="645.0">
-                          <columns>
-                            <TableColumn fx:id="colidann" prefWidth="43.0" text="id" />
-                              <TableColumn fx:id="colclientann" prefWidth="111.0" text="client" />
-                            <TableColumn fx:id="coltypeann" prefWidth="62.0" text="type" />
-                              <TableColumn fx:id="coltitreann" prefWidth="120.0" text="titre" />
-                              <TableColumn fx:id="coldescann" prefWidth="75.0" text="description" />
-                              <TableColumn fx:id="colpminann" prefWidth="75.0" text="prix min" />
-                              <TableColumn fx:id="colpmaxann" prefWidth="75.0" text="prix max" />
-                              <TableColumn fx:id="coldateann" prefWidth="40.0" text="date" />
-                              <TableColumn fx:id="colnbcand" prefWidth="95.0" text="nb candidature" />
-                          </columns>
-                        </TableView>
-                        <Label layoutX="36.0" layoutY="31.0" text="Annonces">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="522.0" layoutY="31.0" text="ID" />
-                        <TextField fx:id="txtidann" disable="true" layoutX="565.0" layoutY="27.0" prefHeight="25.0" prefWidth="32.0" />
-                        <Button fx:id="btnpostuler" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: F1C232;" text="Postuler" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Mes publications">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="723.0">
-                     <children>
-                        <VBox layoutX="57.0" layoutY="66.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
-                           <children>
-                              <Label text="Type publication" />
-                              <Label text="Titre" />
-                              <Label text="Contenu" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="207.0" layoutY="65.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
-                           <children>
-                              <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
-                              <TextField fx:id="txttitrepub" promptText="Titre">
-                                 <VBox.margin>
-                                    <Insets top="5.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <TextArea fx:id="txtcontenupub" prefHeight="67.0" prefWidth="186.0" promptText="Contenu">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                              </TextArea>
-                           </children>
-                        </VBox>
-                        <TableView fx:id="tabpub" layoutX="70.0" layoutY="248.0" onMouseClicked="#click" prefHeight="234.0" prefWidth="593.0">
-                          <columns>
-                            <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
-                            <TableColumn fx:id="coltype" prefWidth="51.199951171875" text="type" />
-                              <TableColumn fx:id="coltitre" prefWidth="72.0" text="titre" />
-                              <TableColumn fx:id="colcontenu" prefWidth="176.79998779296875" text="Contenu" />
-                              <TableColumn fx:id="coldatepub" prefWidth="106.39993286132812" text="date pub" />
-                              <TableColumn fx:id="col_like" prefWidth="112.79998779296875" text="nb like" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
-                        <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <Button fx:id="stat" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Statistique" />
-                        <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
-                        <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
-                        <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
-                        <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Mes concerts">
+    <children>
+        <TextField fx:id="mourad" layoutX="528.0" layoutY="7.0" prefHeight="26.0" prefWidth="54.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="-1.0" stroke="#ffffff00" strokeType="INSIDE" width="724.0" />
+        <TabPane layoutY="44.0" onMouseMoved="#refresh" prefHeight="523.0" prefWidth="724.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Accueil">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tabann" layoutX="36.0" layoutY="102.0" onMouseClicked="#showselectedannonce" prefHeight="362.0" prefWidth="645.0">
+                                    <columns>
+                                        <TableColumn fx:id="colidann" prefWidth="43.0" text="id" />
+                                        <TableColumn fx:id="colclientann" prefWidth="111.0" text="client" />
+                                        <TableColumn fx:id="coltypeann" prefWidth="62.0" text="type" />
+                                        <TableColumn fx:id="coltitreann" prefWidth="120.0" text="titre" />
+                                        <TableColumn fx:id="coldescann" prefWidth="75.0" text="description" />
+                                        <TableColumn fx:id="colpminann" prefWidth="75.0" text="prix min" />
+                                        <TableColumn fx:id="colpmaxann" prefWidth="75.0" text="prix max" />
+                                        <TableColumn fx:id="coldateann" prefWidth="40.0" text="date" />
+                                        <TableColumn fx:id="colnbcand" prefWidth="95.0" text="nb candidature" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="36.0" layoutY="31.0" text="Annonces">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="522.0" layoutY="31.0" text="ID" />
+                                <TextField fx:id="txtidann" disable="true" layoutX="565.0" layoutY="27.0" prefHeight="25.0" prefWidth="32.0" />
+                                <Button fx:id="btnpostuler" layoutX="522.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: F1C232;" text="Postuler" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Mes publications">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="723.0">
+                            <children>
+                                <VBox layoutX="57.0" layoutY="66.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
+                                    <children>
+                                        <Label text="Type publication" />
+                                        <Label text="Titre" />
+                                        <Label text="Contenu" />
+                                    </children>
+                                </VBox>
+                                <VBox layoutX="207.0" layoutY="65.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
+                                    <children>
+                                        <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
+                                        <TextField fx:id="txttitrepub" promptText="Titre">
+                                            <VBox.margin>
+                                                <Insets top="5.0" />
+                                            </VBox.margin>
+                                        </TextField>
+                                        <TextArea fx:id="txtcontenupub" prefHeight="67.0" prefWidth="186.0" promptText="Contenu">
+                                            <VBox.margin>
+                                                <Insets top="10.0" />
+                                            </VBox.margin>
+                                        </TextArea>
+                                    </children>
+                                </VBox>
+                                <TableView fx:id="tabpub" layoutX="70.0" layoutY="248.0" onMouseClicked="#click" prefHeight="234.0" prefWidth="593.0">
+                                    <columns>
+                                        <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
+                                        <TableColumn fx:id="coltype" prefWidth="51.199951171875" text="type" />
+                                        <TableColumn fx:id="coltitre" prefWidth="72.0" text="titre" />
+                                        <TableColumn fx:id="colcontenu" prefWidth="176.79998779296875" text="Contenu" />
+                                        <TableColumn fx:id="coldatepub" prefWidth="106.39993286132812" text="date pub" />
+                                        <TableColumn fx:id="col_like" prefWidth="112.79998779296875" text="nb like" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="addpub" layoutX="614.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Ajouter" />
+                                <Button fx:id="editpub" layoutX="614.0" layoutY="165.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="71.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                                <Button fx:id="deletepub" layoutX="614.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnaction" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                                <Button fx:id="stat" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Statistique" />
+                                <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
+                                <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
+                                <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
+                                <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Mes concerts">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
+                                    <children>
+                                        <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
+                                        <Label prefHeight="18.0" prefWidth="34.0" text="Lieu" />
+                                        <Label prefHeight="18.0" prefWidth="38.0" text="Date" />
+                                    </children>
+                                </VBox>
+                                <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
+                                    <children>
+                                        <TextField fx:id="idconcert" disable="true" editable="false" />
+                                        <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" promptText="Lieu" />
+                                        <DatePicker fx:id="dateconcert" promptText="Date" />
+                                    </children>
+                                </VBox>
+                                <TableView fx:id="tabconcert" layoutX="31.0" layoutY="211.0" onMouseClicked="#click1" prefHeight="235.0" prefWidth="456.0">
+                                    <columns>
+                                        <TableColumn fx:id="colconcert" prefWidth="96.7999267578125" text="id concert" />
+                                        <TableColumn fx:id="colartiste" prefWidth="112.79998779296875" text="id_artiste" />
+                                        <TableColumn fx:id="colplace" prefWidth="130.4000244140625" text="lieu" />
+                                        <TableColumn fx:id="coldate" prefWidth="116.0" text="date" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="addconcert" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
+                                <Button fx:id="editconcert" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                                <Button fx:id="deleteconcert" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                                <TextField fx:id="search1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                                <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="statistique">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <BarChart fx:id="barChart" layoutX="46.0" layoutY="76.0" prefHeight="400.0" prefWidth="595.0">
+                                    <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                    </yAxis>
+                                </BarChart>
+                                <Text layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publication/Artiste">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Text>
+                                <Button fx:id="load" layoutX="46.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Load" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Mes Reclamation">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
+                                    <children>
+                                        <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
+                                        <Label prefHeight="18.0" prefWidth="34.0" text="Titre" />
+                                        <Label prefHeight="18.0" prefWidth="50.0" text="Contenu" />
+                                    </children>
+                                </VBox>
+                                <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
+                                    <children>
+                                        <TextField fx:id="txtid_rec" disable="true" editable="false" />
+                                        <TextField fx:id="txttitre_rec" prefHeight="24.0" prefWidth="150.0" promptText="Titre" />
+                                        <TextArea fx:id="txtdesc_rec" prefHeight="200.0" prefWidth="200.0" promptText="Contenu.." />
+                                    </children>
+                                </VBox>
+                                <TableView fx:id="tableReclamation" layoutX="33.0" layoutY="234.0" onMouseClicked="#showselectedrec" prefHeight="213.0" prefWidth="658.0">
+                                    <columns>
+                                        <TableColumn fx:id="colid_rec" prefWidth="96.7999267578125" text="ID" />
+                                        <TableColumn fx:id="coltitre_rec" prefWidth="111.0" text="Titre" />
+                                        <TableColumn fx:id="colcontenu_rec" prefWidth="224.0" text="Conetnu" />
+                                        <TableColumn fx:id="coletat_rec" prefWidth="64.0" text="Etat" />
+                                        <TableColumn fx:id="coldate_rec" prefWidth="161.0" text="Date" />
+                                    </columns>
+                                </TableView>
+                                <Button fx:id="btn_ajouter" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
+                                <Button fx:id="btn_modifier" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                                <Button fx:id="btn_supprimer" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                                <TextField fx:id="txtrecherche" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                                <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                                <Button fx:id="Btn_stat" layoutX="392.0" layoutY="198.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="Statistique" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Liste Client">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="tab_con_art" layoutX="88.0" layoutY="138.0" onMouseClicked="#showselectedartiste" prefHeight="213.0" prefWidth="549.0">
+                                    <columns>
+                                        <TableColumn fx:id="tab_con_art_id" prefWidth="67.0" text="ID_Client" />
+                                        <TableColumn fx:id="tab_con_art_nom" prefWidth="81.0" text="Nom" />
+                                        <TableColumn fx:id="tab_con_art_pre" prefWidth="89.0" text="Prenom" />
+                                        <TableColumn fx:id="tab_con_art_adresse" prefWidth="128.0" text="Adresse" />
+                                        <TableColumn fx:id="tab_con_art_mail" prefWidth="92.0" text="Mail" />
+                                        <TableColumn fx:id="tab_con_art_tel" prefWidth="92.0" text="Telephone" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="txtrecherche1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                                <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                                <TextField fx:id="txtid_art" editable="false" layoutX="109.0" layoutY="100.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="32.0" />
+                                <Label layoutX="97.0" layoutY="105.0" text="ID" />
+                                <Button fx:id="Contacter_art" layoutX="535.0" layoutY="75.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #f1c232;" text="Contacter" />
+
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            <Tab text="statistique1">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
-                           <children>
-                              <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
-                              <Label prefHeight="18.0" prefWidth="34.0" text="Lieu" />
-                              <Label prefHeight="18.0" prefWidth="38.0" text="Date" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
-                           <children>
-                              <TextField fx:id="idconcert" disable="true" editable="false" />
-                              <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" promptText="Lieu" />
-                              <DatePicker fx:id="dateconcert" promptText="Date" />
-                           </children>
-                        </VBox>
-                        <TableView fx:id="tabconcert" layoutX="31.0" layoutY="211.0" onMouseClicked="#click1" prefHeight="235.0" prefWidth="456.0">
-                          <columns>
-                            <TableColumn fx:id="colconcert" prefWidth="96.7999267578125" text="id concert" />
-                              <TableColumn fx:id="colartiste" prefWidth="112.79998779296875" text="id_artiste" />
-                            <TableColumn fx:id="colplace" prefWidth="130.4000244140625" text="lieu" />
-                              <TableColumn fx:id="coldate" prefWidth="116.0" text="date" />
-                          </columns>
-                        </TableView>
-                        <Button fx:id="addconcert" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
-                        <Button fx:id="editconcert" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="deleteconcert" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <TextField fx:id="search1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
-                        <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                        <PieChart fx:id="pieChart" layoutX="112.0" layoutY="45.0" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-
-            <Tab text="statistique">
-                <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                            <BarChart fx:id="barChart" layoutX="46.0" layoutY="76.0" prefHeight="400.0" prefWidth="595.0">
-                                <xAxis>
-                                    <CategoryAxis side="BOTTOM" />
-                                </xAxis>
-                                <yAxis>
-                                    <NumberAxis side="LEFT" />
-                                </yAxis>
-                            </BarChart>
-                            <Text layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publication/Artiste">
-                                <font>
-                                    <Font size="24.0" />
-                                </font>
-                            </Text>
-                            <Button fx:id="load" layoutX="46.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Load" />
-                        </children>
-                    </AnchorPane>
-                </content>
-            </Tab>
-
-            <Tab text="Mes Reclamation">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="stat3">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
-                           <children>
-                              <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
-                              <Label prefHeight="18.0" prefWidth="34.0" text="Titre" />
-                              <Label prefHeight="18.0" prefWidth="50.0" text="Contenu" />
-                           </children>
-                        </VBox>
-                        <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
-                           <children>
-                              <TextField fx:id="txtid_rec" disable="true" editable="false" />
-                              <TextField fx:id="txttitre_rec" prefHeight="24.0" prefWidth="150.0" promptText="Titre" />
-                              <TextArea fx:id="txtdesc_rec" prefHeight="200.0" prefWidth="200.0" promptText="Contenu.." />
-                           </children>
-                        </VBox>
-                        <TableView fx:id="tableReclamation" layoutX="33.0" layoutY="234.0" onMouseClicked="#showselectedrec" prefHeight="213.0" prefWidth="658.0">
-                           <columns>
-                              <TableColumn fx:id="colid_rec" prefWidth="96.7999267578125" text="ID" />
-                              <TableColumn fx:id="coltitre_rec" prefWidth="111.0" text="Titre" />
-                              <TableColumn fx:id="colcontenu_rec" prefWidth="224.0" text="Conetnu" />
-                              <TableColumn fx:id="coletat_rec" prefWidth="64.0" text="Etat" />
-                              <TableColumn fx:id="coldate_rec" prefWidth="161.0" text="Date" />
-                           </columns>
-                        </TableView>
-                        <Button fx:id="btn_ajouter" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
-                        <Button fx:id="btn_modifier" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
-                        <Button fx:id="btn_supprimer" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
-                        <TextField fx:id="txtrecherche" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
-                        <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
-                        <Button fx:id="Btn_stat" layoutX="392.0" layoutY="198.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="Statistique" />
+                        <ScatterChart fx:id="scatt" layoutX="102.0" layoutY="45.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </ScatterChart>
                      </children>
                   </AnchorPane>
-               </content>
+              </content>
             </Tab>
-            <Tab text="Liste Client">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tab_con_art" layoutX="88.0" layoutY="138.0" onMouseClicked="#showselectedartiste" prefHeight="213.0" prefWidth="549.0">
-                           <columns>
-                              <TableColumn fx:id="tab_con_art_id" prefWidth="67.0" text="ID_Client" />
-                              <TableColumn fx:id="tab_con_art_nom" prefWidth="81.0" text="Nom" />
-                              <TableColumn fx:id="tab_con_art_pre" prefWidth="89.0" text="Prenom" />
-                              <TableColumn fx:id="tab_con_art_adresse" prefWidth="128.0" text="Adresse" />
-                              <TableColumn fx:id="tab_con_art_mail" prefWidth="92.0" text="Mail" />
-                              <TableColumn fx:id="tab_con_art_tel" prefWidth="92.0" text="Telephone" />
-                           </columns>
-                        </TableView>
-                        <TextField fx:id="txtrecherche1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
-                        <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
-                        <TextField fx:id="txtid_art" editable="false" layoutX="109.0" layoutY="100.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="32.0" />
-                        <Label layoutX="97.0" layoutY="105.0" text="ID" />
-                        <Button fx:id="Contacter_art" layoutX="535.0" layoutY="75.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #f1c232;" text="Contacter" />
-
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-      <Label fx:id="artistlogin" layoutX="636.0" layoutY="12.0" text="Happy User">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="btnretour" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="137.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
-   </children>
+            </tabs>
+        </TabPane>
+        <Label fx:id="artistlogin" layoutX="636.0" layoutY="12.0" text="Happy User">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Circle fill="#f1c232" layoutX="614.0" layoutY="21.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+        <Button fx:id="btnretour" layoutX="10.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="137.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
+    </children>
 </AnchorPane>
