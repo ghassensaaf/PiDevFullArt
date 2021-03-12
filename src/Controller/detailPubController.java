@@ -6,6 +6,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import javafx.geometry.Side;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -37,6 +41,9 @@ public class detailPubController implements Initializable {
    private client client1;
     @FXML
     private TableView<jaime> tabJaimeArtiste;
+
+    @FXML
+    private PieChart pieChart;
 
     @FXML
     private TableView<jaime> tableJaimeClient;
@@ -84,6 +91,8 @@ public class detailPubController implements Initializable {
     @FXML
     private Label idPub;
     @FXML
+    private Button btn_stat;
+    @FXML
     private TextField lotfi;
     private Connection conn;
     ResultSet resultSet = null;
@@ -109,6 +118,7 @@ public class detailPubController implements Initializable {
             populateTablecommentaire();
             populateTablejaimeArtiste();
             populateTablejaimeClient();
+            LoadChart1();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -401,6 +411,40 @@ public class detailPubController implements Initializable {
         SortedList sort = new SortedList(filter);
         sort.comparatorProperty().bind(tab_commentaire.comparatorProperty());
         tab_commentaire.setItems(sort);
+
+
+    }
+    private void LoadChart1()  {
+
+        ObservableList<PieChart.Data>data = FXCollections.observableArrayList();
+        String sql = "select * FROM commentaire order by nb_like desc\n";
+
+
+        try {
+
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+
+                data.add(new PieChart.Data(resultSet.getString(3), resultSet.getInt(4)));
+//                System.out.println(resultSet.getString(4));
+//                System.out.println(resultSet.getInt(7));
+
+            }
+//            System.out.println(data);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(artisteController.class.getName()).log(Level.SEVERE,null,ex);
+        }
+
+
+
+        pieChart.setTitle("Nombre des jaimes Par commentaire");
+        pieChart.setLegendSide(Side.RIGHT);
+
+        pieChart.setData(data);
 
 
     }

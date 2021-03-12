@@ -17,6 +17,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -801,6 +803,37 @@ private void ajouterReclamation() throws SQLException {
     }
 
 
+    final CategoryAxis xAxis = new CategoryAxis();
+    final NumberAxis yAxis = new NumberAxis();
+    final StackedBarChart<String, Number> sbc =
+            new StackedBarChart<String, Number>(xAxis, yAxis);
+    final XYChart.Series<String, Number> series1 =
+            new XYChart.Series<String, Number>();
+    Stage stage=new Stage();
+
+    @FXML
+    void btn_stat(ActionEvent event) {
+        stage.setTitle("Statistique");
+        sbc.setTitle("nombre de j'aime par publication");
+        String sql = "select * FROM publication order by nb_like desc";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                series1.getData().add(new XYChart.Data<>(resultSet.getString(4), resultSet.getInt(7)));
+            }
+            System.out.println(resultSet);
+
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        Scene scene = new Scene(sbc, 800, 600);
+        sbc.getData().addAll(series1);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 }

@@ -52,11 +52,12 @@
                         <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnconsulterpub" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" text="Consulter" />
                         <TextField fx:id="txtid_pub" disable="true" layoutX="50.0" layoutY="43.0" prefHeight="25.0" prefWidth="38.0" />
                         <Label layoutX="27.0" layoutY="47.0" text="ID" />
-                        <Label layoutX="265.0" layoutY="13.0" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: WHITE;" text="LES PUBLICATIONS">
+                        <Label layoutX="237.0" layoutY="14.0" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: WHITE;" text="LES PUBLICATIONS">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
+                        <Button fx:id="btn_stat" layoutX="419.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_stat" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #DAA520;" text="Statistique " />
                      </children></AnchorPane>
             </content>
           </Tab>
