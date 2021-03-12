@@ -138,24 +138,87 @@
                   </AnchorPane>
               </content>
             </Tab>
+
             <Tab text="statistique">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <children>
+                            <BarChart fx:id="barChart" layoutX="46.0" layoutY="76.0" prefHeight="400.0" prefWidth="595.0">
+                                <xAxis>
+                                    <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                    <NumberAxis side="LEFT" />
+                                </yAxis>
+                            </BarChart>
+                            <Text layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publication/Artiste">
+                                <font>
+                                    <Font size="24.0" />
+                                </font>
+                            </Text>
+                            <Button fx:id="load" layoutX="46.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Load" />
+                        </children>
+                    </AnchorPane>
+                </content>
+            </Tab>
+
+            <Tab text="Mes Reclamation">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <BarChart fx:id="barChart" layoutX="46.0" layoutY="76.0" prefHeight="400.0" prefWidth="595.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <Text layoutX="246.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Publication/Artiste">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="load" layoutX="46.0" layoutY="19.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="87.0" text="Load" />
+                        <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
+                              <Label prefHeight="18.0" prefWidth="34.0" text="Titre" />
+                              <Label prefHeight="18.0" prefWidth="50.0" text="Contenu" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
+                           <children>
+                              <TextField fx:id="txtid_rec" disable="true" editable="false" />
+                              <TextField fx:id="txttitre_rec" prefHeight="24.0" prefWidth="150.0" promptText="Titre" />
+                              <TextArea fx:id="txtdesc_rec" prefHeight="200.0" prefWidth="200.0" promptText="Contenu.." />
+                           </children>
+                        </VBox>
+                        <TableView fx:id="tableReclamation" layoutX="33.0" layoutY="234.0" onMouseClicked="#showselectedrec" prefHeight="213.0" prefWidth="658.0">
+                           <columns>
+                              <TableColumn fx:id="colid_rec" prefWidth="96.7999267578125" text="ID" />
+                              <TableColumn fx:id="coltitre_rec" prefWidth="111.0" text="Titre" />
+                              <TableColumn fx:id="colcontenu_rec" prefWidth="224.0" text="Conetnu" />
+                              <TableColumn fx:id="coletat_rec" prefWidth="64.0" text="Etat" />
+                              <TableColumn fx:id="coldate_rec" prefWidth="161.0" text="Date" />
+                           </columns>
+                        </TableView>
+                        <Button fx:id="btn_ajouter" layoutX="536.0" layoutY="101.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="ajouter" />
+                        <Button fx:id="btn_modifier" layoutX="536.0" layoutY="151.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="109.0" style="-fx-background-color: #f1c232;" text="Modifier" />
+                        <Button fx:id="btn_supprimer" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
+                        <TextField fx:id="txtrecherche" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                        <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                        <Button fx:id="Btn_stat" layoutX="392.0" layoutY="198.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="Statistique" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Liste Client">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tab_con_art" layoutX="88.0" layoutY="138.0" onMouseClicked="#showselectedartiste" prefHeight="213.0" prefWidth="549.0">
+                           <columns>
+                              <TableColumn fx:id="tab_con_art_id" prefWidth="67.0" text="ID_Client" />
+                              <TableColumn fx:id="tab_con_art_nom" prefWidth="81.0" text="Nom" />
+                              <TableColumn fx:id="tab_con_art_pre" prefWidth="89.0" text="Prenom" />
+                              <TableColumn fx:id="tab_con_art_adresse" prefWidth="128.0" text="Adresse" />
+                              <TableColumn fx:id="tab_con_art_mail" prefWidth="92.0" text="Mail" />
+                              <TableColumn fx:id="tab_con_art_tel" prefWidth="92.0" text="Telephone" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="txtrecherche1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                        <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
+                        <TextField fx:id="txtid_art" editable="false" layoutX="109.0" layoutY="100.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="32.0" />
+                        <Label layoutX="97.0" layoutY="105.0" text="ID" />
+                        <Button fx:id="Contacter_art" layoutX="535.0" layoutY="75.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #f1c232;" text="Contacter" />
+
                      </children>
                   </AnchorPane>
                </content>

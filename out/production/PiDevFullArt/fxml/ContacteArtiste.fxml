@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane onMouseMoved="#refresh" prefHeight="442.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ContacteArtiste">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="42.0" layoutX="-3.0" layoutY="-4.0" stroke="WHITE" strokeType="INSIDE" width="695.0" />
+      <Label layoutX="49.0" layoutY="102.0" prefHeight="17.0" prefWidth="64.0" text="Message" />
+      <Label layoutX="28.0" layoutY="69.0" text="ID Déstinataire" />
+      <TextField fx:id="txtid_art" disable="true" layoutX="136.0" layoutY="65.0" prefHeight="26.0" prefWidth="122.0" promptText="à ..." />
+      <TextArea fx:id="txt_msg" layoutX="136.0" layoutY="102.0" prefHeight="87.0" prefWidth="149.0" promptText="Message" />
+      <Button fx:id="bny_ajouter" layoutX="503.0" layoutY="86.0" mnemonicParsing="false" onAction="#Action_msg" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
+      <Button fx:id="btn_supprimer" layoutX="503.0" layoutY="127.0" mnemonicParsing="false" onAction="#Action_msg" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
+      <Button fx:id="btnretour" layoutX="18.0" layoutY="6.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="25.0" prefWidth="114.0" style="-fx-background-color: #DAA520;" text="Retour" />
+      <Label fx:id="clientlogin" layoutX="610.0" layoutY="13.0" prefHeight="17.0" prefWidth="53.0" />
+      <TableView fx:id="tableMessage" layoutX="21.0" layoutY="197.0" onMouseClicked="#showselectedmsg" prefHeight="234.0" prefWidth="332.0">
+         <columns>
+            <TableColumn fx:id="col_id_msg" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="col_contenu_msg" prefWidth="172.0" text="Contenu" />
+            <TableColumn fx:id="col_date_msg" prefWidth="84.0" text="Date" />
+         </columns>
+      </TableView>
+      <Label layoutX="310.0" layoutY="70.0" text="ID message" />
+      <TextField fx:id="id_msg" disable="true" layoutX="405.0" layoutY="65.0" prefHeight="25.0" prefWidth="40.0" />
+      <TableView fx:id="tablerecu" layoutX="362.0" layoutY="197.0" prefHeight="234.0" prefWidth="321.0">
+         <columns>
+            <TableColumn fx:id="recu_id" prefWidth="91.0" text="ID" />
+            <TableColumn fx:id="contenu_id" prefWidth="153.0" text="Contenu" />
+            <TableColumn fx:id="date_recu" prefWidth="76.0" text="Date" />
+         </columns>
+      </TableView>
+      <Label layoutX="482.0" layoutY="172.0" text="Message Recu " />
+      <TextField fx:id="id_client" disable="true" layoutX="405.0" layoutY="107.0" prefHeight="25.0" prefWidth="40.0" />
+      <Label layoutX="310.0" layoutY="111.0" text="Votre ID " />
+   </children>
+</AnchorPane>

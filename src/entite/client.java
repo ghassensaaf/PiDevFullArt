@@ -30,6 +30,17 @@ public class client {
         this.adresse = adresse;
     }
 
+    public client(int id_client, String nom, String prenom, String mail, int tel, String adresse) {
+        this.id_client = id_client;
+
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+
+        this.adresse = adresse;
+    }
+
     public int getId_client() {
         return id_client;
     }

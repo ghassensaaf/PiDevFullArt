@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -198,6 +201,33 @@
                         </AnchorPane>
                         <Button fx:id="btn_avis" layoutX="409.0" layoutY="69.0" mnemonicParsing="false" onAction="#btn_avis" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" text="Donner un avis" />
                         <TextField layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="147.0" promptText="Recherche " />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Liste Artiste">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
+                           <children>
+                              <Button fx:id="Contacter_art1" layoutX="568.0" layoutY="73.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #F1C232;" text="Contacter" />
+                              <VBox fx:id="tab_artiste1" layoutX="34.0" layoutY="128.0" prefHeight="263.0" prefWidth="640.0" spacing="10.0">
+                                 <children>
+                                    <LineChart fx:id="star">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </VBox>
+                              <Label layoutX="501.0" layoutY="78.0" text="ID" />
+                              <TextField fx:id="txtid_art1" disable="true" layoutX="523.0" layoutY="74.0" prefHeight="25.0" prefWidth="32.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>

@@ -1,7 +1,6 @@
 package Controller;
 
 
-
 import entite.artiste;
 import entite.client;
 import entite.commentaire;
@@ -26,7 +25,7 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class ContacteController implements Initializable {
+public class ContacteArtiste     implements Initializable {
 
     @FXML
     private TextArea txt_msg;
@@ -72,7 +71,7 @@ public class ContacteController implements Initializable {
 
 
 
-    private client client1;
+
     private artiste artiste1;
 
     private Connection conn=null;
@@ -108,12 +107,13 @@ public class ContacteController implements Initializable {
     /**************************** MESSAGE ENVOYER ***********************/
     private void populateTablemessage() throws SQLException {
         list = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM message WHERE id_artiste_dest=? AND id_client_exp=? ";
+        String sql = "SELECT * FROM message WHERE id_artiste_exp=? AND id_client_dest=? ";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, txtid_art.getText());
-            preparedStatement.setString(2, id_client.getText());
+            preparedStatement.setString(1, id_client.getText());
+            preparedStatement.setString(2, txtid_art.getText());
             resultSet=preparedStatement.executeQuery();
+
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
@@ -135,11 +135,11 @@ public class ContacteController implements Initializable {
     private void  populateTablemessage_recu() throws SQLException {
         list1 = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM message WHERE id_artiste_exp=? AND id_client_dest=? ";
+        String sql = "SELECT * FROM message WHERE id_artiste_dest=? AND id_client_exp=? ";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, txtid_art.getText());
-            preparedStatement.setString(2, id_client.getText());
+            preparedStatement.setString(1, id_client.getText());
+            preparedStatement.setString(2, txtid_art.getText());
 
             resultSet=preparedStatement.executeQuery();
         } catch (SQLException ex) {
@@ -198,19 +198,19 @@ public class ContacteController implements Initializable {
     }
     /**************************** AJOUTER  MESSAGE ***********************/
     private void ajouterMessage() throws SQLException {
-        String sql = "INSERT into message (contenu,id_artiste_dest,id_client_exp) " +
+        String sql = "INSERT into message (contenu,id_artiste_exp,id_client_dest) " +
                 "values (?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txt_msg.getText());
-            preparedStatement.setString(2, txtid_art.getText());
-            preparedStatement.setString(3, id_client.getText());
+            preparedStatement.setString(2, id_client.getText());
+            preparedStatement.setString(3, txtid_art.getText());
             preparedStatement.executeUpdate();
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-       populateTablemessage();
+        populateTablemessage();
     }
     /**************************** SUPPRIMER  MESSAGE ***********************/
     private void supprimerMessage() throws SQLException {
@@ -236,7 +236,7 @@ public class ContacteController implements Initializable {
         if(a!=null)
         {
             txt_msg.setText(String.valueOf(a.getContenu()));
-           id_msg.setText(String.valueOf(a.getId_message()));
+            id_msg.setText(String.valueOf(a.getId_message()));
 
         }
 
@@ -258,7 +258,7 @@ public class ContacteController implements Initializable {
 
             }
         }
-   else  if (event.getSource() == btn_supprimer) {
+        else  if (event.getSource() == btn_supprimer) {
             try {
                 supprimerMessage();
                 Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
@@ -272,17 +272,17 @@ public class ContacteController implements Initializable {
 
             }
         }
-        }
+    }
     /**************************** BACK HOME  ***********************/
     @FXML
     void back_to_client_home(ActionEvent event) throws IOException {
         try {
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/Client.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/artiste.fxml"));
             Parent p=loader.load();
             Scene scene=new Scene(p);
 
-            ClientIController controller = loader.getController();
+           artisteController controller = loader.getController();
             controller.initData(clientlogin.getText());
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
@@ -303,13 +303,13 @@ public class ContacteController implements Initializable {
     void refresh(MouseEvent event) throws SQLException {
         populateTablemessage_recu();
         populateTablemessage();
-        client1=getClient();
-
-        id_client.setText(String.valueOf(client1.getId_client()));
+        artiste1=getartisteid();
+        id_client.setText(String.valueOf(artiste1.getId_artiste()));
 
     }
 
 }
+
 
 
 

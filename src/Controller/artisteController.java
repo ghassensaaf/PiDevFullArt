@@ -1,6 +1,5 @@
 package Controller;
 
-import com.sun.media.sound.ModelDestination;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,10 +13,7 @@ import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -25,9 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
@@ -36,7 +29,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -182,8 +175,80 @@ public class artisteController implements Initializable {
     @FXML
     private Button load;
 
-    artiste aa = null;
 
+    @FXML
+    private TextField txtrecherche;
+
+    @FXML
+    private Button btn_ajouter;
+
+    @FXML
+    private Button btn_modifier;
+
+    @FXML
+    private Button btn_supprimer;
+
+    @FXML
+    private TableView<reclamation> tableReclamation;
+
+
+    @FXML
+    private TableColumn<reclamation, Integer> colid_rec;
+
+    @FXML
+    private TableColumn<reclamation, String> coltitre_rec;
+
+    @FXML
+    private TableColumn<reclamation, String> colcontenu_rec;
+
+    @FXML
+    private TableColumn<reclamation, Integer> coletat_rec;
+
+    @FXML
+    private TableColumn<reclamation, Timestamp> coldate_rec;
+
+    @FXML
+    private TextField txtid_rec;
+    @FXML
+    private TextField txtid_art;
+
+    @FXML
+    private TextField txttitre_rec;
+
+    @FXML
+    private TextArea txtdesc_rec;
+
+    @FXML
+    private TextField lotfi;
+
+    @FXML
+    private TableView<client> tab_con_art;
+
+    @FXML
+    private TableColumn<client, Integer> tab_con_art_id;
+
+    @FXML
+    private TableColumn<client, String> tab_con_art_nom;
+
+    @FXML
+    private TableColumn<client, String> tab_con_art_pre;
+
+    @FXML
+    private TableColumn<client, String> tab_con_art_adresse;
+
+    @FXML
+    private TableColumn<client, String> tab_con_art_mail;
+
+    @FXML
+    private TableColumn<client, Integer> tab_con_art_tel;
+
+
+    @FXML
+    private Button Contacter_art;
+
+    artiste aa=null;
+
+    private artiste artiste1;
 
     private Connection conn = null;
     ResultSet resultSet = null;
@@ -192,6 +257,8 @@ public class artisteController implements Initializable {
     private ObservableList<publication> list;
     private ObservableList<concert> list1;
     private ObservableList<Annonce> list2;
+    private ObservableList <reclamation> list3;
+    private ObservableList <client> list4;
 
 
 
@@ -210,7 +277,11 @@ public class artisteController implements Initializable {
                 txttypepub.getItems().add(p.getId_type());
             }
             populateTableAnnonce();
+
             LoadChart();
+
+
+            populateTableArtiste();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -551,10 +622,13 @@ public class artisteController implements Initializable {
 
     @FXML
     void refresh(MouseEvent event) throws SQLException {
-        aa = getartisteid();
+
+        artiste1=getartisteid();
+        aa=getartisteid();
         mourad.setText(String.valueOf(aa.getId_artiste()));
         afficherPublication();
         afficherconcert();
+        populateTablereclamation();
 
     }
 
@@ -618,8 +692,255 @@ public class artisteController implements Initializable {
         }
 
     }
+    /*****************************************RECLAMATION**********************/
+    private void populateTablereclamation() throws SQLException {
+        list3 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM reclamation where id_artiste=?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,mourad.getText() );
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        while (resultSet.next()) {
+            reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
+            list3.add(rec);
+        }
+        colid_rec.setCellValueFactory(new PropertyValueFactory<>("id_reclamation"));
+        coltitre_rec.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        colcontenu_rec.setCellValueFactory(new PropertyValueFactory<>("contenu"));
+        coldate_rec.setCellValueFactory(new PropertyValueFactory<>("date"));
+        coletat_rec.setCellValueFactory(new PropertyValueFactory<>("etat"));
+        tableReclamation.setItems(list3);
+
+    }
+
+    /*************************AJOUTER RECLAMATION*****************/
+    private void ajouterReclamation() throws SQLException {
+        String sql = "INSERT into reclamation (titre, contenu,etat,id_artiste) " +
+                "values (?,?,?,?) ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txttitre_rec.getText());
+            preparedStatement.setString(2, txtdesc_rec.getText());
+            preparedStatement.setString(3, "0");
+            preparedStatement.setString(4, mourad.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablereclamation();
+    }
+    /*************************ACTION RECLAMATION*****************/
+    @FXML
+    void Action_rec(ActionEvent event) {
+        if (event.getSource() == btn_ajouter) {
+            try {
+                ajouterReclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation ajoutée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+                txtdesc_rec.setText("");
+
+            }
+        }
+        if (event.getSource() == btn_modifier) {
+            try {
+                modifierReclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation modifiée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+                txtid_rec.setText("");
+
+            }
+        }
+        if (event.getSource() == btn_supprimer) {
+            try {
+                deleteReclamation();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("reclamation supprimée");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txttitre_rec.setText("");
+                txtdesc_rec.setText("");
+                txtid_rec.setText("");
+
+            }
+        }
+    }
+    /*************************MOUSE  RECLAMATION*****************/
+    @FXML
+    void showselectedrec(MouseEvent event) {
+        reclamation a=tableReclamation.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            txtdesc_rec.setText(String.valueOf(a.getContenu()));
+            txttitre_rec.setText(a.getTitre());
+            txtid_rec.setText(String.valueOf(a.getId_reclamation()));
+
+        }
+
+    }
+    /*************************MODIFIER RECLAMATION*****************/
+    private void modifierReclamation() throws SQLException {
+        String sql="UPDATE reclamation set  titre= ? , contenu= ?  where id_reclamation= ?";
+        try {
+            preparedStatement1 = conn.prepareStatement(sql);
+            preparedStatement1.setString(1, txttitre_rec.getText());
+            preparedStatement1.setString(2, txtdesc_rec.getText());
+            preparedStatement1.setString(3, txtid_rec.getText());
+            preparedStatement1.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablereclamation();
+        tableReclamation.refresh();
+    }
+    /*************************DELETE  RECLAMATION*****************/
+    private void deleteReclamation() throws SQLException {
+        String sql="delete from reclamation where id_reclamation = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtid_rec.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTablereclamation();
+    }
+    /**************************** SEARCH RECLAMATION  ***********************/
+    @FXML
+    void search2(KeyEvent event) {
+
+        FilteredList filter = new FilteredList(list3, e->true);
+        txtrecherche.textProperty().addListener((observable, oldValue, newValue )-> {
 
 
+            filter.setPredicate((Predicate<? super reclamation>) (reclamation reclamation)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(reclamation.getTitre().contains(newValue)) {
+                    return true;
+                }
+                else if(reclamation.getContenu().contains(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tableReclamation.comparatorProperty());
+        tableReclamation.setItems(sort);
+
+    }
+
+    /**************************** MESSAGE ***********************/
+    private void populateTableArtiste() throws SQLException {
+        list4 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM client";
+        resultSet = conn.createStatement().executeQuery(sql);
+        while (resultSet.next()) {
+            client rec = new client(resultSet.getInt("id_client"), resultSet.getString("nom"), resultSet.getString("prenom"), resultSet.getString("mail"), resultSet.getInt("tel"),resultSet.getString("adresse"));
+            list4.add(rec);
+        }
+        tab_con_art_id.setCellValueFactory(new PropertyValueFactory<>("id_client"));
+        tab_con_art_nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        tab_con_art_pre.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+
+        tab_con_art_mail.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        tab_con_art_tel.setCellValueFactory(new PropertyValueFactory<>("tel"));
+        tab_con_art_adresse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+
+        tab_con_art.setItems(list4);
+
+    }
+
+    @FXML
+    void showselectedartiste(MouseEvent event) {
+        client a=tab_con_art.getSelectionModel().getSelectedItem();
+        if(a!=null)
+        {
+            txtid_art.setText(String.valueOf(a.getId_client()));
+        }
+
+    }
+
+    @FXML
+    void btn_contacter(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/ContacteArtiste.fxml"));
+
+            Parent p=loader.load();
+
+            Scene scene=new Scene(p);
+            ContacteArtiste controller = loader.getController();
+            controller.initData(Integer.parseInt(txtid_art.getText()),artistlogin.getText());
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
+    /**************************** STAT REC  ***********************/
+    final CategoryAxis xAxis = new CategoryAxis();
+    final NumberAxis yAxis = new NumberAxis();
+    final StackedBarChart<String, Number> sbc =
+            new StackedBarChart<String, Number>(xAxis, yAxis);
+    final XYChart.Series<String, Number> series1 =
+            new XYChart.Series<String, Number>();
+    Stage stage=new Stage();
+
+    @FXML
+    void Btn_stat(ActionEvent event)
+    {
+        stage.setTitle("Stat");
+        sbc.setTitle("Nb de rec par Date");
+        String sql = "SELECT date, COUNT(*) as lotfi FROM reclamation WHERE date >= DATE(NOW()) - INTERVAL 6 DAY GROUP by DAYOFWEEK(date)";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                series1.getData().add(new XYChart.Data<>(String.valueOf(resultSet.getDate(1)), resultSet.getInt(2)));
+                System.out.println(resultSet.getDate(1));
+                System.out.println(resultSet.getInt(2));
+            }
+            System.out.println(resultSet);
+//            barChart.getData().add(data);
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        Scene scene = new Scene(sbc, 800, 600);
+        sbc.getData().addAll(series1);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**************************** STAT PUB ***********************/
     private void LoadChart()  {
 
         XYChart.Series<String,Integer> data =new XYChart.Series<>();

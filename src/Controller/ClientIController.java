@@ -15,6 +15,9 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -36,6 +39,8 @@ public class ClientIController implements Initializable {
     @FXML private TextField txtid_rec;
     @FXML private Button consult_pub;
     @FXML private Button edit;
+    @FXML
+    private LineChart<?, ?> star;
 
     @FXML private Label clientlogin;
 
@@ -221,13 +226,17 @@ public class ClientIController implements Initializable {
                 txteve.getItems().add(e.getNom());
             }
             populateTablePublication();
+           
 
             populateTableArtiste();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-//****************************Action Buttons******************************************
+
+   
+
+    //****************************Action Buttons******************************************
 @FXML
 void btnaction(ActionEvent event) {
     if(event.getSource()==add)
@@ -532,7 +541,7 @@ private void ajouterReclamation() throws SQLException {
         preparedStatement.setString(1, txttitre_rec.getText());
         preparedStatement.setString(2, txtdesc_rec.getText());
         preparedStatement.setString(3, "0");
-        preparedStatement.setString(4, "1");
+        preparedStatement.setString(4, lotfi.getText());
         preparedStatement.executeUpdate();
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
@@ -792,4 +801,8 @@ private void ajouterReclamation() throws SQLException {
         tableReclamation.setItems(sort);
 
     }
+
+
+
+
 }
