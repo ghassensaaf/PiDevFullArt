@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.scene.Scene;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,10 @@ import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -167,6 +172,9 @@ public class artisteController implements Initializable {
     private BarChart<String, Integer> barChart ;
 
     @FXML
+    private ScatterChart<String, Integer> scatt ;
+
+    @FXML
     private TextField txtidann;
 
     @FXML
@@ -175,6 +183,15 @@ public class artisteController implements Initializable {
     @FXML
     private Button load;
 
+    @FXML
+            private PieChart pieChart;
+
+
+    @FXML
+    private BubbleChart<String, Integer> bubChart;
+
+
+    artiste aa = null;
 
     @FXML
     private TextField txtrecherche;
@@ -246,8 +263,6 @@ public class artisteController implements Initializable {
     @FXML
     private Button Contacter_art;
 
-    artiste aa=null;
-
     private artiste artiste1;
 
     private Connection conn = null;
@@ -279,6 +294,8 @@ public class artisteController implements Initializable {
             populateTableAnnonce();
 
             LoadChart();
+            LoadChart3();
+            LoadChart1();
 
 
             populateTableArtiste();
@@ -960,12 +977,13 @@ public class artisteController implements Initializable {
 
 
                 data.getData().add(new XYChart.Data<>(resultSet.getString(4), resultSet.getInt(7)));
-                System.out.println(resultSet.getString(4));
-                System.out.println(resultSet.getInt(7));
+//                System.out.println(resultSet.getString(4));
+//                System.out.println(resultSet.getInt(7));
 
             }
-            System.out.println(data);
+//            System.out.println(data);
             barChart.getData().add(data);
+
 
         } catch (SQLException ex) {
             Logger.getLogger(artisteController.class.getName()).log(Level.SEVERE,null,ex);
@@ -973,6 +991,77 @@ public class artisteController implements Initializable {
 
 
     }
+
+    private void LoadChart1()  {
+
+        ObservableList<PieChart.Data>data = FXCollections.observableArrayList();
+        String sql = "select * FROM publication order by nb_like desc";
+
+
+        try {
+
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+
+                data.add(new PieChart.Data(resultSet.getString(4), resultSet.getInt(7)));
+//                System.out.println(resultSet.getString(4));
+//                System.out.println(resultSet.getInt(7));
+
+            }
+//            System.out.println(data);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(artisteController.class.getName()).log(Level.SEVERE,null,ex);
+        }
+
+
+
+        pieChart.setTitle("Nombre des jaimes Par Publication");
+        pieChart.setLegendSide(Side.LEFT);
+        pieChart.setData(data);
+
+
+    }
+
+    private void LoadChart3()  {
+
+        XYChart.Series data =new XYChart.Series();
+
+        String sql = "select * FROM publication order by nb_like desc";
+
+
+        try {
+            barChart.setTitle("Nombre des jaimes par publication");
+
+
+
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+
+                data.getData().add(new XYChart.Data<>(resultSet.getString(4), resultSet.getInt(7)));
+//                System.out.println(resultSet.getString(4));
+//                System.out.println(resultSet.getInt(7));
+
+            }
+//            System.out.println(data);
+            scatt.setTitle("Jaime publication");
+            scatt.getData().add(data);
+            scatt.setLegendSide(Side.LEFT);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(artisteController.class.getName()).log(Level.SEVERE,null,ex);
+        }
+
+
+    }
+
+
 }
 
 
