@@ -3,9 +3,23 @@ package entite;
 public class jaime {
     private int id_like;
     private int id_artiste;
+    private String nom;
     private int id_client;
     private int id_pub;
     private int id_commentaire;
+
+    public jaime() {
+    }
+
+
+
+    public jaime(int id_like, int id_artiste, String nom, int id_client, int id_pub) {
+        this.id_like = id_like;
+        this.id_artiste = id_artiste;
+        this.nom = nom;
+        this.id_client = id_client;
+        this.id_pub = id_pub;
+    }
 
     public int getId_like() {
         return id_like;
@@ -21,6 +35,14 @@ public class jaime {
 
     public void setId_artiste(int id_artiste) {
         this.id_artiste = id_artiste;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public int getId_client() {
@@ -46,14 +68,4 @@ public class jaime {
     public void setId_commentaire(int id_commentaire) {
         this.id_commentaire = id_commentaire;
     }
-
-    public jaime(int id_like, int id_artiste, int id_client, int id_pub) {
-        this.id_like = id_like;
-        this.id_artiste = id_artiste;
-        this.id_client = id_client;
-        this.id_pub = id_pub;
-    }
-
-
-
 }

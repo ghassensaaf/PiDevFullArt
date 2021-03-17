@@ -80,7 +80,7 @@
  * **********
 */
 .label{
-	 -fx-text-fill : -black;
+	 -fx-text-fill : -white;
  }
 
 /*
@@ -340,60 +340,7 @@
 	-fx-background-color : -black;
 }
 
-/*
- * **********
- * Table
- * **********
- *
- */
-.table-view:row-selection{
-	-fx-background-color : -gray;
-}
 
-.table-view:row-selection>*.column-header-background{
-	-fx-background-color : -white;
-}
-
-.table-view>*.column-resize-line{
-	-fx-background-color : -black;
-}
-
-.table-view>*.column-header-background>*.nested-column-header>*.table-column{
-	-fx-background-color : -darkGray, -white;
-}
-
-.table-view>*.column-header-background>*.filler{
-	-fx-background-color : -darkGray, -gray;
-}
-
-.table-view>*.column-header-background>*.show-hide-columns-button{
-	-fx-background-color : -gray;
-}
-
-
-.tree-table-view:row-selection{
-	-fx-background-color : -gray;
-}
-
-.tree-table-view:row-selection>*.column-header-background{
-	-fx-background-color : -white;
-}
-
-.tree-table-view>*.column-resize-line{
-	-fx-background-color : -black;
-}
-
-.tree-table-view>*.column-header-background>*.nested-column-header>*.table-column{
-	-fx-background-color : -darkGray, -white;
-}
-
-.tree-table-view>*.column-header-background>*.filler{
-	-fx-background-color : -darkGray, -gray;
-}
-
-.tree-table-view>*.column-header-background>*.show-hide-columns-button{
-	-fx-background-color : -gray;
-}
 
 
 /*

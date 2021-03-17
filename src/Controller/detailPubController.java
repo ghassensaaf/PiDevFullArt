@@ -87,7 +87,7 @@ public class detailPubController implements Initializable {
 
 
     @FXML
-    private TableColumn<commentaire, Integer> coljaimeClient;
+    private TableColumn<commentaire, String> coljaimeClient;
     @FXML
     private Label idPub;
     @FXML
@@ -311,7 +311,7 @@ public class detailPubController implements Initializable {
             System.err.println(ex.getMessage());
         }
         while (resultSet.next()) {
-            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"), resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
+            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom"), resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
             list1.add(rec);
 
         }
@@ -339,7 +339,7 @@ public class detailPubController implements Initializable {
 
     private void populateTablejaimeClient() throws SQLException {
         list1 = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_client IS NOT NULL ";
+        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_client and nom IS NOT NULL ";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, detailpub.getText());
@@ -349,11 +349,11 @@ public class detailPubController implements Initializable {
             System.err.println(ex.getMessage());
         }
         while (resultSet.next()) {
-            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"), resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
+            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom") ,resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
             list1.add(rec);
 
         }
-        coljaimeClient.setCellValueFactory(new PropertyValueFactory<>("id_client"));
+        coljaimeClient.setCellValueFactory(new PropertyValueFactory<>("nom"));
         tableJaimeClient.setItems(list1);
 
     }

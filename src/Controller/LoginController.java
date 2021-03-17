@@ -21,7 +21,10 @@ package Controller;
         import util.ConnectionUtil;
 
         import java.io.IOException;
+        import java.math.BigInteger;
         import java.net.URL;
+        import java.security.MessageDigest;
+        import java.security.NoSuchAlgorithmException;
         import java.sql.Connection;
         import java.sql.PreparedStatement;
         import java.sql.ResultSet;
@@ -59,6 +62,22 @@ public class LoginController implements Initializable {
     Connection conn=null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+    public static String convertPassMd5(String pass) {
+        String password = null;
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(pass.getBytes(), 0, pass.length());
+            pass = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (pass.length() < 32) {
+                pass = "0" + pass;
+            }
+            password = pass;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return password;
+    }
     @FXML
     void login(ActionEvent event) {
         if(logIn().equals("admin"))
@@ -137,7 +156,7 @@ public class LoginController implements Initializable {
             try {
                 preparedStatement = conn.prepareStatement(sql);
                 preparedStatement.setString(1, login);
-                preparedStatement.setString(2, mdp);
+                preparedStatement.setString(2, convertPassMd5(mdp));
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Login/Password");
@@ -155,7 +174,7 @@ public class LoginController implements Initializable {
             try {
                 preparedStatement = conn.prepareStatement(sql);
                 preparedStatement.setString(1, login);
-                preparedStatement.setString(2, mdp);
+                preparedStatement.setString(2, convertPassMd5(mdp));
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
@@ -173,7 +192,7 @@ public class LoginController implements Initializable {
             try {
                 preparedStatement = conn.prepareStatement(sql);
                 preparedStatement.setString(1, login);
-                preparedStatement.setString(2, mdp);
+                preparedStatement.setString(2, convertPassMd5(mdp));
                 resultSet = preparedStatement.executeQuery();
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
@@ -196,6 +215,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn= ConnectionUtil.conDB();
+        System.out.println(convertPassMd5("salma"));
         if (conn == null) {
             lblDB.setTextFill(Color.TOMATO);
             lblDB.setText("Server Error : Check");

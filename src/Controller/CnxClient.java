@@ -9,12 +9,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import sun.security.provider.MD5;
 import util.ConnectionUtil;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,7 +47,7 @@ public class CnxClient implements Initializable {
     private TextField login;
 
     @FXML
-    private TextField mdp;
+    private PasswordField mdp;
 
     @FXML
     private TextField photo;
@@ -60,13 +65,29 @@ public class CnxClient implements Initializable {
 
 
     }
+    public static String convertPassMd5(String pass) {
+        String password = null;
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(pass.getBytes(), 0, pass.length());
+            pass = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (pass.length() < 32) {
+                pass = "0" + pass;
+            }
+            password = pass;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return password;
+    }
     private void ajouterClient() throws SQLException {
         String sql = "INSERT into client (login,pwd,nom,prenom,mail,tel,photo,adresse) " +
                 "values (?,?,?,?,?,?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, login.getText());
-            preparedStatement.setString(2,mdp.getText());
+            preparedStatement.setString(2, convertPassMd5(mdp.getText()));
             preparedStatement.setString(3, nom.getText());
             preparedStatement.setString(4, prenom.getText());
             preparedStatement.setString(5, mail.getText());

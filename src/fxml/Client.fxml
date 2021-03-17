@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -23,22 +20,22 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="596.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ClientIController">
    <children>
       <TextField fx:id="lotfi" disable="true" layoutX="556.0" layoutY="9.0" prefHeight="26.0" prefWidth="32.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="46.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="735.0" />
-      <TabPane layoutY="42.0" onMouseMoved="#refresh1" prefHeight="499.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-1.0" layoutY="45.0" onMouseMoved="#refresh1" prefHeight="552.0" prefWidth="735.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Acceuil">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0">
                      <children>
-                        <ImageView fitHeight="465.0" fitWidth="735.0" pickOnBounds="true">
+                        <ImageView fitHeight="522.0" fitWidth="743.0" pickOnBounds="true">
                            <image>
                               <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/trois-cassettes-disque-vinyle-fond-noir_23-2147889880.jpg" />
                            </image>
                         </ImageView>
-                        <TableView fx:id="tabpub" layoutX="17.0" layoutY="92.0" onMouseClicked="#showselectedpub" prefHeight="302.0" prefWidth="707.0">
+                        <TableView fx:id="tabpub" layoutX="17.0" layoutY="92.0" onMouseClicked="#showselectedpub" prefHeight="302.0" prefWidth="707.0" stylesheets="@../table.css">
                            <columns>
                               <TableColumn fx:id="colid2" prefWidth="23.0" text="id" />
                               <TableColumn fx:id="coltype" prefWidth="54.0" text="type" />
@@ -51,8 +48,8 @@
                         </TableView>
                         <Button fx:id="consult_pub" layoutX="554.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnconsulterpub" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" text="Consulter" />
                         <TextField fx:id="txtid_pub" disable="true" layoutX="50.0" layoutY="43.0" prefHeight="25.0" prefWidth="38.0" />
-                        <Label layoutX="27.0" layoutY="47.0" text="ID" />
-                        <Label layoutX="237.0" layoutY="14.0" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: WHITE;" text="LES PUBLICATIONS">
+                        <Label layoutX="27.0" layoutY="47.0" text="ID" textFill="#e54e4e" />
+                        <Label layoutX="237.0" layoutY="14.0" prefHeight="27.0" prefWidth="154.0" text="LES PUBLICATIONS">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -63,11 +60,16 @@
           </Tab>
           <Tab text="Mes annonces">
             <content>
-              <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="481.0" prefWidth="735.0">
+              <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="512.0" prefWidth="735.0">
                      <children>
-                        <TextField layoutX="572.0" layoutY="16.0" promptText="Recherche" />
+                        <ImageView fitHeight="521.0" fitWidth="743.0" layoutX="1.0" layoutY="-1.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/trois-cassettes-disque-vinyle-fond-noir_23-2147889880.jpg" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="txtsearchann" layoutX="572.0" layoutY="16.0" onKeyPressed="#searchann" promptText="Recherche" />
                         <Label layoutX="497.0" layoutY="20.0" text="Rechercher" />
-                        <TableView fx:id="tableAnnonce" layoutX="10.0" layoutY="264.0" onMouseClicked="#showselected" prefHeight="206.0" prefWidth="715.0" stylesheets="@../style.css">
+                        <TableView fx:id="tableAnnonce" layoutX="10.0" layoutY="310.0" onMouseClicked="#showselected" prefHeight="201.0" prefWidth="715.0" stylesheets="@../table.css">
                           <columns>
                             <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                             <TableColumn fx:id="coltitre" prefWidth="75.0" text="titre" />
@@ -119,6 +121,7 @@
                               <Button fx:id="edit" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="delete" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Supprimer" />
                               <Button fx:id="consulter" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Consulter" />
+                              <Button fx:id="btnstatann" mnemonicParsing="false" onAction="#statann" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Statistique" />
                            </children>
                         </VBox>
                      </children>
@@ -131,7 +134,7 @@
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
                            <children>
-                              <ImageView fitHeight="463.0" fitWidth="763.0" layoutX="-9.0" layoutY="-1.0" pickOnBounds="true">
+                              <ImageView fitHeight="521.0" fitWidth="763.0" layoutX="-9.0" layoutY="-1.0" pickOnBounds="true">
                                  <image>
                                     <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/plein-cadre-du-disque-vinyle_23-2147889739.jpg" />
                                  </image>
@@ -141,7 +144,7 @@
                               <Button fx:id="btn_ajouter" layoutX="590.0" layoutY="74.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="btn_modifier" layoutX="590.0" layoutY="117.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="113.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="btn_supprimer" layoutX="590.0" layoutY="160.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: F1C232;" text="Supprimer" />
-                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="248.0" onMouseClicked="#showselectedrec" prefHeight="206.0" prefWidth="550.0">
+                              <TableView fx:id="tableReclamation" layoutX="20.0" layoutY="248.0" onMouseClicked="#showselectedrec" prefHeight="243.0" prefWidth="550.0" stylesheets="@../table.css">
                                  <columns>
                                     <TableColumn fx:id="colid_rec" prefWidth="75.0" text="id" />
                                     <TableColumn fx:id="coltitre_rec" prefWidth="49.5999755859375" text="Titre" />
@@ -175,7 +178,7 @@
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
                            <children>
-                              <ImageView fitHeight="469.0" fitWidth="735.0" layoutY="2.0" pickOnBounds="true">
+                              <ImageView fitHeight="518.0" fitWidth="762.0" layoutX="-27.0" layoutY="2.0" pickOnBounds="true">
                                  <image>
                                     <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
                                  </image>
@@ -183,7 +186,7 @@
                               <Button fx:id="Contacter_art" layoutX="567.0" layoutY="73.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #F1C232;" text="Contacter" />
                               <VBox fx:id="tab_artiste" layoutX="34.0" layoutY="128.0" prefHeight="263.0" prefWidth="640.0" spacing="10.0">
                                  <children>
-                                    <TableView fx:id="tab_con_art" onMouseClicked="#showselectedartiste" prefHeight="262.0" prefWidth="611.0">
+                                    <TableView fx:id="tab_con_art" onMouseClicked="#showselectedartiste" prefHeight="262.0" prefWidth="611.0" stylesheets="@../table.css">
                                       <columns>
                                         <TableColumn fx:id="tab_con_art_id" prefWidth="75.0" text="id_artiste" />
                                         <TableColumn fx:id="tab_con_art_nom" prefWidth="75.0" text="Nom" />
@@ -202,33 +205,6 @@
                         </AnchorPane>
                         <Button fx:id="btn_avis" layoutX="409.0" layoutY="69.0" mnemonicParsing="false" onAction="#btn_avis" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" text="Donner un avis" />
                         <TextField layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="147.0" promptText="Recherche " />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Liste Artiste">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
-                           <children>
-                              <Button fx:id="Contacter_art1" layoutX="568.0" layoutY="73.0" mnemonicParsing="false" onAction="#btn_contacter" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #F1C232;" text="Contacter" />
-                              <VBox fx:id="tab_artiste1" layoutX="34.0" layoutY="128.0" prefHeight="263.0" prefWidth="640.0" spacing="10.0">
-                                 <children>
-                                    <LineChart fx:id="star">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                      </yAxis>
-                                    </LineChart>
-                                 </children>
-                              </VBox>
-                              <Label layoutX="501.0" layoutY="78.0" text="ID" />
-                              <TextField fx:id="txtid_art1" disable="true" layoutX="523.0" layoutY="74.0" prefHeight="25.0" prefWidth="32.0" />
-                           </children>
-                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>

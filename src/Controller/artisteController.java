@@ -924,8 +924,8 @@ public class artisteController implements Initializable {
     /**************************** STAT REC  ***********************/
     final CategoryAxis xAxis = new CategoryAxis();
     final NumberAxis yAxis = new NumberAxis();
-    final StackedBarChart<String, Number> sbc =
-            new StackedBarChart<String, Number>(xAxis, yAxis);
+    final StackedAreaChart<String, Number> sbc =
+            new StackedAreaChart<>(xAxis, yAxis);
     final XYChart.Series<String, Number> series1 =
             new XYChart.Series<String, Number>();
     Stage stage=new Stage();

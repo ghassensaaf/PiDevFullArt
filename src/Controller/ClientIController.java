@@ -801,6 +801,36 @@ private void ajouterReclamation() throws SQLException {
         tableReclamation.setItems(sort);
 
     }
+    @FXML
+    private TextField txtsearchann;
+    @FXML
+    void searchann(KeyEvent event) {
+        FilteredList filter = new FilteredList(list, e->true);
+        txtsearchann.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+            filter.setPredicate((Predicate<? super Annonce>) (Annonce annonce)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(annonce.getTitre().contains(newValue)) {
+                    return true;
+                }
+                else if(String.valueOf(annonce.getPrix_max()).contains(newValue)) {
+                    return true;
+                }
+                else if(String.valueOf(annonce.getPrix_min()).contains(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tableAnnonce.comparatorProperty());
+        tableAnnonce.setItems(sort);
+
+    }
 
 
     final CategoryAxis xAxis = new CategoryAxis();
@@ -833,6 +863,32 @@ private void ajouterReclamation() throws SQLException {
         sbc.getData().addAll(series1);
         stage.setScene(scene);
         stage.show();
+    }
+    @FXML
+    private Button btnstatann;
+    @FXML
+    void statann(ActionEvent event) {
+        stage.setTitle("Statistique");
+        sbc.setTitle("nombre d'annonce par jour dernier semaine");
+        String sql = "SELECT date_annonce, COUNT(*) as lotfi FROM annonce WHERE date_annonce >= DATE(NOW()) - INTERVAL 6 DAY GROUP by DAYOFWEEK(date_annonce)";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                series1.getData().add(new XYChart.Data<>(String.valueOf(resultSet.getDate(1)), resultSet.getInt(2)));
+            }
+            System.out.println(resultSet);
+
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        Scene scene = new Scene(sbc, 800, 600);
+        sbc.getData().addAll(series1);
+        stage.setScene(scene);
+        stage.show();
+
     }
 
 
