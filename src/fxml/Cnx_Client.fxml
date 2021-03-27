@@ -17,7 +17,7 @@
             <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/cassettes-transparentes-disque-vinyle-fond-jaune_23-2147889884.jpg" />
          </image>
       </ImageView>
-      <VBox layoutX="131.0" layoutY="55.0" prefHeight="262.0" prefWidth="319.0" spacing="8.0">
+      <VBox layoutX="26.0" layoutY="53.0" prefHeight="239.0" prefWidth="242.0" spacing="8.0">
          <children>
             <TextField fx:id="nom" opacity="0.99" promptText="Nom" />
             <TextField fx:id="prenom" opacity="0.99" promptText="Prenom" />
@@ -26,7 +26,6 @@
             <TextField fx:id="tel" opacity="0.99" promptText="Telephone" />
             <TextField fx:id="login" opacity="0.99" promptText="Login" />
             <PasswordField fx:id="mdp" promptText="mot de pass" />
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="26.0" prefWidth="321.0" text="Button" />
          </children>
       </VBox>
       <Label layoutX="230.0" text="Bienvenu" textFill="WHITE">
@@ -36,5 +35,7 @@
       </Label>
       <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_to_client_home" style="-fx-background-color: black;" text="Retour" textFill="WHITE" />
       <Button fx:id="btn_inscrit" layoutX="186.0" layoutY="362.0" mnemonicParsing="false" onAction="#Action_inscrit" prefHeight="26.0" prefWidth="215.0" style="-fx-background-color: #8FBC8F;" text="S'inscrire" textFill="#2c2828" />
+      <Button fx:id="taswira" layoutX="401.0" layoutY="146.0" mnemonicParsing="false" onAction="#taswira" prefHeight="26.0" prefWidth="130.0" text="Browser" />
+      <ImageView fx:id="photo" fitHeight="116.0" fitWidth="130.0" layoutX="401.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

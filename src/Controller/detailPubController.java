@@ -8,6 +8,8 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,8 +24,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.ConnectionUtil;
 
+import javax.management.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -178,6 +183,8 @@ public class detailPubController implements Initializable {
                         setGraphic(btnconsulter);
                         setText(null);
                     }
+
+
 
                 }
             };

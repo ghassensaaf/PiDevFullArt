@@ -14,6 +14,16 @@ public class artiste {
     private int id_artiste;
     private String description;
     private String couverture;
+    private Integer etat;
+
+
+    public Integer getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Integer etat) {
+        this.etat = etat;
+    }
 
     public int getId_artiste() {
         return id_artiste;
@@ -64,6 +74,19 @@ public class artiste {
         this.mail = mail;
         this.tel = tel;
         this.description = description;
+    }
+
+    public artiste(int id_artiste,String login, String nom, String prenom, String adresse,String mail, int tel,String pwd, String description, Integer etat) {
+        this.id_artiste = id_artiste;
+        this.login = login;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.mail = mail;
+        this.tel = tel;
+        this.pwd=pwd;
+        this.description = description;
+        this.etat = etat;
     }
 
     public String getLogin() {

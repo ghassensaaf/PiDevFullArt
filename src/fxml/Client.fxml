@@ -167,6 +167,7 @@
                                     <TextArea fx:id="txtdesc_rec" prefHeight="118.0" prefWidth="158.0" promptText="Description" />
                                  </children>
                               </VBox>
+                              <Button fx:id="btn_pdf" layoutX="590.0" layoutY="204.0" mnemonicParsing="false" onAction="#Action_pdf" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: F1C232;" text="Imprimer PDF" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

@@ -26,7 +26,7 @@
             <TextField fx:id="tel" opacity="0.99" promptText="Telephone" />
             <TextField fx:id="login" opacity="0.99" promptText="Login" />
             <PasswordField fx:id="mdp" promptText="mot de pass" />
-            <Button fx:id="button1" mnemonicParsing="false" prefHeight="26.0" prefWidth="321.0" text="Button" />
+            <Button fx:id="taswira" mnemonicParsing="false" onAction="#taswira" prefHeight="26.0" prefWidth="321.0" text="Browser" />
          </children>
       </VBox>
       <Label layoutX="230.0" text="Bienvenu" textFill="WHITE">

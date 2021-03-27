@@ -2,6 +2,8 @@ package Controller;
 import entite.avis;
 import entite.commentaire;
 import entite.reclamation;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -18,9 +20,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.controlsfx.control.Rating;
 import util.ConnectionUtil;
 
-import javax.swing.event.ChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -81,7 +83,9 @@ public class avisController implements Initializable {
     private Label label;
 
     @FXML
-    private Slider note;
+    private Rating rating;
+
+
 
 
     private Connection conn;
@@ -104,6 +108,13 @@ public class avisController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        rating.ratingProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number t, Number t1) {
+                label.setText(t1.toString());
+            }
+        });
     }
 
 
@@ -135,11 +146,7 @@ public class avisController implements Initializable {
     }
 
 
-    @FXML
-    void harek(MouseEvent event) {
-        int sliderValue = (int) note.getValue();
-        label.setText(sliderValue +" ");
-    }
+
 
     private void ajouterAvis() throws SQLException {
         String sql = "INSERT into avis (id_artiste,note,contenu) " +
@@ -182,8 +189,8 @@ public class avisController implements Initializable {
             } finally {
                 txt_avis.setText("");
                 id_avis.setText("");
-                note.setValue(0);
                 label.setText("");
+                rating.setRating(0);
             }
         }
         else if (event.getSource() == btn_supprimer_avis) {
@@ -197,8 +204,8 @@ public class avisController implements Initializable {
             } finally {
                 txt_avis.setText("");
                 id_avis.setText("");
-                note.setValue(0);
                 label.setText("");
+                rating.setRating(0);
             }
         }
         else if (event.getSource() == btn_modifier_avis) {
@@ -212,8 +219,8 @@ public class avisController implements Initializable {
             } finally {
                 txt_avis.setText("");
                 id_avis.setText("");
-                note.setValue(0);
                 label.setText("");
+                rating.setRating(0);
             }
         }
     }
@@ -225,7 +232,8 @@ public class avisController implements Initializable {
             id_avis.setText(String.valueOf(a.getId_avis()));
             txt_avis.setText(String.valueOf(a.getContenu()));
             label.setText(String.valueOf(a.getNote()));
-            note.setValue(a.getNote());
+            rating.setRating(Double.parseDouble(String.valueOf(a.getNote())));
+
 
         }
 

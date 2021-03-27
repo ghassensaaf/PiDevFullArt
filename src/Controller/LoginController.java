@@ -84,12 +84,16 @@ public class LoginController implements Initializable {
         {
             try {
 
-                //add you loading or delays - ;-)
+                FXMLLoader loader=new FXMLLoader();
+                loader.setLocation(getClass().getResource("/fxml/admin.fxml"));
+                Parent p=loader.load();
+                Scene scene=new Scene(p);
+
+//                adminController controller = loader.getController();
+//                controller.initData(txtlogin.getText());
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
-                //stage.setMaximized(true);
                 stage.close();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../sarra/Project_1/build/classes/project_1/interfac/Typemusique.class")));
                 stage.setScene(scene);
                 stage.show();
 

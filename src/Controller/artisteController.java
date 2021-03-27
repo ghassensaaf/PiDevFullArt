@@ -722,7 +722,7 @@ public class artisteController implements Initializable {
             System.err.println(ex.getMessage());
         }
         while (resultSet.next()) {
-            reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
+            reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getString("etat")    );
             list3.add(rec);
         }
         colid_rec.setCellValueFactory(new PropertyValueFactory<>("id_reclamation"));

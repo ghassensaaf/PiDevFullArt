@@ -7,14 +7,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sun.security.provider.MD5;
 import util.ConnectionUtil;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.html.ImageView;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -48,6 +49,9 @@ public class CnxClient implements Initializable {
 
     @FXML
     private PasswordField mdp;
+    @FXML
+    private Button taswira;
+
 
     @FXML
     private TextField photo;
@@ -149,5 +153,32 @@ public class CnxClient implements Initializable {
         }
     }
 
+    @FXML
+    private ImageView photo;
 
+    @FXML
+    void taswira(ActionEvent event) {
+        JFileChooser filec = new JFileChooser();
+        filec.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("*.Images", "jpg","png","gif");
+        filec.addChoosableFileFilter(fileFilter);
+
+        int fileState = filec.showSaveDialog(null);
+        if(fileState == JFileChooser.APPROVE_OPTION){
+            File selectedFile = filec.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+
+
+
+
+
+
+
+
+
+        }
+
+
+    }
 }

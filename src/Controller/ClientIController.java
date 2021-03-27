@@ -1,41 +1,57 @@
 package Controller;
-import java.io.IOException;
-import java.sql.*;
-import java.text.SimpleDateFormat;
 
+import com.itextpdf.text.Image;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import util.ConnectionUtil;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.*;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
+import javafx.event.*;
 
-public class ClientIController implements Initializable {
+
+public class ClientIController extends Component implements Initializable {
     @FXML private Button add;
     @FXML private TextField txtid_pub;
     @FXML private TextField txtid_rec;
@@ -443,6 +459,9 @@ void showselected(MouseEvent event) {
     }
 //****************************Affichage Table Pub******************************************
 
+
+
+
     private void populateTablePublication() throws SQLException {
         list2= FXCollections.observableArrayList();
         String sql ="SELECT * FROM publication";
@@ -470,8 +489,20 @@ void showselected(MouseEvent event) {
                     }
                     else {
                         final Button btnconsulter=new Button("j'aime");
+                        publication pub=getTableView().getItems().get(getIndex());
                         btnconsulter.setOnAction(event -> {
-                            publication pub=getTableView().getItems().get(getIndex());
+                            btnconsulter.setStyle("-fx-background-color: #002aff; ");
+                            javafx.scene.image.Image img = new javafx.scene.image.Image("/image/like2.png");
+                            Notifications notificationBuilder = Notifications.create()
+                                    .title("Notification")
+                                    .text("Vous venez d'aimé la publication"+" "+ pub.getTitre())
+                                    .graphic(new ImageView(img))
+                                    .hideAfter(Duration.seconds(5))
+                                    .position(Pos.BOTTOM_RIGHT);
+
+                            notificationBuilder.show();
+
+
                             String sql="UPDATE publication set  nb_like = nb_like+1 where id_pub=?";
                             String sql1="INSERT into jaime (id_artiste, id_client, id_pub, id_commentaire) values (null,?,?,null)";
                             try {
@@ -480,7 +511,7 @@ void showselected(MouseEvent event) {
                                 preparedStatement.setString(1, String.valueOf(pub.getId_pub()));
                                 preparedStatement1.setString(1, lotfi.getText());
                                 preparedStatement1.setString(2, String.valueOf(pub.getId_pub()));
-                                System.out.println(preparedStatement1.toString());
+
 
                                 preparedStatement.executeUpdate();
                                 preparedStatement1.executeUpdate();
@@ -519,7 +550,7 @@ private void populateTablereclamation() throws SQLException {
         System.err.println(ex.getMessage());
     }
     while (resultSet.next()) {
-        reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getInt("etat")    );
+        reclamation rec = new reclamation(resultSet.getInt("id_reclamation"), resultSet.getString("titre"), resultSet.getString("contenu"), resultSet.getTimestamp("date"), resultSet.getString("etat")    );
         list3.add(rec);
     }
     colid_rec.setCellValueFactory(new PropertyValueFactory<>("id_reclamation"));
@@ -891,5 +922,114 @@ private void ajouterReclamation() throws SQLException {
 
     }
 
+    @FXML
+    private Button btn_pdf;
+
+
+    @FXML
+    void Action_pdf(ActionEvent event) {
+
+        String path="";
+        JFileChooser j = new JFileChooser();
+        j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int x=j.showSaveDialog(this);
+
+        if (x==JFileChooser.APPROVE_OPTION)
+        {
+            path=j.getSelectedFile().getPath();
+        }
+
+        Document doc = new Document();
+        try {
+            PdfWriter.getInstance(doc,new FileOutputStream(path+"Liste des Réclamation.pdf"));
+            doc.open();
+            Image img = Image.getInstance("C:\\Users\\salma\\Documents\\GitHub\\PiDevFullArt\\images\\couv.png");
+            img.scaleAbsoluteWidth(600);
+            img.scaleAbsoluteHeight(92);
+            img.setAlignment(Image.ALIGN_CENTER);
+            doc.add(img);
+
+            doc.add(new Paragraph(" "));
+            doc.add(new Paragraph("Liste des reclamations"));
+            doc.add(new Paragraph(" "));
+
+
+            PdfPTable table = new PdfPTable(5);
+            table.setWidthPercentage(100);
+
+            PdfPCell cell;
+             /***************************************************************/
+            cell = new PdfPCell( new Phrase("ID",FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.ORANGE);
+            table.addCell(cell);
+
+            cell = new PdfPCell( new Phrase("Titre",FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.ORANGE);
+            table.addCell(cell);
+
+            cell = new PdfPCell( new Phrase("Contenu",FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.ORANGE);
+            table.addCell(cell);
+
+            cell = new PdfPCell( new Phrase("Etat",FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.ORANGE);
+            table.addCell(cell);
+
+            cell = new PdfPCell( new Phrase("Date",FontFactory.getFont("Comic Sans MS",12)));
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.ORANGE);
+            table.addCell(cell);
+
+
+            String sql = "SELECT * FROM reclamation ";
+
+                preparedStatement = conn.prepareStatement(sql);
+                resultSet=preparedStatement.executeQuery();
+
+
+            while (resultSet.next()) {
+                String id_reclamation = resultSet.getString("id_reclamation");
+                cell=new PdfPCell(new Phrase(id_reclamation));
+                table.addCell(cell);
+                String titre=resultSet.getString("titre");
+                cell=new PdfPCell(new Phrase(titre));
+                table.addCell(cell);
+                String contenu=resultSet.getString("contenu");
+                cell=new PdfPCell(new Phrase(contenu));
+                table.addCell(cell);
+                String etat=resultSet.getString("etat");
+                cell=new PdfPCell(new Phrase(etat));
+                table.addCell(cell);
+                String date=resultSet.getString("date");
+                cell=new PdfPCell(new Phrase(date));
+                table.addCell(cell);
+
+
+
+            }
+
+            doc.add(table);
+
+
+            doc.close();
+
+
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 
 }

@@ -2,8 +2,18 @@
   <library name="mysql-connector-java-8.0.23">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../../../../mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../controlsfx-8.40.11.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/Nouveau dossier/jfoenix-8.0.2.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/Nouveau dossier/itextpdf-5.1.0.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/itext.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../controlsfx-8.40.14.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../controlsfx-8.40.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../controlsfx-samples-8.40.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../fxsampler-1.0.10.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../controlsfx-samples-8.40.15.jar!/" />
+    </SOURCES>
   </library>
 </component>

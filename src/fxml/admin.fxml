@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane onMousePressed="#refresh" prefHeight="526.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminController">
+   <children>
+      <TabPane layoutY="54.0" prefHeight="470.0" prefWidth="838.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Liste des Artiste">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_bloquer" layoutX="575.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_bloquer" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #ff471a;" text="Bloquer " />
+                        <Button fx:id="btn_debloquer" layoutX="691.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_debloquer" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #00b33c;" text="Débloquer " />
+                        <TableView fx:id="tableArtiste" layoutX="28.0" layoutY="67.0" onMouseMoved="#showselected2" prefHeight="339.0" prefWidth="787.0">
+                          <columns>
+                            <TableColumn fx:id="tab_con_art_id" prefWidth="39.99996566772461" text="ID" />
+                            <TableColumn fx:id="tab_art_login" prefWidth="75.19998168945312" text="Login" />
+                              <TableColumn fx:id="tab_con_art_nom" prefWidth="68.0" text="Nom" />
+                              <TableColumn fx:id="tab_con_art_pre" prefWidth="90.40003967285156" text="Prénom" />
+                              <TableColumn fx:id="tab_con_art_adresse" prefWidth="79.99993896484375" text="Adresse" />
+                              <TableColumn fx:id="tab_con_art_mail" prefWidth="64.0" text="Mail" />
+                              <TableColumn fx:id="tab_art_tel" prefWidth="72.79998779296875" text="télephone" />
+                              <TableColumn fx:id="tab_art_mdp" prefWidth="89.5999755859375" text="MDP" />
+                              <TableColumn fx:id="tab_con_art_desc" prefWidth="93.5999755859375" text="Description" />
+                              <TableColumn fx:id="tab_art_etat" prefWidth="114.4000244140625" text="Etat" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="id_artiste" layoutX="35.0" layoutY="14.0" prefHeight="26.0" prefWidth="38.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Liste des clients ">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Les Reclamations">
+               <content>
+                  <AnchorPane maxHeight="458.0" maxWidth="834.0" minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="834.0">
+                     <children>
+                        <ImageView fitHeight="470.0" fitWidth="838.0" layoutX="-1.0" layoutY="-3.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/ecouteurs-blancs-disque-vinyle-fond-noir_23-2147889874.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableReclamation" layoutX="14.0" layoutY="223.0" onMouseClicked="#showselectedrec" prefHeight="200.0" prefWidth="686.0" stylesheets="@../table.css">
+                          <columns>
+                            <TableColumn fx:id="colid_rec" prefWidth="33.600006103515625" text="ID" />
+                            <TableColumn fx:id="coltitre_rec" prefWidth="49.599945068359375" text="Titre" />
+                              <TableColumn fx:id="colcontenu_rec" prefWidth="106.4000244140625" text="Contenu" />
+                              <TableColumn fx:id="coldate_rec" prefWidth="155.20001220703125" text="Date" />
+                              <TableColumn fx:id="coletat_rec" prefWidth="100.79998779296875" text="Traitement " />
+                              <TableColumn fx:id="id_artiste_rec" prefWidth="84.0" text="Nom Artiste" />
+                              <TableColumn fx:id="id_client_rec" prefWidth="152.800048828125" text="Nom Client " />
+
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btn_traiter" layoutX="634.0" layoutY="72.0" mnemonicParsing="false" onAction="#traiter" prefHeight="26.0" prefWidth="169.0" style="-fx-background-color: #ffcc00;" text="Traiter " />
+                        <TextField fx:id="rech_rec_admin" layoutX="625.0" layoutY="10.0" prefHeight="26.0" prefWidth="178.0" promptText="Recherche" />
+                        <Button fx:id="save" layoutX="632.0" layoutY="111.0" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="173.0" style="-fx-background-color: #ffcc00;" text="Enregistrer" />
+                        <TextArea fx:id="txtdesc_rec" layoutX="92.0" layoutY="18.0" prefHeight="62.0" prefWidth="320.0" />
+                        <TextArea fx:id="txt_rep_rec" layoutX="92.0" layoutY="107.0" prefHeight="62.0" prefWidth="320.0" />
+                        <Label layoutX="20.0" layoutY="35.0" text="Contenu" textFill="WHITE" />
+                        <Label layoutX="20.0" layoutY="116.0" text="Réponse" textFill="WHITE" />
+                        <TextField fx:id="txtid_rec" disable="true" layoutX="439.0" layoutY="19.0" prefHeight="26.0" prefWidth="47.0" />
+                        <Button fx:id="btn_stat" layoutX="632.0" layoutY="148.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="173.0" style="-fx-background-color: #ffcc00;" text="Statistiques" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Les Annonces">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Intéraction ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView layoutX="35.0" layoutY="159.0" prefHeight="213.0" prefWidth="534.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID " />
+                            <TableColumn prefWidth="75.0" text="Contenu" />
+                              <TableColumn prefWidth="178.39996337890625" text="ID _pub" />
+                              <TableColumn prefWidth="92.00006103515625" text="nb_like" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Deconnexion" />
+      <Label layoutX="524.0" layoutY="19.0" />
+      <Label fx:id="adminLogin" layoutX="524.0" layoutY="19.0" prefHeight="18.0" prefWidth="32.0" text="aa" />
+   </children>
+</AnchorPane>
