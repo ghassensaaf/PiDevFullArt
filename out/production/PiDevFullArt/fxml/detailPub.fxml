@@ -22,29 +22,19 @@
             <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/ecouteurs-blancs-disque-vinyle-fond-noir_23-2147889874.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="txt_com" layoutX="105.0" layoutY="141.0" opacity="0.87" prefHeight="86.0" prefWidth="238.0" promptText="Ajouter un commentaire..." />
-      <TableView fx:id="tab_commentaire" layoutX="30.0" layoutY="307.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="417.0" style="-fx-background-color: #F5F5DC;">
+      <TextArea fx:id="txt_com" layoutX="126.0" layoutY="108.0" opacity="0.87" prefHeight="86.0" prefWidth="221.0" promptText="Ajouter un commentaire..." />
+      <TableView fx:id="tab_commentaire" layoutX="30.0" layoutY="307.0" onMouseClicked="#showselected" prefHeight="242.0" prefWidth="656.0" style="-fx-background-color: #F5F5DC;">
         <columns>
           <TableColumn fx:id="colid_com" prefWidth="75.0" text="id" />
-          <TableColumn fx:id="colContenu_com" prefWidth="150.4000015258789" text="contenu" />
-            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="103.2000732421875" text="nb like" />
-            <TableColumn fx:id="collike_com" minWidth="4.0" prefWidth="87.199951171875" text="Like" />
+          <TableColumn fx:id="colContenu_com" prefWidth="320.8000030517578" text="contenu" />
+            <TableColumn fx:id="colnb_like_com" minWidth="4.0" prefWidth="134.4000244140625" text="nb like" />
+            <TableColumn fx:id="collike_com" minWidth="4.0" prefWidth="124.800048828125" text="Like" />
         </columns>
       </TableView>
       <Label fx:id="login" layoutX="635.0" layoutY="22.0" prefHeight="18.0" prefWidth="56.0" />
       <Label fx:id="idPub" layoutX="63.0" layoutY="59.0" text="Id Pub : " textFill="WHITE" />
       <TextField fx:id="detailpub" disable="true" layoutX="119.0" layoutY="55.0" prefHeight="25.0" prefWidth="33.0" />
-      <TableView fx:id="tabJaimeArtiste" layoutX="462.0" layoutY="307.0" prefHeight="242.0" prefWidth="122.0" style="-fx-background-color: #F5F5DC;">
-        <columns>
-          <TableColumn fx:id="coljaimeArtiste" prefWidth="119.99996948242188" text="id_Artiste" />
-        </columns>
-      </TableView>
-      <TableView fx:id="tableJaimeClient" layoutX="590.0" layoutY="307.0" prefHeight="242.0" prefWidth="130.0" style="-fx-background-color: #F5F5DC;">
-        <columns>
-          <TableColumn fx:id="coljaimeClient" prefWidth="128.79995727539062" text="id_Client" />
-        </columns>
-      </TableView>
-      <Label layoutX="21.0" layoutY="145.0" text="Commentaire" textFill="WHITE" />
+      <Label layoutX="21.0" layoutY="112.0" text="Commentaire" textFill="WHITE" />
       <Button fx:id="btn_supprimer_com" layoutX="181.0" layoutY="252.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
       <Button fx:id="btn_modifier_com" layoutX="288.0" layoutY="252.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Modifier" />
       <Button fx:id="btn_ajouter_com" layoutX="74.0" layoutY="252.0" mnemonicParsing="false" onAction="#Action_com" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
@@ -57,7 +47,8 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="220.0" layoutX="376.0" layoutY="81.0" stroke="BLACK" strokeType="INSIDE" width="368.0" />
-      <PieChart fx:id="pieChart" layoutX="372.0" layoutY="80.0" prefHeight="222.0" prefWidth="368.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="212.0" layoutX="432.0" layoutY="88.0" stroke="BLACK" strokeType="INSIDE" width="284.0" />
+      <PieChart fx:id="pieChart" layoutX="432.0" layoutY="88.0" prefHeight="212.0" prefWidth="284.0" />
+      <Label fx:id="erreur" layoutX="105.0" layoutY="202.0" prefHeight="18.0" prefWidth="230.0" />
    </children>
 </AnchorPane>

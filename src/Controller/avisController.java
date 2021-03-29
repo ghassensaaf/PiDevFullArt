@@ -82,6 +82,13 @@ public class avisController implements Initializable {
     @FXML
     private Label label;
 
+
+    @FXML
+    private Label err1;
+
+    @FXML
+    private Label err2;
+
     @FXML
     private Rating rating;
 
@@ -179,18 +186,42 @@ public class avisController implements Initializable {
 
     public void Action_avis(javafx.event.ActionEvent event) {
         if (event.getSource() == btn_ajouter_avis) {
-            try {
-                ajouterAvis();
-                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
-                aa.setContentText("Avis ajouté");
-                aa.show();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                txt_avis.setText("");
-                id_avis.setText("");
-                label.setText("");
-                rating.setRating(0);
+
+
+            if (rating.getRating() == 0) {
+                new animatefx.animation.Shake(rating).play();
+                err1.setText("Veuillez ajouter une note");
+                err1.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(err1).play();
+            } else {
+                rating.setStyle(null);
+                err1.setText("");
+            }
+
+            if (txt_avis.getText().length()== 0) {
+                txt_avis.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(rating).play();
+                err2.setText("Veuillez ajouter un avis");
+                err2.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(err2).play();
+            } else {
+                txt_avis.setStyle(null);
+                err2.setText("");
+
+                try {
+
+                    ajouterAvis();
+                    Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Avis ajouté");
+                    aa.show();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } finally {
+                    txt_avis.setText("");
+                    id_avis.setText("");
+                    label.setText("");
+                    rating.setRating(0);
+                }
             }
         }
         else if (event.getSource() == btn_supprimer_avis) {

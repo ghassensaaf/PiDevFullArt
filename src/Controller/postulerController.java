@@ -2,7 +2,6 @@ package Controller;
 
 import entite.Candidature;
 import entite.artiste;
-import entite.message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

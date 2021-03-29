@@ -254,5 +254,14 @@ public class LoginController implements Initializable {
         }
 
     }
+    private static LoginController instance;
+
+    public LoginController() {
+        instance = this;
+    }
+
+    public static LoginController getInstance() {
+        return instance;
+    }
 }
 

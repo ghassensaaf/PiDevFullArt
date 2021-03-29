@@ -2,23 +2,22 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
-
 <?import org.controlsfx.control.Rating?>
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.avisController">
    <children>
       <AnchorPane onMouseMoved="#refresh" prefHeight="476.0" prefWidth="734.0">
          <children>
+            <Label fx:id="label" layoutX="344.0" layoutY="152.0" opacity="0.9" prefHeight="18.0" prefWidth="51.0" style="-fx-background-color: white;" textFill="#461b1b" />
             <ImageView fitHeight="422.0" fitWidth="748.0" layoutY="53.0" pickOnBounds="true">
                <image>
                   <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
@@ -46,12 +45,13 @@
 
             <Label layoutX="17.0" layoutY="152.0" text="Votre Note" textFill="WHITE" />
             <Label layoutX="351.0" layoutY="152.0" />
-            <Label fx:id="label" layoutX="344.0" layoutY="152.0" opacity="0.9" prefHeight="18.0" prefWidth="51.0" style="-fx-background-color: white;" textFill="#461b1b" />
             <Button fx:id="btn_ajouter_avis" layoutX="17.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #DAA520;" text="Ajouter" />
             <Button fx:id="btn_modifier_avis" layoutX="126.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #DAA520;" text="Modifier" />
             <Button fx:id="btn_supprimer_avis" layoutX="233.0" layoutY="404.0" mnemonicParsing="false" onAction="#Action_avis" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #DAA520;" text="Supprimer" />
             <Label layoutX="499.0" layoutY="68.0" text="Recherche" textFill="WHITE" />
             <TextField fx:id="recherche_avis" layoutX="568.0" layoutY="64.0" onKeyPressed="#search1" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+            <Label fx:id="err1" layoutX="93.0" layoutY="189.0" prefHeight="18.0" prefWidth="234.0" />
+            <Label fx:id="err2" layoutX="93.0" layoutY="370.0" prefHeight="18.0" prefWidth="246.0" />
          </children>
       </AnchorPane>
    </children>

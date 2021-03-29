@@ -28,6 +28,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -205,6 +208,16 @@ public class ClientIController extends Component implements Initializable {
     private Button btn_avis;
 
     @FXML
+    private Label lblerreur1;
+
+    @FXML
+    private Label erreur;
+
+
+    @FXML
+    private Label lblerreur2;
+
+    @FXML
     private TextField txtid_art;
     private client client1;
     private Connection conn=null;
@@ -257,6 +270,88 @@ public class ClientIController extends Component implements Initializable {
 void btnaction(ActionEvent event) {
     if(event.getSource()==add)
     {
+        if (txttitre.getText().length()==0 ) {
+            txttitre.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txttitre).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+        else {
+            txttitre.setStyle(null);
+            erreur.setText("");
+        }
+        if (txteve.getSelectionModel().isEmpty())
+        {
+            txteve.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txteve).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txteve.setStyle(null);
+            erreur.setText("");
+        }
+
+
+        if (txtprixmin.getText().length()==0)
+        {
+            txtprixmin.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txtprixmin).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txtprixmin.setStyle(null);
+            erreur.setText("");
+        }
+
+
+        if (txtprixmax.getText().length()==0)
+        {
+            txtprixmax.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txtprixmax).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txtprixmax.setStyle(null);
+            erreur.setText("");
+        }
+
+        if (txtadresse.getText().length()==0)
+        {
+            txtadresse.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txtadresse).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txtadresse.setStyle(null);
+            erreur.setText("");
+        }
+
+        if (txtdesc.getText().length()==0)
+        {
+            txtdesc.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txtdesc).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txtdesc.setStyle(null);
+            erreur.setText("");
+        
         try {
             addAnnonce();
             Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
@@ -275,7 +370,7 @@ void btnaction(ActionEvent event) {
             txtprixmin.setText("");
             txteve.getSelectionModel().select(-1);
         }
-    }
+    }}
     else if(event.getSource()==delete)
     {
         try {
@@ -491,8 +586,9 @@ void showselected(MouseEvent event) {
                         final Button btnconsulter=new Button("j'aime");
                         publication pub=getTableView().getItems().get(getIndex());
                         btnconsulter.setOnAction(event -> {
-                            btnconsulter.setStyle("-fx-background-color: #002aff; ");
-                            javafx.scene.image.Image img = new javafx.scene.image.Image("/image/like2.png");
+                            btnconsulter.setStyle("-fx-background-color: red; ");
+                            new animatefx.animation.Shake(btnconsulter).play();
+                            javafx.scene.image.Image img = new javafx.scene.image.Image("/image/love.png");
                             Notifications notificationBuilder = Notifications.create()
                                     .title("Notification")
                                     .text("Vous venez d'aimé la publication"+" "+ pub.getTitre())
@@ -500,7 +596,15 @@ void showselected(MouseEvent event) {
                                     .hideAfter(Duration.seconds(5))
                                     .position(Pos.BOTTOM_RIGHT);
 
+
                             notificationBuilder.show();
+                            try {
+                                Media hit = new Media(getClass().getClassLoader().getResource("image/notification.wav").toString());
+                                MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                                mediaPlayer.play();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
 
                             String sql="UPDATE publication set  nb_like = nb_like+1 where id_pub=?";
@@ -583,6 +687,31 @@ private void ajouterReclamation() throws SQLException {
     @FXML
     void Action_rec(ActionEvent event) {
         if (event.getSource() == btn_ajouter) {
+            if ( txttitre_rec.getText().length()==0 ) {
+                txttitre_rec.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                new animatefx.animation.Shake(txttitre_rec).play();
+                lblerreur1.setText("Veuillez saisir un Titre");
+                lblerreur1.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lblerreur1).play();
+            }
+            else {
+                txttitre_rec.setStyle(null);
+                lblerreur1.setText("");
+            }
+             if (txtdesc_rec.getText().length()==0)
+            {
+                 txtdesc_rec.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                new animatefx.animation.Shake(txtdesc_rec).play();
+                lblerreur2.setText("Veuillez saisir un Contenu");
+                lblerreur2.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lblerreur2).play();
+            }
+
+else {
+                 txtdesc_rec.setStyle(null);
+                 lblerreur2.setText("");
+
+
             try {
                 ajouterReclamation();
                 Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
@@ -595,7 +724,7 @@ private void ajouterReclamation() throws SQLException {
                 txtdesc_rec.setText("");
                 txtdesc_rec.setText("");
 
-            }
+            }}
         }
         if (event.getSource() == btn_modifier) {
             try {
@@ -766,13 +895,12 @@ private void ajouterReclamation() throws SQLException {
     void btn_contacter(ActionEvent event) {
         try {
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/Contacte.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/ChatView.fxml"));
 
             Parent p=loader.load();
 
             Scene scene=new Scene(p);
-            ContacteController controller = loader.getController();
-            controller.initData(Integer.parseInt(txtid_art.getText()),clientlogin.getText());
+
 
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();

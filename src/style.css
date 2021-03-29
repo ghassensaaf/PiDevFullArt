@@ -336,9 +336,6 @@
 	-fx-background-color : -gray;
 }
 
-.titled-pane*>*.title>*.arrow-button>*.arrow{
-	-fx-background-color : -black;
-}
 
 
 

@@ -3,7 +3,7 @@ package entite;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class message {
+public class Message {
     private int id_message;
     private String contenu;
     private Timestamp date;
@@ -68,7 +68,7 @@ public class message {
         this.id_artiste_exp = id_artiste_exp;
     }
 
-    public message(int id_message, String contenu, Timestamp date, int id_client_dest, int id_client_exp, int id_artiste_dest, int id_artiste_exp) {
+    public Message(int id_message, String contenu, Timestamp date, int id_client_dest, int id_client_exp, int id_artiste_dest, int id_artiste_exp) {
 
         this.id_message = id_message;
         this.contenu = contenu;
@@ -78,7 +78,7 @@ public class message {
         this.id_artiste_dest = id_artiste_dest;
         this.id_artiste_exp = id_artiste_exp;
     }
-    public message(int id_message, String contenu, Timestamp date) {
+    public Message(int id_message, String contenu, Timestamp date) {
 
         this.id_message = id_message;
         this.contenu = contenu;
@@ -89,8 +89,8 @@ public class message {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof message)) return false;
-        message message = (message) o;
+        if (!(o instanceof Message)) return false;
+        Message message = (Message) o;
         return id_message == message.id_message;
     }
 

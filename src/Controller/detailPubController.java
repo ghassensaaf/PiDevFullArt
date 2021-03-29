@@ -21,8 +21,12 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -83,16 +87,14 @@ public class detailPubController implements Initializable {
     private Label login;
     @FXML
     private TextField id_comm;
+
+    @FXML
+    private Label erreur;
     @FXML
     private TableColumn<commentaire, String> collike_com;
 
 
-    @FXML
-    private TableColumn<commentaire, Integer> coljaimeArtiste;
 
-
-    @FXML
-    private TableColumn<commentaire, String> coljaimeClient;
     @FXML
     private Label idPub;
     @FXML
@@ -121,8 +123,8 @@ public class detailPubController implements Initializable {
         try {
 
             populateTablecommentaire();
-            populateTablejaimeArtiste();
-            populateTablejaimeClient();
+            //populateTablejaimeArtiste();
+            //populateTablejaimeClient();
             LoadChart1();
 
         } catch (SQLException throwables) {
@@ -162,8 +164,26 @@ public class detailPubController implements Initializable {
                         setText(null);
                     }
                     else {
-                        final Button btnconsulter=new Button("j'aime");
+                        final
+                        Button btnconsulter=new Button("j'aime");
                         btnconsulter.setOnAction(event -> {
+                            javafx.scene.image.Image img = new javafx.scene.image.Image("/image/com.png");
+                            Notifications notificationBuilder = Notifications.create()
+                                    .title("Notification")
+                                    .text("Vous venez d'aimé le commentaire ")
+                                    .graphic(new ImageView(img))
+                                    .hideAfter(Duration.seconds(5))
+                                    .position(Pos.BOTTOM_RIGHT);
+
+                            notificationBuilder.show();
+                            try {
+                                Media hit = new Media(getClass().getClassLoader().getResource("image/notification.wav").toString());
+                                MediaPlayer mediaPlayer = new MediaPlayer(hit);
+                                mediaPlayer.play();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                             commentaire pub=getTableView().getItems().get(getIndex());
                             String sql="UPDATE commentaire set  nb_like = nb_like+1 where id_commentaire=?";
                             try {
@@ -214,22 +234,36 @@ public class detailPubController implements Initializable {
             System.err.println(ex.getMessage());
         }
         populateTablecommentaire();
-        populateTablejaimeArtiste();
+        //populateTablejaimeArtiste();
     }
 
     @FXML
     void Action_com(ActionEvent event) {
         if (event.getSource() == btn_ajouter_com) {
-            try {
-                ajouterCommentaire();
-                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
-                aa.setContentText("Commentaire ajoutée");
-                aa.show();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                txt_com.setText("");
-                id_comm.setText("");
+
+            if (txt_com.getText().length() == 0) {
+                txt_com.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(txt_com).play();
+                erreur.setText("Veuillez ajouter un commentaire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                txt_com.setStyle(null);
+                erreur.setText("");
+
+                try {
+
+
+                    ajouterCommentaire();
+                    Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Commentaire ajoutée");
+                    aa.show();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } finally {
+                    txt_com.setText("");
+                    id_comm.setText("");
+                }
             }
         }
         else if (event.getSource() == btn_modifier_com) {
@@ -306,26 +340,26 @@ public class detailPubController implements Initializable {
         populateTablecommentaire();
     }
 
-    private void populateTablejaimeArtiste() throws SQLException {
-        list1 = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_artiste IS NOT NULL ";
-        try {
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, detailpub.getText());
-
-            resultSet=preparedStatement.executeQuery();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        while (resultSet.next()) {
-            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom"), resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
-            list1.add(rec);
-
-        }
-        coljaimeArtiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
-        tabJaimeArtiste.setItems(list1);
-
-    }
+//    private void populateTablejaimeArtiste() throws SQLException {
+//        list1 = FXCollections.observableArrayList();
+//        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_artiste IS NOT NULL ";
+//        try {
+//            preparedStatement = conn.prepareStatement(sql);
+//            preparedStatement.setString(1, detailpub.getText());
+//
+//            resultSet=preparedStatement.executeQuery();
+//        } catch (SQLException ex) {
+//            System.err.println(ex.getMessage());
+//        }
+//        while (resultSet.next()) {
+//            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom"), resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
+//            list1.add(rec);
+//
+//        }
+//        coljaimeArtiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
+//        tabJaimeArtiste.setItems(list1);
+//
+//    }
 
     private client getClient() throws SQLException {
         String sql ="SELECT * FROM client ";
@@ -344,26 +378,26 @@ public class detailPubController implements Initializable {
         return ccc;
     }
 
-    private void populateTablejaimeClient() throws SQLException {
-        list1 = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_client and nom IS NOT NULL ";
-        try {
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, detailpub.getText());
-
-            resultSet=preparedStatement.executeQuery();
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-        while (resultSet.next()) {
-            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom") ,resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
-            list1.add(rec);
-
-        }
-        coljaimeClient.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        tableJaimeClient.setItems(list1);
-
-    }
+//    private void populateTablejaimeClient() throws SQLException {
+//        list1 = FXCollections.observableArrayList();
+//        String sql = "SELECT * FROM jaime WHERE id_pub=? and id_client and nom IS NOT NULL ";
+//        try {
+//            preparedStatement = conn.prepareStatement(sql);
+//            preparedStatement.setString(1, detailpub.getText());
+//
+//            resultSet=preparedStatement.executeQuery();
+//        } catch (SQLException ex) {
+//            System.err.println(ex.getMessage());
+//        }
+//        while (resultSet.next()) {
+//            jaime rec = new jaime(resultSet.getInt("id_like"), resultSet.getInt("id_artiste"),resultSet.getString("nom") ,resultSet.getInt("id_client") , resultSet.getInt("id_pub"));
+//            list1.add(rec);
+//
+//        }
+//        coljaimeClient.setCellValueFactory(new PropertyValueFactory<>("nom"));
+//        tableJaimeClient.setItems(list1);
+//
+//    }
 
     @FXML
     void back_to_client_home(ActionEvent event) throws IOException {
@@ -389,9 +423,9 @@ public class detailPubController implements Initializable {
     @FXML
     void refresh(MouseEvent event) throws SQLException {
 
-        populateTablejaimeArtiste();
+        //populateTablejaimeArtiste();
         populateTablecommentaire();
-        populateTablejaimeClient();
+        //populateTablejaimeClient();
 
 
     }
