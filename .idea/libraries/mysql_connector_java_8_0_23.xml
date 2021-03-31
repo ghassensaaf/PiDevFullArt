@@ -26,6 +26,7 @@
       <root url="jar://$USER_HOME$/Desktop/maajouni/chat-program-master/org-apache-commons-logging.jar!/" />
       <root url="jar://$USER_HOME$/Desktop/maajouni/chat-program-master/mysql-connector-java-5.1.23-bin.jar!/" />
       <root url="jar://$USER_HOME$/Desktop/aaaaaaaaaaaaaaaaaa/AnimateFX-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../mysql-connector-java-8.0.23/javax.mail.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

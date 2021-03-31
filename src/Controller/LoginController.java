@@ -20,6 +20,7 @@ package Controller;
         import javafx.stage.Stage;
         import util.ConnectionUtil;
 
+        import java.awt.event.MouseEvent;
         import java.io.IOException;
         import java.math.BigInteger;
         import java.net.URL;
@@ -240,7 +241,7 @@ public class LoginController implements Initializable {
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/Cnx_Client.fxml"));
             Parent p=loader.load();
-            Scene scene=new Scene(p);
+            Scene scene=new Scene(p,700,500);
 
 
             Node node = (Node) event.getSource();
@@ -253,6 +254,25 @@ public class LoginController implements Initializable {
             System.err.println(ex.getMessage());
         }
 
+    }
+    @FXML
+    void forgotPass(ActionEvent event) {
+        try {
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("/fxml/forgot_pass.fxml"));
+            Parent p=loader.load();
+            Scene scene=new Scene(p,700,500);
+
+
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
     }
     private static LoginController instance;
 

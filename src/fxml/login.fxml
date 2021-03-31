@@ -36,18 +36,19 @@
             </ImageView>
             <Label layoutX="27.0" layoutY="125.0" text="Username" />
             <Label layoutX="29.0" layoutY="172.0" text="Password" />
-            <Button fx:id="btnlogin" layoutX="118.0" layoutY="253.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="181.0" style="-fx-background-color: #DAA520;" text="Login" />
-            <Button fx:id="inscription" layoutX="118.0" layoutY="295.0" mnemonicParsing="false" onAction="#Action_inscription" prefHeight="32.0" prefWidth="186.0" style="-fx-background-color: #DAA520;" text="S'inscrire" />
+            <Button fx:id="btnlogin" layoutX="115.0" layoutY="293.0" mnemonicParsing="false" onAction="#login" prefHeight="32.0" prefWidth="187.0" style="-fx-background-color: #DAA520;" text="Login" />
+            <Button fx:id="inscription" layoutX="115.0" layoutY="335.0" mnemonicParsing="false" onAction="#Action_inscription" prefHeight="32.0" prefWidth="186.0" style="-fx-background-color: #DAA520;" text="S'inscrire" />
             <TextField fx:id="txtlogin" layoutX="113.0" layoutY="120.0" prefHeight="26.0" prefWidth="219.0" promptText="Username" />
             <PasswordField fx:id="pwd" layoutX="113.0" layoutY="167.0" prefHeight="26.0" prefWidth="222.0" promptText="Password" />
             <Label fx:id="lblDB" layoutX="198.0" layoutY="367.0" prefHeight="18.0" prefWidth="175.0" textAlignment="RIGHT" />
-            <RadioButton fx:id="rd_artiste" layoutX="113.0" layoutY="207.0" mnemonicParsing="false" text="Artiste">
+            <RadioButton fx:id="rd_artiste" layoutX="111.0" layoutY="250.0" mnemonicParsing="false" text="Artiste">
                <toggleGroup>
                   <ToggleGroup fx:id="user" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="rd_client" layoutX="198.0" layoutY="207.0" mnemonicParsing="false" text="Client" toggleGroup="$user" />
-            <RadioButton fx:id="rd_admin" layoutX="277.0" layoutY="207.0" mnemonicParsing="false" text="Admin" toggleGroup="$user" />
-            <Label fx:id="lblErrors" layoutX="113.0" layoutY="235.0" prefHeight="18.0" prefWidth="192.0" />
+            <RadioButton fx:id="rd_client" layoutX="196.0" layoutY="250.0" mnemonicParsing="false" text="Client" toggleGroup="$user" />
+            <RadioButton fx:id="rd_admin" layoutX="275.0" layoutY="250.0" mnemonicParsing="false" text="Admin" toggleGroup="$user" />
+            <Label fx:id="lblErrors" layoutX="29.0" layoutY="198.0" prefHeight="18.0" prefWidth="192.0" />
+            <Button layoutX="286.0" layoutY="204.0" mnemonicParsing="false" onAction="#forgotPass" text="forgot?" />
          </children>
       </AnchorPane>
    </right>

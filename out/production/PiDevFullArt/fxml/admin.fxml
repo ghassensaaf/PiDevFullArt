@@ -11,17 +11,29 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane onMousePressed="#refresh" prefHeight="526.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminController">
+<AnchorPane onMousePressed="#refresh" prefHeight="550.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.adminController">
    <children>
-      <TabPane layoutY="54.0" prefHeight="470.0" prefWidth="838.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="54.0" prefHeight="499.0" prefWidth="838.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Liste des Artiste">
+          <Tab style="-fx-background-color: #ffcc00;" text="Liste des Artiste">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btn_bloquer" layoutX="575.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_bloquer" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #ff471a;" text="Bloquer " />
-                        <Button fx:id="btn_debloquer" layoutX="691.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_debloquer" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #00b33c;" text="Débloquer " />
+                        <ImageView fitHeight="476.0" fitWidth="838.0" layoutY="-4.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/ecouteurs-blancs-disque-vinyle-fond-noir_23-2147889874.jpg" />
+                           </image>
+                        </ImageView>
+                        <Button fx:id="btn_bloquer" layoutX="575.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_bloquer" prefHeight="26.0" prefWidth="106.0" style="-fx-background-color: #ff471a;" text="Bloquer " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
+                        <Button fx:id="btn_debloquer" layoutX="691.0" layoutY="27.0" mnemonicParsing="false" onAction="#Action_debloquer" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: #00b33c;" text="Débloquer " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Button>
                         <TableView fx:id="tableArtiste" layoutX="28.0" layoutY="67.0" onMouseMoved="#showselected2" prefHeight="339.0" prefWidth="787.0">
                           <columns>
                             <TableColumn fx:id="tab_con_art_id" prefWidth="39.99996566772461" text="ID" />
@@ -40,12 +52,44 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-          <Tab text="Liste des clients ">
+          <Tab style="-fx-background-color: #ffcc00;" text="Liste des clients ">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="474.0" fitWidth="838.0" layoutY="-1.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tab_client" layoutX="12.0" layoutY="79.0" onMouseClicked="#showSelected" prefHeight="336.0" prefWidth="814.0">
+                          <columns>
+                            <TableColumn fx:id="col_id" prefWidth="46.39999008178711" text="ID" />
+                              <TableColumn fx:id="col_login" prefWidth="66.39996337890625" text="Login" />
+                              <TableColumn fx:id="col_mdp" prefWidth="92.80003356933594" text="Mot de passe" />
+                              <TableColumn fx:id="col_nom" prefWidth="66.39997863769531" text="Nom" />
+                              <TableColumn fx:id="col_prenom" prefWidth="75.99993896484375" text="Prenom" />
+                              <TableColumn fx:id="col_mail" prefWidth="106.4000244140625" text="Mail" />
+                              <TableColumn fx:id="col_tel" prefWidth="75.99993896484375" text="Telephone" />
+                              <TableColumn fx:id="col_photo" prefWidth="120.79998779296875" text="Photo" />
+                              <TableColumn fx:id="col_adresse" prefWidth="98.4000244140625" text="Adresse" />
+                              <TableColumn fx:id="col_etat" prefWidth="63.9998779296875" text="Etat" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btn_bloquer_client" layoutX="565.0" layoutY="23.0" mnemonicParsing="false" onAction="#Action_bloquer_client" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: red;" text="Bloquer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_debloquer_client" layoutX="692.0" layoutY="23.0" mnemonicParsing="false" onAction="#Action_debloquer_client" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: green;" text="Débloquer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="idClient" disable="true" layoutX="14.0" layoutY="24.0" prefHeight="26.0" prefWidth="40.0" />
+                     </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Les Reclamations">
+            <Tab style="-fx-background-color: #ffcc00;" text="Les Reclamations">
                <content>
                   <AnchorPane maxHeight="458.0" maxWidth="834.0" minHeight="0.0" minWidth="0.0" prefHeight="440.0" prefWidth="834.0">
                      <children>
@@ -68,7 +112,7 @@
                         </TableView>
                         <Button fx:id="btn_traiter" layoutX="634.0" layoutY="72.0" mnemonicParsing="false" onAction="#traiter" prefHeight="26.0" prefWidth="169.0" style="-fx-background-color: #ffcc00;" text="Traiter " />
                         <TextField fx:id="rech_rec_admin" layoutX="625.0" layoutY="10.0" prefHeight="26.0" prefWidth="178.0" promptText="Recherche" />
-                        <Button fx:id="save" layoutX="632.0" layoutY="111.0" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="173.0" style="-fx-background-color: #ffcc00;" text="Enregistrer" />
+                        <Button fx:id="save" layoutX="632.0" layoutY="111.0" mnemonicParsing="false" onAction="#save" prefHeight="26.0" prefWidth="173.0" style="-fx-background-color: #ffcc00;" text="Exporter en PDF" />
                         <TextArea fx:id="txtdesc_rec" layoutX="92.0" layoutY="18.0" prefHeight="62.0" prefWidth="320.0" />
                         <TextArea fx:id="txt_rep_rec" layoutX="92.0" layoutY="107.0" prefHeight="62.0" prefWidth="320.0" />
                         <Label layoutX="20.0" layoutY="35.0" text="Contenu" textFill="WHITE" />
@@ -79,21 +123,106 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Les Annonces">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab text="Intéraction ">
+            <Tab style="-fx-background-color: ffcc00;" text="Les Annonces">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView layoutX="35.0" layoutY="159.0" prefHeight="213.0" prefWidth="534.0">
+                        <ImageView fitHeight="476.0" fitWidth="847.0" layoutX="-6.0" layoutY="-2.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/trois-cassettes-disque-vinyle-fond-noir_23-2147889880.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tableAnnonce" layoutX="9.0" layoutY="68.0" onMouseClicked="#ShowselectedAnn" prefHeight="350.0" prefWidth="823.0">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="ID " />
-                            <TableColumn prefWidth="75.0" text="Contenu" />
-                              <TableColumn prefWidth="178.39996337890625" text="ID _pub" />
-                              <TableColumn prefWidth="92.00006103515625" text="nb_like" />
+                            <TableColumn fx:id="col_id_ann" prefWidth="47.99996566772461" text="ID" />
+                            <TableColumn fx:id="col_ann_id_client" prefWidth="62.39996337890625" text="id_Client" />
+                              <TableColumn fx:id="col_ann_titre" prefWidth="46.4000244140625" text="Titre" />
+                              <TableColumn fx:id="col_ann_desc" prefWidth="85.59999084472656" text="Description" />
+                              <TableColumn fx:id="col_ann_prix_min" prefWidth="62.4000244140625" text="prix min" />
+                              <TableColumn fx:id="col_ann_prix_max" prefWidth="65.60003662109375" text="prix max" />
+                              <TableColumn fx:id="col_ann_date" prefWidth="55.20001220703125" text="Date" />
+                              <TableColumn fx:id="col_ann_adresse" prefWidth="60.79998779296875" text="adresse" />
+                              <TableColumn fx:id="col_ann_etat" prefWidth="60.00006103515625" text="Etat" />
+                              <TableColumn fx:id="col_ann_d" prefWidth="93.59991455078125" text="Date_annonce" />
+                              <TableColumn fx:id="col_ann_nbr_con" prefWidth="92.0" text="Nbr_condidature" />
+                              <TableColumn fx:id="col_ann_type" prefWidth="86.4000122070313" text="ID_type_event" />
+                              <TableColumn fx:id="col_ann_date1" prefWidth="55.20001220703125" text="Date" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btn_supp_ann" layoutX="686.0" layoutY="27.0" mnemonicParsing="false" onAction="#supp_ann" prefHeight="26.0" prefWidth="121.0" style="-fx-background-color: red;" text="Supprimer" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <TextField fx:id="idAnn" disable="true" layoutX="26.0" layoutY="27.0" prefHeight="26.0" prefWidth="32.0" />
+                        <Button fx:id="btn_stat_ann" layoutX="545.0" layoutY="28.0" mnemonicParsing="false" onAction="#stat_annonce" prefHeight="26.0" prefWidth="129.0" style="-fx-background-color: #ffcc00;" text="Statistique " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab style="-fx-background-color: #ffcc00;" text="Intéraction ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="838.0">
+                     <children>
+                        <TextField fx:id="lbl_com" disable="true" layoutX="31.0" layoutY="16.0" prefHeight="26.0" prefWidth="38.0" />
+                        <TextField fx:id="lblavis" disable="true" layoutX="470.0" layoutY="16.0" prefHeight="26.0" prefWidth="38.0" />
+                        <ImageView fitHeight="475.0" fitWidth="848.0" layoutX="-4.0" layoutY="-1.0" pickOnBounds="true">
+                           <image>
+                              <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/plein-cadre-du-disque-vinyle_23-2147889739.jpg" />
+                           </image>
+                        </ImageView>
+                        <TableView fx:id="tab_commentaire" layoutX="31.0" layoutY="49.0" onMouseClicked="#show_comm" prefHeight="171.0" prefWidth="419.0">
+                          <columns>
+                            <TableColumn fx:id="colid" prefWidth="75.0" text="ID " />
+                            <TableColumn fx:id="colContenu_com" prefWidth="188.8000030517578" text="Contenu" />
+                              <TableColumn fx:id="colid_pub_com" prefWidth="64.800048828125" text="ID _pub" />
+                              <TableColumn fx:id="colnb_like_com" prefWidth="92.00006103515625" text="nb_like" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="tab_avis" layoutX="470.0" layoutY="49.0" onMouseClicked="#showavis" prefHeight="174.0" prefWidth="354.0">
+                          <columns>
+                            <TableColumn fx:id="colid_avis" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="col_idartista_avis" prefWidth="81.5999755859375" text="Id_artiste" />
+                              <TableColumn fx:id="colnote_avis" prefWidth="112.79998779296875" text="Note" />
+                              <TableColumn fx:id="colContenu_avis" prefWidth="84.0" text="Contenu" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="102.0" layoutY="16.0" text="Liste des Commentaires" textFill="#d7b330">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="585.0" layoutY="12.0" textFill="#d7b330">
+                           <font>
+                              <Font name="System Bold" size="23.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btn_del_com" layoutX="345.0" layoutY="14.0" mnemonicParsing="false" onAction="#supp_comm" prefHeight="26.0" prefWidth="104.0" style="-fx-background-color: red;" text="Supprimer" textFill="WHITE" />
+                        <Button fx:id="btn_del_avis" layoutX="722.0" layoutY="15.0" mnemonicParsing="false" onAction="#del_avis" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: red;" text="Supprimer" textFill="WHITE" />
+                        <Label layoutX="558.0" layoutY="16.0" text="Liste des Avis" textFill="#d7b330">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="94.0" layoutY="226.0" text="Liste des Publications" textFill="#d7b330">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="594.0" layoutY="305.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: #ffcc00;" text="Statistique Commentaire" />
+                        <Button layoutX="596.0" layoutY="352.0" mnemonicParsing="false" onAction="#btn_stat_pub" prefHeight="26.0" prefWidth="204.0" style="-fx-background-color: #ffcc00;" text="Statistique J'aime / publication " />
+                        <TableView fx:id="tab_pub" layoutX="31.0" layoutY="257.0" prefHeight="200.0" prefWidth="530.0">
+                          <columns>
+                            <TableColumn fx:id="colid_pubb" prefWidth="57.60000228881836" text="ID" />
+                            <TableColumn fx:id="col_artiste_pub" prefWidth="92.79998779296875" text="id_artiste" />
+                              <TableColumn fx:id="col_type_pub" prefWidth="75.0" text="id_type" />
+                              <TableColumn fx:id="col_titre_pub" prefWidth="75.0" text="Titre" />
+                              <TableColumn fx:id="col_contenu_pub" prefWidth="75.0" text="Contenu" />
+                              <TableColumn fx:id="col_date_pub" prefWidth="75.0" text="Date_pub" />
+                              <TableColumn fx:id="col_nblike_pub" prefWidth="75.0" text="nb_like" />
                           </columns>
                         </TableView>
                      </children>
@@ -102,8 +231,8 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Deconnexion" />
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back_home" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #0066ff;" text="Deconnexion" />
       <Label layoutX="524.0" layoutY="19.0" />
-      <Label fx:id="adminLogin" layoutX="524.0" layoutY="19.0" prefHeight="18.0" prefWidth="32.0" text="aa" />
+      <Label fx:id="adminLogin" layoutX="729.0" layoutY="18.0" prefHeight="18.0" prefWidth="32.0" />
    </children>
 </AnchorPane>

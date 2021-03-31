@@ -5,8 +5,17 @@ import java.util.Objects;
 
 public class avis {
      private int id_avis;
+     private int id_artiste;
      private int note;
      private String contenu;
+
+    public int getId_artiste() {
+        return id_artiste;
+    }
+
+    public void setId_artiste(int id_artiste) {
+        this.id_artiste = id_artiste;
+    }
 
     public int getId_avis() {
         return id_avis;
@@ -34,6 +43,13 @@ public class avis {
 
     public avis(int id_avis, int note, String contenu) {
         this.id_avis = id_avis;
+        this.note = note;
+        this.contenu = contenu;
+    }
+
+    public avis(int id_avis, int id_artiste, int note, String contenu) {
+        this.id_avis = id_avis;
+        this.id_artiste = id_artiste;
         this.note = note;
         this.contenu = contenu;
     }

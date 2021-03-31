@@ -122,19 +122,99 @@ public class CnxClient implements Initializable {
     }
 
 
+    @FXML
+    private Label erreur;
 
     public void Action_inscrit(javafx.event.ActionEvent event) {
         if (event.getSource() == btn_inscrit) {
-            try {
-                ajouterClient();
-                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
-                aa.setContentText("Inscription réussite");
-                aa.show();
 
-                    FXMLLoader loader=new FXMLLoader();
+            if (nom.getText().length() == 0) {
+                nom.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(nom).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                nom.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (prenom.getText().length() == 0) {
+                prenom.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(prenom).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                prenom.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (adresse.getText().length() == 0) {
+                adresse.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(adresse).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                adresse.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (tel.getText().length() == 0) {
+                tel.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(tel).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                tel.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (login.getText().length() == 0) {
+                login.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(login).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                login.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (mdp.getText().length() == 0) {
+                mdp.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(mdp).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                mdp.setStyle(null);
+                erreur.setText("");
+            }
+
+            if (mail.getText().length() == 0) {
+                mail.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(mail).play();
+                erreur.setText("Champ Obligatoire");
+                erreur.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(erreur).play();
+            } else {
+                mail.setStyle(null);
+                erreur.setText("");
+
+
+                try {
+                    ajouterClient();
+                    Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("Inscription réussite");
+                    aa.show();
+
+                    FXMLLoader loader = new FXMLLoader();
                     loader.setLocation(getClass().getResource("/fxml/login.fxml"));
-                    Parent p=loader.load();
-                    Scene scene=new Scene(p);
+                    Parent p = loader.load();
+                    Scene scene = new Scene(p);
 
 
                     Node node = (Node) event.getSource();
@@ -146,6 +226,7 @@ public class CnxClient implements Initializable {
                 } catch (IOException | SQLException ex) {
                     System.err.println(ex.getMessage());
                 }
+            }
         }
     }
     @FXML

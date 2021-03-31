@@ -13,9 +13,23 @@ public class client {
     private int tel;
     private String photo;
     private String adresse;
+    private Integer etat;
 
     public client(int id_client) {
         this.id_client = id_client;
+    }
+
+    public client(int id_client, String login, String pwd, String nom, String prenom, String mail, int tel, String photo, String adresse, Integer etat) {
+        this.id_client = id_client;
+        this.login = login;
+        this.pwd = pwd;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.mail = mail;
+        this.tel = tel;
+        this.photo = photo;
+        this.adresse = adresse;
+        this.etat = etat;
     }
 
     public client(int id_client, String login, String pwd, String nom, String prenom, String mail, int tel, String photo, String adresse) {
@@ -39,6 +53,14 @@ public class client {
         this.tel = tel;
 
         this.adresse = adresse;
+    }
+
+    public Integer getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Integer etat) {
+        this.etat = etat;
     }
 
     public int getId_client() {
