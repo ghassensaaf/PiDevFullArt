@@ -241,7 +241,7 @@ public class LoginController implements Initializable {
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/Cnx_Client.fxml"));
             Parent p=loader.load();
-            Scene scene=new Scene(p,700,500);
+            Scene scene=new Scene(p,600,450);
 
 
             Node node = (Node) event.getSource();
@@ -261,7 +261,7 @@ public class LoginController implements Initializable {
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/forgot_pass.fxml"));
             Parent p=loader.load();
-            Scene scene=new Scene(p,700,500);
+            Scene scene=new Scene(p,600,400);
 
 
             Node node = (Node) event.getSource();

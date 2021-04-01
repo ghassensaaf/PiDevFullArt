@@ -1,5 +1,8 @@
 package Controller;
 
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -25,12 +28,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
@@ -43,13 +49,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.Predicate;
 import javafx.event.*;
 
@@ -228,8 +234,13 @@ public class ClientIController extends Component implements Initializable {
     private ObservableList <publication> list2;
     private ObservableList <reclamation> list3;
     private ObservableList <artiste> list4;
+    private ObservableList <concert> list5;
     private Annonce a;
     private evenement event;
+
+    @FXML
+    private Circle photo_circle;
+
 //****************************Initialisation******************************************
     @FXML
     void refresh1(MouseEvent event) throws SQLException {
@@ -237,6 +248,7 @@ public class ClientIController extends Component implements Initializable {
         lotfi.setText(String.valueOf(client1.getId_client()));
         populateTableAnnonce();
         populateTablereclamation();
+        afficherconcert();
     }
     public ClientIController() throws SQLException {
     }
@@ -250,7 +262,13 @@ public class ClientIController extends Component implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
+        javafx.scene.image.Image img = new javafx.scene.image.Image("/image/away.png");
+        photo_circle.setFill(new ImagePattern(img));
+
+
+
         try {
+
             ArrayList <evenement> listeve=gettypeeve();
             for (evenement  e: listeve)
             {
@@ -258,6 +276,7 @@ public class ClientIController extends Component implements Initializable {
             }
             populateTablePublication();
             populateTableArtiste();
+            afficherconcert();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -1156,6 +1175,74 @@ else {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+
+    }
+
+
+    @FXML
+    private TableView<concert> tab_concert;
+
+    @FXML
+    private TableColumn<concert, Integer> col_id_concert;
+
+    @FXML
+    private TableColumn<concert, Integer> col_id_artiste;
+
+    @FXML
+    private TableColumn<concert, String> col_lieu;
+
+    @FXML
+    private TableColumn<concert, Timestamp> col_date_concert;
+
+
+    private void afficherconcert() throws SQLException {
+        list5 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM concert ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        while (resultSet.next()) {
+            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"));
+            list5.add(crt);
+        }
+        col_id_concert.setCellValueFactory(new PropertyValueFactory<>("id_concert"));
+        col_id_artiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
+        col_lieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
+        col_date_concert.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tab_concert.setItems(list5);
+
+    }
+    @FXML
+    private TextField txtid_con;
+    @FXML
+    void showselectedconcert(MouseEvent event) {
+        concert c=tab_concert.getSelectionModel().getSelectedItem();
+        if(c!=null)
+        {
+            txtid_con.setText(String.valueOf(c.getId_concert()));
+
+        }
+    }
+    @FXML
+    void participer(ActionEvent event) throws IOException, WriterException {
+        Random rand = new Random();
+        int rand_int1 = rand.nextInt(899999999) + 100000000;
+        String code=String.valueOf(rand_int1);
+        String sql = "INSERT into ticket (id_ticket, id_client,id_concert) values (?,?,?) ";
+
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, code);
+            preparedStatement.setString(2, lotfi.getText());
+            preparedStatement.setString(3, txtid_con.getText());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
 
     }

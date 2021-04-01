@@ -17,7 +17,7 @@ public class Email {
     	
 	public static void sendEmail(String address, String subject, String message) throws Exception{
                         
-            String from="info@lancersent.tn";
+            String from="info@fullart.com";
             String pass="Za3maettal3ou";
             String[] to = {address};
             String host="mail.lancersent.tn";

@@ -30,6 +30,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="223.0" prefWidth="600.0">
                      <children>
+                        <Button fx:id="btn_stat" layoutX="419.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_stat" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #DAA520;" text="Statistique " />
                         <ImageView fitHeight="522.0" fitWidth="743.0" pickOnBounds="true">
                            <image>
                               <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/trois-cassettes-disque-vinyle-fond-noir_23-2147889880.jpg" />
@@ -54,7 +55,6 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btn_stat" layoutX="419.0" layoutY="42.0" mnemonicParsing="false" onAction="#btn_stat" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: #DAA520;" text="Statistique " />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -117,11 +117,11 @@
                         </VBox>
                         <VBox layoutX="572.0" layoutY="57.0" prefHeight="191.0" prefWidth="149.0" spacing="25.0">
                            <children>
+                              <Button fx:id="btnstatann" mnemonicParsing="false" onAction="#statann" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Statistique" />
                               <Button fx:id="add" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="164.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
                               <Button fx:id="edit" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: F1C232;" text="Modifier" />
                               <Button fx:id="delete" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Supprimer" />
                               <Button fx:id="consulter" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Consulter" />
-                              <Button fx:id="btnstatann" mnemonicParsing="false" onAction="#statann" prefHeight="26.0" prefWidth="167.0" style="-fx-background-color: F1C232;" text="Statistique" />
                            </children>
                         </VBox>
                         <Label fx:id="erreur" layoutX="326.0" layoutY="252.0" prefHeight="26.0" prefWidth="172.0" />
@@ -135,6 +135,7 @@
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
                            <children>
+                              <Button fx:id="btn_pdf" layoutX="590.0" layoutY="204.0" mnemonicParsing="false" onAction="#Action_pdf" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: F1C232;" text="Imprimer PDF" />
                               <ImageView fitHeight="521.0" fitWidth="763.0" layoutX="-9.0" layoutY="-1.0" pickOnBounds="true">
                                  <image>
                                     <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/plein-cadre-du-disque-vinyle_23-2147889739.jpg" />
@@ -170,7 +171,6 @@
                                     <Label fx:id="lblerreur2" prefHeight="18.0" prefWidth="206.0" textFill="RED" />
                                  </children>
                               </VBox>
-                              <Button fx:id="btn_pdf" layoutX="590.0" layoutY="204.0" mnemonicParsing="false" onAction="#Action_pdf" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: F1C232;" text="Imprimer PDF" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>
@@ -213,6 +213,39 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab text="Liste des concerts">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
+                           <children>
+                              <ImageView fitHeight="518.0" fitWidth="762.0" layoutX="-27.0" layoutY="2.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
+                                 </image>
+                              </ImageView>
+                              <Button fx:id="btn_participier" layoutX="567.0" layoutY="73.0" mnemonicParsing="false" onAction="#participer" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: #F1C232;" text="Participer" />
+                              <VBox fx:id="tab_artiste1" layoutX="34.0" layoutY="128.0" prefHeight="263.0" prefWidth="640.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="tab_concert" onMouseClicked="#showselectedconcert" prefHeight="262.0" prefWidth="611.0" stylesheets="@../table.css">
+                                       <columns>
+                                          <TableColumn fx:id="col_id_concert" prefWidth="107.19998550415039" text="id_concert" />
+                                          <TableColumn fx:id="col_id_artiste" prefWidth="128.00001525878906" text="id_artiste" />
+                                          <TableColumn fx:id="col_lieu" prefWidth="262.4000244140625" text="Lieu" />
+                                          <TableColumn fx:id="col_date_concert" prefWidth="143.20001220703125" text="Date" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                              <Label layoutX="34.0" layoutY="77.0" text="ID" textFill="WHITE" />
+                              <TextField fx:id="txtid_con" disable="true" layoutX="56.0" layoutY="73.0" prefHeight="25.0" prefWidth="32.0" />
+                           </children>
+                        </AnchorPane>
+                        <TextField layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="147.0" promptText="Recherche " />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
       <Label fx:id="clientlogin" layoutX="646.0" layoutY="13.0" text="Happy User">
@@ -220,7 +253,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Circle fill="#f1c232" layoutX="620.0" layoutY="22.0" radius="16.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="photo_circle" fill="#f1c232" layoutX="611.0" layoutY="23.0" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="btnretour" layoutX="20.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" styleClass="v" text="Se deconnecter" />
    </children>
 </AnchorPane>

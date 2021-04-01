@@ -4,18 +4,41 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.forgot_passController">
    <children>
-      <TextField fx:id="tfemail" layoutX="188.0" layoutY="42.0" prefHeight="26.0" prefWidth="280.0" />
-      <Label layoutX="104.0" layoutY="46.0" text="email" />
-      <Button fx:id="send_mail" layoutX="220.0" layoutY="93.0" mnemonicParsing="false" onAction="#send_email" prefHeight="26.0" prefWidth="160.0" text="send verification code" />
-      <TextField fx:id="tfcode" layoutX="285.0" layoutY="187.0" />
-      <Label layoutX="174.0" layoutY="191.0" text="Secret code" />
-      <Label layoutX="174.0" layoutY="233.0" text="new Password" />
-      <Button layoutX="265.0" layoutY="279.0" mnemonicParsing="false" onAction="#update_pass" text="Confirmer" />
-      <PasswordField fx:id="new_pass" layoutX="285.0" layoutY="229.0" />
+      <ImageView fitHeight="408.0" fitWidth="600.0" layoutY="-1.0" pickOnBounds="true">
+         <image>
+            <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/james-stamler-k3heD_KwH0A-unsplash.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="tfemail" layoutX="168.0" layoutY="93.0" prefHeight="26.0" prefWidth="280.0" promptText="Email" />
+      <Button fx:id="send_mail" layoutX="228.0" layoutY="137.0" mnemonicParsing="false" onAction="#send_email" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #ffcc00;" text="Envoyer le code" />
+      <TextField fx:id="tfcode" layoutX="174.0" layoutY="229.0" prefHeight="26.0" prefWidth="280.0" promptText="Code secret" />
+      <Button layoutX="235.0" layoutY="321.0" mnemonicParsing="false" onAction="#update_pass" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #ffcc00;" text="Confirmer" />
+      <PasswordField fx:id="new_pass" layoutX="177.0" layoutY="271.0" prefHeight="26.0" prefWidth="280.0" promptText="Nouveau mot de passe" />
+      <Label layoutX="140.0" layoutY="21.0" text="Réinitialisation de votre mot de passe" textFill="#ffcc00">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="100.0" layoutY="98.0" prefHeight="18.0" prefWidth="41.0" text="Email" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#Action_retour_login" opacity="0.95" prefHeight="30.0" prefWidth="42.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/retour.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
