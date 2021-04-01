@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Project_1.jnlp">
+  <information>
+    <title>Project_1</title>
+    <vendor>saraz</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Project_1.jar" size="401809" download="eager" />
+    <jar href="lib\itextpdf-5.0.6.jar" size="1613319" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.23.jar" size="2415211" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="project_1.gui.NewFXMain"  name="Project_1" />
+  <update check="always"/>
+</jnlp>
