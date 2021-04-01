@@ -274,6 +274,7 @@ public class artisteController implements Initializable {
     private ObservableList<Annonce> list2;
     private ObservableList <reclamation> list3;
     private ObservableList <client> list4;
+    private ObservableList<service> list5;
 
 
 
@@ -299,6 +300,7 @@ public class artisteController implements Initializable {
 
 
             populateTableArtiste();
+             populateTableservice(); /****partie service****/
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -1060,8 +1062,416 @@ public class artisteController implements Initializable {
 
 
     }
+    
+    
+    
+    
+    
+                      /***********************************SERVICE***********************************/ 
+                     /***********************************SERVICE***********************************/ 
+    
+    
+    
+    
+    
+    @FXML
+    private TextField txtnom;
+    @FXML
+    private TextField txtprix;
+    @FXML
+    private TextField idser;
+    @FXML
+    private TextField txtdetail;
+    @FXML
+    private TableView<service> tabservice;
+    @FXML
+    private TableColumn<service, String> colnom;
+    @FXML
+    private TableColumn<service, Integer> colprix;
+    @FXML
+    private TableColumn<service, String> coldetail;
+    @FXML
+    private TextField txtrech;
+    @FXML
+    private Button btnajouterser;
+    @FXML
+    private Button btnmodifser;
+    @FXML
+    private Button btnsuppser;
+    @FXML
+    private TableColumn<service, Integer> colidser;
+    @FXML
+    private Button btnserpro;
+    @FXML
+    private Button statistique;
+    @FXML
+    private PieChart piecharts;
 
 
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     /**********************MODIF**************************/
+    
+    
+    private void populateTableservice() throws SQLException {
+        list5 = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM service where id_artiste=? ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            /*preparedStatement.setString(1, txtnom.getText());*/
+                preparedStatement.setString(1, mourad.getText());
+
+            resultSet=preparedStatement.executeQuery();
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+
+        while (resultSet.next()) {
+            service Sec = new service(resultSet.getInt("id_service"),resultSet.getInt("id_artiste"),resultSet.getString("nom_service"),resultSet.getInt("prix_service"), resultSet.getString("detail"));
+            list5.add(Sec);
+        }
+        colidser.setCellValueFactory(new PropertyValueFactory<>("id_service"));
+        
+        colnom.setCellValueFactory(new PropertyValueFactory<>("nom_service"));
+        colprix.setCellValueFactory(new PropertyValueFactory<>("prix_service"));
+        coldetail.setCellValueFactory(new PropertyValueFactory<>("detail"));
+        /*tabservice.setItems();*/
+        tabservice.setItems(list5);
+        
+}
+        
+        
+   /**********************AJOUTER**************************/ 
+        
+         private void ajouterservice() throws SQLException {
+        String sql = "INSERT into service (nom_service,prix_service,id_artiste,detail) " +
+                "values (?,?,?,?) ";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtnom.getText());
+            preparedStatement.setString(2, txtprix.getText());
+            preparedStatement.setString(3, mourad.getText());
+            preparedStatement.setString(4, txtdetail.getText());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTableservice();
+    
+    }
+         
+         
+         
+         
+         
+         
+         
+        /******************************recupnoms**********************************/
+        
+        
+        public boolean recupnom() throws SQLException, MessagingException {
+         
+         int t=1;
+        String S = " SELECT nom_service from service where id_artiste= ";  
+        
+        S=S+mourad.getText()+ " AND nom_service LIKE '"+txtnom.getText() +"'";
+       
+                      preparedStatement = conn.prepareStatement(S);
+                      
+                      
+                     
+         
+                      resultSet = preparedStatement.executeQuery();
+           
+                           
+      
+        while (resultSet.next()) {
+           String ns=resultSet.getString("nom_service"); 
+        
+         t=0;
+        
+        }
+       /*String m=resultSet.getString("mail");*/
+       
+               
+              
+           
+           if (t==0){
+               return true;
+           }
+         else { 
+        return false;
+        
+        }}
+        
+         /******************************bouton**********************************/
+   
+
+    @FXML
+    private void Action_ser(ActionEvent event) throws SQLException, MessagingException {
+     String v=txtprix.getText(); 
+          int i=Integer.parseInt(v);   /****convertir string lel int ****/
+      
+          
+    if (event.getSource() == btnajouterser ){
+          
+        if ((txtnom.getText().length()==0) || (recupnom()==true)  ) {      /**** ctrl de saisie sur le nom ****/
+               txtnom.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+           
+         }
+         
+          
+        else if ((txtprix.getText().length()==0 ) ||  (i <=1)){ /**** ctrl de saisie sur le prix  ****/
+            
+               txtprix.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+         } 
+        
+        
+        
+         else {
+            try {
+                
+                ajouterservice();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("service ajouté");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtnom.setText("");
+                
+                txtprix.setText("");
+                txtdetail.setText("");
+
+            }
+        }}
+        else if (event.getSource() == btnmodifser) {
+            if ((txtprix.getText().length()==0 ) ||  (i <=1)){ /**** ctrl de saisie sur le prix  ****/
+            
+               txtprix.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+         } 
+        
+        
+        
+         else {
+            try {
+                editservice();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("service modifié");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtnom.setText("");
+                
+                txtprix.setText("");
+                txtdetail.setText("");
+                idser.setText("");
+
+            }
+        }}
+        else if (event.getSource() == btnsuppser) {
+            try {
+                deleteservice();
+                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                aa.setContentText("service supprimer");
+                aa.show();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                txtnom.setText("");
+                
+                txtprix.setText("");
+                txtdetail.setText("");
+            }
+        }
+    }
+    
+    
+    
+    
+    /**********************MODIFIER**************************/
+    
+    private void editservice() throws SQLException {
+//        Annonce annonce = new Annonce(1,txttitre.getText(),txtdesc.getText(),Integer.parseInt(txtprixmin.getText()),Integer.parseInt(txtprixmax.getText()), Date.from(Instant.from(txtdate.getValue().atStartOfDay(ZoneId.systemDefault()))),txtadresse.getText(),true,0,2);
+       String sql="UPDATE service set  prix_service= ? , detail = ?   where id_service= ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            
+
+          
+       
+            preparedStatement.setString(1, txtprix.getText());
+            
+            preparedStatement.setString(2, txtdetail.getText());
+            preparedStatement.setString(3, idser.getText());
+            /*tabservice.getSelectionModel().getSelectedItem().getId_service();*/
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTableservice();
+        tabservice.refresh();
+    }
+
+    /**********************SUPPRIMER**************************/ 
+    
+     private void deleteservice() throws SQLException {
+//       
+        String sql="delete from service where id_service = ?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, idser.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        populateTableservice();
+    }
+     
+     
+     
+     /**********************SELECTIONNE**************************/ 
+@FXML
+     private void showselectedser(MouseEvent event) {
+    
+        service s=tabservice.getSelectionModel().getSelectedItem();
+        if(s !=null)
+        {
+                txtnom.setText(String.valueOf(s.getNom_service()));
+                txtprix.setText(String.valueOf(s.getPrix_service()));
+                
+                txtdetail.setText(String.valueOf(s.getDetail()));
+            idser.setText(String.valueOf(s.getId_service()));
+    }}
+     
+     
+     
+     /**********************RECHERCHER**************************/ 
+     
+     @FXML
+    private void rechserv(KeyEvent event) {
+    FilteredList filter = new FilteredList(list5, e->true);
+        txtrech.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+        filter.setPredicate((Predicate<? super service>) (service service)->{
+            if(newValue.isEmpty() || newValue==null) {
+                return true;
+            }
+            else if(service.getNom_service().contains(newValue)) {
+                return true;
+            }
+         
+
+            return false;
+        });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tabservice.comparatorProperty());
+        tabservice.setItems(sort);
+    }
+    
+    
+    
+    
+    /**********************BTNPROMO**************************/ 
+
+    @FXML
+    private void serpro(ActionEvent event) throws IOException {
+    
+     Parent stat_page = FXMLLoader.load(getClass().getResource("promoservice.fxml"));
+            
+            Scene stat_page_scene=new Scene(stat_page);
+
+          
+            
+            Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            app_stage.setScene(stat_page_scene);
+            app_stage.show();}
+
+    
+    
+    
+   
+        
+        
+        /**********************statistique**************************/ 
+        
+
+    @FXML
+    private void btss(ActionEvent event) throws SQLException {
+    String sql = "SELECT prix_service FROM service WHERE (prix_service>100)  AND id_artiste=?";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            /*preparedStatement.setString(1, txtnom.getText());*/
+              preparedStatement.setString(1, mourad.getText());
+            resultSet=preparedStatement.executeQuery();
+            
+     
+         
+           // metaData.getColumnName(i) 
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+            
+        int i=0;
+        while (resultSet.next()) {
+           i=i+1;
+        }
+           
+      
+      
+      
+      String res2 = "SELECT prix_service FROM service WHERE (prix_service<=100) AND id_artiste=?";
+        try {
+            preparedStatement = conn.prepareStatement(res2);
+            /*preparedStatement.setString(1, txtnom.getText());*/
+             preparedStatement.setString(1, mourad.getText());
+
+            resultSet=preparedStatement.executeQuery();
+            
+     
+         
+           // metaData.getColumnName(i) 
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+            
+        int j=0;
+        while (resultSet.next()) {
+           j=j+1;
+        }
+        piecharts.setTitle("statistiques des prix ");
+        ObservableList<PieChart.Data> list = FXCollections.observableArrayList(
+
+                new PieChart.Data("prix supperieur à 100dt",i),
+        new PieChart.Data("prix inferieur à 100dt",j));
+        piecharts.setData(list);
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
 }
 
 
