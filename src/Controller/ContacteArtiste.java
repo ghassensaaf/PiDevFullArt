@@ -3,7 +3,7 @@ package Controller;
 
 import entite.artiste;
 import entite.client;
-import entite.Message;
+import entite.message;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,16 +36,16 @@ public class ContacteArtiste     implements Initializable {
     private Button btn_supprimer;
 
     @FXML
-    private TableView<Message> tableMessage;
+    private TableView<message> tableMessage;
 
     @FXML
-    private TableColumn<Message, Integer> col_id_msg;
+    private TableColumn<message, Integer> col_id_msg;
 
     @FXML
-    private TableColumn<Message, String> col_contenu_msg;
+    private TableColumn<message, String> col_contenu_msg;
 
     @FXML
-    private TableColumn<Message, Timestamp> col_date_msg;
+    private TableColumn<message, Timestamp> col_date_msg;
 
     @FXML
     private Label clientlogin;
@@ -57,16 +57,16 @@ public class ContacteArtiste     implements Initializable {
     @FXML
     private TextField id_client;
     @FXML
-    private TableView<Message> tablerecu;
+    private TableView<message> tablerecu;
 
     @FXML
-    private TableColumn<Message, Integer> recu_id;
+    private TableColumn<message, Integer> recu_id;
 
     @FXML
-    private TableColumn<Message, String> contenu_id;
+    private TableColumn<message, String> contenu_id;
 
     @FXML
-    private TableColumn<Message, Timestamp> date_recu;
+    private TableColumn<message, Timestamp> date_recu;
 
 
 
@@ -76,8 +76,8 @@ public class ContacteArtiste     implements Initializable {
     private Connection conn=null;
     ResultSet resultSet = null;
     PreparedStatement preparedStatement = null;
-    private ObservableList<Message> list;
-    private ObservableList<Message> list1;
+    private ObservableList<message> list;
+    private ObservableList<message> list1;
 
 
 
@@ -118,7 +118,7 @@ public class ContacteArtiste     implements Initializable {
         }
 
         while (resultSet.next()) {
-            Message rec = new Message(resultSet.getInt("id_message"), resultSet.getString("contenu"), resultSet.getTimestamp("date"));
+            message rec = new message(resultSet.getInt("id_message"), resultSet.getString("contenu"), resultSet.getTimestamp("date"));
             list.add(rec);
         }
         col_id_msg.setCellValueFactory(new PropertyValueFactory<>("id_message"));
@@ -146,7 +146,7 @@ public class ContacteArtiste     implements Initializable {
         }
 
         while (resultSet.next()) {
-            Message rec = new Message(resultSet.getInt("id_message"), resultSet.getString("contenu"), resultSet.getTimestamp("date"));
+            message rec = new message(resultSet.getInt("id_message"), resultSet.getString("contenu"), resultSet.getTimestamp("date"));
             list1.add(rec);
         }
         recu_id.setCellValueFactory(new PropertyValueFactory<>("id_message"));
@@ -231,7 +231,7 @@ public class ContacteArtiste     implements Initializable {
     /****************************MOUSE  MESSAGE ***********************/
     @FXML
     void showselectedmsg(MouseEvent event) {
-        Message a=tableMessage.getSelectionModel().getSelectedItem();
+        message a=tableMessage.getSelectionModel().getSelectedItem();
         if(a!=null)
         {
             txt_msg.setText(String.valueOf(a.getContenu()));

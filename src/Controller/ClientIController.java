@@ -1,13 +1,14 @@
 package Controller;
 
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
+import com.stripe.model.Customer;
 import entite.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -1228,12 +1229,28 @@ else {
         }
     }
     @FXML
-    void participer(ActionEvent event) throws IOException, WriterException {
+    void participer(ActionEvent event) throws StripeException {
         Random rand = new Random();
         int rand_int1 = rand.nextInt(899999999) + 100000000;
         String code=String.valueOf(rand_int1);
         String sql = "INSERT into ticket (id_ticket, id_client,id_concert) values (?,?,?) ";
+        Stripe.apiKey ="sk_test_51E1IDxDf4dmFOPGYPesehMS319W3sD4UXvYouBXxreVdm2rc02Srw1fZJ5Cp76OG1frAIAR5w1s1ZCbYSLoWZrfb00N92IJxwU"; // add your api key
 
+        Customer a= Customer.retrieve("cus_JDydQ2OhL8YO6V");//htha li client lezem thot l id  ***
+
+
+
+
+
+
+
+        Map<String, Object> params = new HashMap<String,Object>();
+        params.put("amount", "20000");// hna thot li prix
+        params.put("currency", "usd");//hna il devise eur wala usd
+        params.put("description", "achat ticket concert id:"+txtid_con.getText());//hna il description
+        params.put("customer", a.getId());
+
+        Charge.create(params);
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, code);
@@ -1244,6 +1261,9 @@ else {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+        Alert aa=new Alert(Alert.AlertType.CONFIRMATION);
+        aa.setContentText("Succés du paiment");
+        aa.show();
 
     }
 

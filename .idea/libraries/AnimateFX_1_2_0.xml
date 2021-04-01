@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="AnimateFX-1.2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/AnimateFX-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/controlsfx-8.40.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/google-services-3.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/itextpdf-5.5.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/javax.mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/mysql-connector-java-8.0.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/gson-2.8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../mysql-connector-java-8.0.23/stripe-java-6.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

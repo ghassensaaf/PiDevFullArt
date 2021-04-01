@@ -2,6 +2,7 @@ package Controller;
 
 import entite.Candidature;
 import entite.artiste;
+import entite.client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,8 +22,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import util.ConnectionUtil;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -111,6 +117,23 @@ public class postulerController implements Initializable {
 
 
     }
+    private client getClient() throws SQLException {
+        String sql ="SELECT * FROM client where id_client=(select id_client from annonce where id_annonce= ?) ";
+        client ccc=null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, txtidann.getText());
+            resultSet=preparedStatement.executeQuery();
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        if (resultSet.next())
+        {
+            ccc = new client(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getInt(7),resultSet.getString(8),resultSet.getString(9));
+        }
+        return ccc;
+    }
     @FXML
     private TextField txtcontcan;
 
@@ -120,6 +143,9 @@ public class postulerController implements Initializable {
         String sql = "INSERT into candidature (contenu, prix, etat, id_artiste,id_annonce) " +
                 "values (?,?,?,?,?) ";
         String sql1 ="update annonce set nb_candidature=nb_candidature+1 ";
+        client c=getClient();
+        System.out.println(c);
+        String tel=String.valueOf(c.getTel());
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, txtcontcan.getText() );
@@ -135,6 +161,43 @@ public class postulerController implements Initializable {
 
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
+        }
+        try {
+            // Construct data
+            String data = "";
+            /*
+             * Note the suggested encoding for certain parameters, notably
+             * the username, password and especially the message.  ISO-8859-1
+             * is essentially the character set that we use for message bodies,
+             * with a few exceptions for e.g. Greek characters.  For a full list,
+             * see:  https://www.bulksms.com/developer/eapi/submission/character-encoding/
+             */
+            data += "username=" + URLEncoder.encode("trabelsim", "ISO-8859-1");
+            data += "&password=" + URLEncoder.encode("Za3maettal3ou", "ISO-8859-1");
+            data += "&message=" + URLEncoder.encode(clientlogin.getText()+" a postuler a votre annonce id "+txtidann.getText()+" !!Offre: "+txtprix.getText()+"!!Message: "+txtcontcan.getText(), "ISO-8859-1");
+            data += "&want_report=1";
+            data += "&msisdn=216"+tel;
+            // Send data
+            // Please see the FAQ regarding HTTPS (port 443) and HTTP (port 80/5567)
+            URL url = new URL("https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0");
+
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                // Print the response output...
+                System.out.println(line);
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         populateTableCandidature();
     }
