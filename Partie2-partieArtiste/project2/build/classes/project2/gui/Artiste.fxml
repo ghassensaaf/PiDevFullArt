@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="873.0" prefWidth="1470.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project2.gui.ArtisteController">
+    <children>
+      <ImageView fx:id="anchor" fitHeight="963.0" fitWidth="1836.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="paneajouter" layoutX="297.0" layoutY="138.0" prefHeight="660.0" prefWidth="667.0" style="-fx-background-color: #696969; -fx-border-width: 3; -fx-border-color: #ff8000;">
+         <children>
+            <Label fx:id="label1" layoutX="124.0" layoutY="243.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="85.0" text="Nom" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="pwd" layoutX="341.0" layoutY="493.0" prefHeight="30.0" prefWidth="177.0" promptText="aF5@aze" />
+            <TextField fx:id="tel" layoutX="341.0" layoutY="445.0" prefHeight="30.0" prefWidth="177.0" promptText="90706194" />
+            <TextField fx:id="adresse" layoutX="341.0" layoutY="396.0" prefHeight="30.0" prefWidth="177.0" promptText="Rue tarek ibn zied" />
+            <TextField fx:id="mail" layoutX="339.0" layoutY="346.0" prefHeight="30.0" prefWidth="177.0" promptText="sarra.zouari@esprit.tn" />
+            <TextField fx:id="login" layoutX="339.0" layoutY="210.0" prefHeight="30.0" prefWidth="178.0" promptText="sarra99" />
+            <TextField fx:id="nom" layoutX="340.0" layoutY="255.0" prefHeight="30.0" prefWidth="178.0" promptText="Zouari" />
+            <Label fx:id="label11" layoutX="125.0" layoutY="483.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="194.0" text="Mot de passe" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="label111" layoutX="123.0" layoutY="384.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="129.0" text="Adresse" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="lablm" layoutX="124.0" layoutY="335.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="127.0" text="Mail" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="label113" layoutX="122.0" layoutY="436.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="151.0" text="Telephone" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="label12" layoutX="123.0" layoutY="288.0" minHeight="16" minWidth="69" prefHeight="50.0" prefWidth="124.0" text="Prenom" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="label1121" layoutX="124.0" layoutY="201.0" minHeight="16" minWidth="69" prefHeight="48.0" prefWidth="168.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="prenom" layoutX="340.0" layoutY="300.0" prefHeight="30.0" prefWidth="178.0" promptText="Sarra" />
+            <Label fx:id="label" layoutX="90.0" layoutY="13.0" minHeight="16" minWidth="69" prefHeight="95.0" prefWidth="487.0" text="creer un compte" textFill="#f1c232">
+               <font>
+                  <Font size="62.0" />
+               </font>
+            </Label>
+            <Button fx:id="n" layoutX="531.0" layoutY="564.0" mnemonicParsing="false" onAction="#paneafficher" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #F1C232;" text="suivant" />
+            <Label layoutX="177.0" layoutY="100.0" prefHeight="26.0" prefWidth="410.0" text="Étape1 : Remplir ce formulaire s'il vous plaît" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneajouter1" layoutX="298.0" layoutY="141.0" prefHeight="655.0" prefWidth="663.0" style="-fx-background-color: #696969; -fx-border-width: 3; -fx-border-color: #ff8000;" visible="false">
+         <children>
+            <ImageView fx:id="imagev" fitHeight="182.0" fitWidth="158.0" layoutX="430.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Desktop/person.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnajouterartiste" layoutX="540.0" layoutY="568.0" mnemonicParsing="false" onAction="#ajouterArtiste" prefHeight="60.0" prefWidth="96.0" style="-fx-background-color: #F1C232;" text="Terminer" />
+            <TextArea fx:id="description" layoutX="41.0" layoutY="486.0" prefHeight="120.0" prefWidth="277.0" promptText="Exp: je suis violoniste je travaille avec la bande fullart depuis 5 ans" style="-fx-background-color: #F1C232;" />
+            <ImageView fx:id="imagev2" fitHeight="200.0" fitWidth="200.0" layoutX="434.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../Desktop/Artiste%20partie%20client-sarra/project2/rose.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="Upload" layoutX="249.0" layoutY="181.0" mnemonicParsing="false" onAction="#UploadImageActionPerformed" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #F1C232;" text="Importer une photo" />
+            <Button fx:id="cam" layoutX="250.0" layoutY="146.0" mnemonicParsing="false" onAction="#webcam" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #F1C232;" text="Avec Camera" />
+            <Button fx:id="cam" layoutX="255.0" layoutY="352.0" mnemonicParsing="false" onAction="#webcam2" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #F1C232;" text="Avec Camera" />
+            <Button fx:id="Upload2" layoutX="255.0" layoutY="387.0" mnemonicParsing="false" onAction="#UploadImageActionPerformed2" prefHeight="26.0" prefWidth="176.0" style="-fx-background-color: #F1C232;" text="Importer une photo" />
+            <Label layoutX="183.0" layoutY="93.0" prefHeight="26.0" prefWidth="389.0" text="Étape 2: il ne vous reste que ces dernières étapes" textFill="WHITE" />
+            <Label layoutX="36.0" layoutY="161.0" prefHeight="25.0" prefWidth="267.0" text="Choisir une photo de profil :" textFill="WHITE" />
+            <Label layoutX="34.0" layoutY="352.0" prefHeight="26.0" prefWidth="235.0" text="Choisir une photo de couverture :" textFill="WHITE" />
+            <Label layoutX="44.0" layoutY="451.0" prefHeight="26.0" prefWidth="334.0" text="Ajouter une description :" textFill="WHITE" />
+            <Label fx:id="label2" layoutX="91.0" layoutY="9.0" minHeight="16" minWidth="69" prefHeight="95.0" prefWidth="487.0" text="créer un compte" textFill="#f1c232">
+               <font>
+                  <Font size="62.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets top="-8.0" />
+         </opaqueInsets>
+      </AnchorPane>
+      <AnchorPane fx:id="paneaffiche" layoutX="299.0" layoutY="136.0" prefHeight="660.0" prefWidth="666.0" style="-fx-background-color: #696969; -fx-border-width: 3; -fx-border-color: #ff8000;" visible="false">
+         <children>
+            <HBox layoutX="142.0" layoutY="9.0" prefHeight="222.0" prefWidth="404.0" style="-fx-background-color: #F1C232;">
+               <children>
+                  <VBox prefHeight="308.0" prefWidth="214.0">
+                     <children>
+                        <ImageView fx:id="imagev3" fitHeight="82.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../Desktop/b5d673824c2f51b665b7ebc8f642cf29.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imagev1" fitHeight="276.0" fitWidth="222.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../Desktop/119942074_1709411539205926_1435216800576762872_n.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="418.0" prefWidth="182.0">
+                     <children>
+                        <Label prefHeight="44.0" prefWidth="182.0" />
+                        <Label fx:id="lml1" prefHeight="65.0" prefWidth="214.0" text="  zouari" textFill="WHITE">
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lml2" prefHeight="49.0" prefWidth="214.0" text="   sarra" textFill="WHITE">
+                           <font>
+                              <Font size="50.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lml" prefHeight="86.0" prefWidth="211.0" text="      sarra99" textFill="WHITE">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox layoutX="1.0" layoutY="428.0" prefHeight="222.0" prefWidth="507.0">
+               <children>
+                  <VBox prefHeight="191.0" prefWidth="192.0">
+                     <children>
+                        <Label fx:id="lablm11" minHeight="16" minWidth="69" prefHeight="66.0" prefWidth="118.0" text="   Mail :" textFill="#f1c232">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label11111" minHeight="16" minWidth="69" prefHeight="66.0" prefWidth="154.0" text="   Adresse:" textFill="#f1c232">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label11312" minHeight="16" minWidth="69" prefHeight="71.0" prefWidth="176.0" text="   Telephone:" textFill="#f1c232">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="label113111" minHeight="16" minWidth="69" prefHeight="103.0" prefWidth="192.0" text="   Description:" textFill="#f1c232">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="142.0" prefWidth="276.0" style="-fx-background-color: lml.setText(&quot;&quot;+login.getText());                                         lml1.setText(&quot;&quot;+nom.getText());                                         lml2.setText(&quot;&quot;+prenom.getText());                                         lml4.setText(&quot;&quot;+adresse.getText());                                         lml3.setText(&quot;&quot;+mail.getText());                                         lml5.setText(&quot;&quot;+tel.getText());                                         lml6.setText(&quot;&quot;+description.getText());                                                                                          lbb2.setText(&quot;&quot;+login.getText());                                         lbb3.setText(&quot;&quot;+nom.getText());                                         lbb4.setText(&quot;&quot;+prenom.getText());                                         lbb5.setText(&quot;&quot;+adresse.getText());                                         lbb6.setText(&quot;&quot;+mail.getText());                                         lbb7.setText(&quot;&quot;+tel.getText());                                         lbb8.setText(&quot;&quot;+description.getText());;">
+                     <children>
+                        <Label fx:id="lml3" prefHeight="64.0" prefWidth="211.0" text="sarra.zouari@esprit.tn" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lml4" prefHeight="69.0" prefWidth="211.0" text="Rue tarek ibn zied" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lml5" prefHeight="61.0" prefWidth="212.0" text="302654845" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="lml6" disable="true" prefHeight="103.0" prefWidth="276.0" text="bn,&#10;&#10;" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label layoutX="-15.0" layoutY="349.0" prefHeight="79.0" prefWidth="218.0" text="   Details:" textFill="WHITE">
+               <font>
+                  <Font name="Cambria Bold" size="43.0" />
+               </font>
+            </Label>
+            <Button fx:id="delete" layoutX="547.0" layoutY="578.0" mnemonicParsing="false" onAction="#deleteArtiste" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #F1C232;" text="supprimer" />
+            <Button fx:id="o1" layoutX="548.0" layoutY="500.0" mnemonicParsing="false" onAction="#panemodifierr" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #F1C232;" text="modifier" />
+            <Button fx:id="qr" layoutX="546.0" layoutY="420.0" mnemonicParsing="false" onAction="#QRcode" prefHeight="60.0" prefWidth="100.0" style="-fx-background-color: #F1C232;" text="QRcode" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="panemodifier" layoutX="209.0" layoutY="62.0" prefHeight="799.0" prefWidth="760.0" style="-fx-background-color: #696969; -fx-border-color: #ff8000; -fx-border-width: 3;" visible="false">
+         <children>
+            <Button fx:id="o2" layoutX="672.0" layoutY="740.0" mnemonicParsing="false" onAction="#modifierartiste" prefHeight="48.0" prefWidth="76.0" style="-fx-background-color: #F1C232;" text="modifier" />
+            <HBox layoutX="34.0" layoutY="37.0" prefHeight="685.0" prefWidth="694.0">
+               <children>
+                  <VBox prefHeight="602.0" prefWidth="275.0" style="-fx-background-color: #F1C232;">
+                     <children>
+                        <Label minHeight="13.0" minWidth="69" prefHeight="13.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="52.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="label13" minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="128.0" text="     Nom:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label minHeight="0.0" minWidth="69" prefHeight="13.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="58.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="label121" minHeight="16" minWidth="69" prefHeight="30.0" prefWidth="152.0" text="     Prenom :" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label minHeight="0.0" minWidth="69" prefHeight="10.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="58.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="lablm1" minHeight="16" minWidth="69" prefHeight="39.0" prefWidth="172.0" text="     Mail:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="53.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="label1111" minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="162.0" text="     Adresse:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label minHeight="4.0" minWidth="69" prefHeight="6.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="58.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="label1131" minHeight="16" minWidth="69" prefHeight="26.0" prefWidth="161.0" text="     Telephone:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="51.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label prefHeight="34.0" prefWidth="186.0" text="     Mot de passe:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Label minHeight="13.0" minWidth="69" prefHeight="13.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="45.0" prefWidth="270.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="87.0" />
+                              <Label fx:id="label11311" minHeight="16" minWidth="69" prefHeight="34.0" prefWidth="166.0" text="     Description:" textAlignment="JUSTIFY" textFill="#696969">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="66.0" prefWidth="270.0" />
+                        <Label minHeight="13.0" minWidth="69" prefHeight="13.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="44.0" prefWidth="235.0" text="                 Photo " textAlignment="JUSTIFY" textFill="#696969">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="39.0" prefWidth="235.0" text="               de profil" textAlignment="JUSTIFY" textFill="#696969">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="41.0" prefWidth="350.0" />
+                        <Label prefHeight="46.0" prefWidth="244.0" text="                 Photo " textAlignment="JUSTIFY" textFill="#696969">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="46.0" prefWidth="244.0" text="           de couverture" textAlignment="JUSTIFY" textFill="#696969">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="41.0" prefWidth="350.0" />
+                        <Label prefHeight="40.0" prefWidth="104.0" />
+                        <Label prefHeight="39.0" prefWidth="87.0" />
+                        <Label prefHeight="39.0" prefWidth="87.0" />
+                        <Label prefHeight="39.0" prefWidth="87.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="702.0" prefWidth="431.0" style="-fx-background-color: #F1C232;">
+                     <children>
+                        <Label minHeight="13.0" minWidth="69" prefHeight="13.0" prefWidth="86.0" textFill="#f5f503">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="44.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextField fx:id="lbb3" prefHeight="28.0" prefWidth="214.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextField fx:id="lbb4" prefHeight="26.0" prefWidth="215.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="40.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextField fx:id="lbb5" prefHeight="26.0" prefWidth="215.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextField fx:id="lbb6" prefHeight="26.0" prefWidth="214.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="44.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextField fx:id="lbb7" prefHeight="26.0" prefWidth="213.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="45.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <PasswordField fx:id="lbb9" prefHeight="26.0" prefWidth="212.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="41.0" prefWidth="350.0">
+                           <children>
+                              <Label prefHeight="40.0" prefWidth="104.0" />
+                              <TextArea fx:id="lbb8" prefHeight="82.0" prefWidth="222.0" />
+                           </children></HBox>
+                        <HBox prefHeight="38.0" prefWidth="426.0">
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="76.0" />
+                              <HBox prefHeight="64.0" prefWidth="56.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="121.0" prefWidth="426.0">
+                           <children>
+                              <VBox prefHeight="74.0" prefWidth="85.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0" />
+                                    <Button fx:id="cam1" mnemonicParsing="false" onAction="#cam1modfier" prefHeight="26.0" prefWidth="73.0" text="cam" />
+                                    <Button fx:id="image1" mnemonicParsing="false" onAction="#image1modifier" prefHeight="26.0" prefWidth="74.0" text="image" />
+                                 </children>
+                              </VBox>
+                              <Label prefHeight="76.0" prefWidth="50.0" />
+                              <ImageView fx:id="profilemod" fitHeight="69.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="110.0" prefWidth="426.0">
+                           <children>
+                              <VBox prefHeight="78.0" prefWidth="87.0">
+                                 <children>
+                                    <Label prefHeight="54.0" prefWidth="68.0" />
+                                    <Button fx:id="cam2" mnemonicParsing="false" onAction="#cam2modifier" prefHeight="26.0" prefWidth="73.0" text="cam" />
+                                    <Button fx:id="image2" mnemonicParsing="false" onAction="#image2modifier" prefHeight="26.0" prefWidth="74.0" text="image" />
+                                 </children>
+                              </VBox>
+                              <Label prefHeight="80.0" prefWidth="50.0" />
+                              <ImageView fx:id="couvmod" fitHeight="68.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <opaqueInsets>
+            <Insets top="-2.0" />
+         </opaqueInsets>
+      </AnchorPane>
+      <AnchorPane fx:id="paneafficher" layoutX="1018.0" layoutY="147.0" prefHeight="547.0" prefWidth="621.0" style="-fx-background-color: #000000; -fx-border-width: 3; -fx-border-color: #ff8000;" visible="false">
+         <children>
+            <TableView fx:id="tableartiste" layoutX="28.0" layoutY="113.0" onMouseClicked="#handleCategorieAction" prefHeight="256.0" prefWidth="854.0">
+              <columns>
+                <TableColumn fx:id="id_" prefWidth="38.4000244140625" text="id" />
+                <TableColumn fx:id="login1" prefWidth="66.4000244140625" text="login" />
+                  <TableColumn fx:id="nom1" prefWidth="59.20001220703125" text="nom" />
+                  <TableColumn fx:id="prenom1" prefWidth="69.5999755859375" text="prenom" />
+                  <TableColumn fx:id="adresse1" prefWidth="142.4000244140625" text="adresse" />
+                  <TableColumn fx:id="mail1" prefWidth="79.199951171875" text="mail" />
+                  <TableColumn fx:id="tel1" prefWidth="79.199951171875" text="tel" />
+                  <TableColumn fx:id="pwd1" prefWidth="79.199951171875" text="pwd" />
+                  <TableColumn fx:id="description1" prefWidth="79.199951171875" text="description " />
+                  <TableColumn fx:id="photo1" prefWidth="79.199951171875" text="photo" />
+                  <TableColumn fx:id="couverture1" prefWidth="79.199951171875" text="couverture" />
+              </columns>
+            </TableView>
+            <Button fx:id="j" layoutX="260.0" layoutY="401.0" mnemonicParsing="false" onAction="#paneajouterr" text="ajouter" />
+            <TextField fx:id="idd5" layoutX="322.0" layoutY="401.0" prefHeight="26.0" prefWidth="96.0" />
+         </children>
+      </AnchorPane>
+    </children>
+</AnchorPane>
