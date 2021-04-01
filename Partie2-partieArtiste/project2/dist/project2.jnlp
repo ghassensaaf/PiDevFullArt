@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="project2.jnlp">
+  <information>
+    <title>project2</title>
+    <vendor>saraz</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\bridj-0.7.0.jar" size="935929" download="eager" />
+    <jar href="lib\mysql-connector-java-8.0.23.jar" size="2415211" download="eager" />
+    <jar href="lib\qrgen-1.0.jar" size="4932" download="eager" />
+    <jar href="lib\slf4j-api-1.7.2.jar" size="26083" download="eager" />
+    <jar href="lib\webcam-capture-0.3.12.jar" size="428314" download="eager" />
+    <jar href="lib\zxing-core-1.7.jar" size="352719" download="eager" />
+    <jar href="lib\zxing-j2se-1.7.jar" size="22051" download="eager" />
+    <jar href="project2.jar" size="567869" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="800" height="600" main-class="project2.gui.Project2"  name="project2" />
+  <update check="always"/>
+</jnlp>
