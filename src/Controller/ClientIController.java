@@ -64,6 +64,7 @@ import javafx.event.*;
 public class ClientIController extends Component implements Initializable {
     @FXML private Button add;
     @FXML private TextField txtid_pub;
+    @FXML private TextField prixC;
     @FXML private TextField txtid_rec;
     @FXML private Button consult_pub;
     @FXML private Button edit;
@@ -263,7 +264,7 @@ public class ClientIController extends Component implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
-        javafx.scene.image.Image img = new javafx.scene.image.Image("/image/away.png");
+        javafx.scene.image.Image img = new javafx.scene.image.Image("/image/users/check.jpg");
         photo_circle.setFill(new ImagePattern(img));
 
 
@@ -1217,6 +1218,10 @@ else {
     @FXML
     private TableColumn<concert, Integer> col_id_concert;
 
+
+    @FXML
+    private TableColumn<concert, Integer> col_prix;
+
     @FXML
     private TableColumn<concert, Integer> col_id_artiste;
 
@@ -1237,13 +1242,16 @@ else {
             throwables.printStackTrace();
         }
         while (resultSet.next()) {
-            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"));
+            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"),resultSet.getInt("prix"));
             list5.add(crt);
         }
         col_id_concert.setCellValueFactory(new PropertyValueFactory<>("id_concert"));
         col_id_artiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
         col_lieu.setCellValueFactory(new PropertyValueFactory<>("lieu"));
         col_date_concert.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_prix.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
+
         tab_concert.setItems(list5);
 
     }
@@ -1255,6 +1263,7 @@ else {
         if(c!=null)
         {
             txtid_con.setText(String.valueOf(c.getId_concert()));
+            prixC.setText(String.valueOf(c.getPrix()*100));
 
         }
     }
@@ -1264,6 +1273,7 @@ else {
         int rand_int1 = rand.nextInt(899999999) + 100000000;
         String code=String.valueOf(rand_int1);
         String sql = "INSERT into ticket (id_ticket, id_client,id_concert) values (?,?,?) ";
+
         Stripe.apiKey ="sk_test_51E1IDxDf4dmFOPGYPesehMS319W3sD4UXvYouBXxreVdm2rc02Srw1fZJ5Cp76OG1frAIAR5w1s1ZCbYSLoWZrfb00N92IJxwU"; // add your api key
 
         Customer a= Customer.retrieve("cus_JDydQ2OhL8YO6V");//htha li client lezem thot l id  ***
@@ -1275,7 +1285,7 @@ else {
 
 
         Map<String, Object> params = new HashMap<String,Object>();
-        params.put("amount", "20000");// hna thot li prix
+        params.put("amount", prixC.getText());// hna thot li prix
         params.put("currency", "usd");//hna il devise eur wala usd
         params.put("description", "achat ticket concert id:"+txtid_con.getText());//hna il description
         params.put("customer", a.getId());

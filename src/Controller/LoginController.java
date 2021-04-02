@@ -10,12 +10,7 @@ package Controller;
         import javafx.scene.Node;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.Label;
-        import javafx.scene.control.PasswordField;
-        import javafx.scene.control.RadioButton;
-        import javafx.scene.control.TextField;
-        import javafx.scene.control.ToggleGroup;
+        import javafx.scene.control.*;
         import javafx.scene.paint.Color;
         import javafx.stage.Stage;
         import util.ConnectionUtil;
@@ -184,8 +179,18 @@ public class LoginController implements Initializable {
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
                 } else {
-                    setLblError(Color.GREEN, "Login Successful..Redirecting..");
-                    return "artiste";
+                    if(resultSet.getInt("etat")==1)
+                    {
+                        Alert aa = new Alert(Alert.AlertType.ERROR);
+                        aa.setContentText("Compte bloqué contacté l'admin");
+                        aa.show();
+                        return "no";
+                    }
+                    else
+                    {
+                        setLblError(Color.GREEN, "Login Successful..Redirecting..");
+                        return "artiste";
+                    }
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());
@@ -202,8 +207,18 @@ public class LoginController implements Initializable {
                 if (!resultSet.next()) {
                     setLblError(Color.TOMATO, "Enter Correct Email/Password");
                 } else {
-                    setLblError(Color.GREEN, "Login Successful..Redirecting..");
-                    return "client";
+                    if(resultSet.getInt("etat")==1)
+                    {
+                        Alert aa = new Alert(Alert.AlertType.ERROR);
+                        aa.setContentText("Compte bloqué contacté l'admin");
+                        aa.show();
+                        return "no";
+                    }
+                    else
+                    {
+                        setLblError(Color.GREEN, "Login Successful..Redirecting..");
+                        return "client";
+                    }
                 }
             } catch (SQLException ex) {
                 System.err.println(ex.getMessage());

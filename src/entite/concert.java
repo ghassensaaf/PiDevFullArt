@@ -7,6 +7,23 @@ public class concert {
     private int id_artiste;
     private String lieu;
     private Date date;
+    private Integer prix;
+
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Integer prix) {
+        this.prix = prix;
+    }
+
+    public concert(int id_concert, int id_artiste, String lieu, Date date, Integer prix) {
+        this.id_concert = id_concert;
+        this.id_artiste = id_artiste;
+        this.lieu = lieu;
+        this.date = date;
+        this.prix = prix;
+    }
 
     public concert(int id_concert, int id_artiste, String lieu, Date date) {
         this.id_concert = id_concert;

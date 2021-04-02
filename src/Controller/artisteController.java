@@ -14,6 +14,8 @@ import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -128,6 +130,8 @@ public class artisteController implements Initializable {
 
     @FXML
     private TableColumn<concert, Integer> colartiste;
+    @FXML
+    private TableColumn<concert, Integer> col_prix_concert;
 
     @FXML
     private TableColumn<concert, String> colplace;
@@ -297,11 +301,13 @@ public class artisteController implements Initializable {
         artistlogin.setText(login);
         return login;
     }
-
+    @FXML
+    private Circle photo;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         conn = ConnectionUtil.conDB();
-
+        javafx.scene.image.Image img = new javafx.scene.image.Image("/image/users/salma.jpg");
+        photo.setFill(new ImagePattern(img));
         try {
             ArrayList<type_pub> listepub = gettypepub();
             for (type_pub p : listepub) {
@@ -489,7 +495,7 @@ public class artisteController implements Initializable {
             } finally {
                 lieuconcert.setText("");
                 dateconcert.setValue(null);
-                txtcontenupub.setText("");
+                txtprix_concert.setText("");
             }
         } else if (event.getSource() == deleteconcert) {
             try {
@@ -499,7 +505,7 @@ public class artisteController implements Initializable {
             } finally {
                 lieuconcert.setText("");
                 dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                txtcontenupub.setText("");
+                txtprix_concert.setText("");
             }
         } else if (event.getSource() == editconcert) {
             try {
@@ -514,6 +520,7 @@ public class artisteController implements Initializable {
                 lieuconcert.setText("");
                 dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 txtcontenupub.setText("");
+                txtprix_concert.setText("");
             }
         } else if (event.getSource() == btnretour) {
             try {
@@ -582,6 +589,7 @@ public class artisteController implements Initializable {
             idpub.setText(String.valueOf(p.getId_pub()));
             txttitrepub.setText(p.getTitre());
             txtcontenupub.setText(p.getContenu());
+
         }
     }
 
@@ -628,25 +636,35 @@ public class artisteController implements Initializable {
             throwables.printStackTrace();
         }
         while (resultSet.next()) {
-            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"));
+            concert crt = new concert(resultSet.getInt("id_concert"), resultSet.getInt("id_artiste"), resultSet.getString("lieu"), resultSet.getDate("date"),resultSet.getInt("prix"));
             list1.add(crt);
         }
         colconcert.setCellValueFactory(new PropertyValueFactory<>("id_concert"));
         colartiste.setCellValueFactory(new PropertyValueFactory<>("id_artiste"));
         colplace.setCellValueFactory(new PropertyValueFactory<>("lieu"));
         coldate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_prix_concert.setCellValueFactory(new PropertyValueFactory<>("prix"));
+
+
+
+
+
+
         tabconcert.setItems(list1);
 
     }
+    @FXML
+    private TextField txtprix_concert;
 
     private void ajouterconcert() throws SQLException {
-        String sql = "INSERT into concert ( id_artiste, lieu, date) " +
-                "values (?,?,?) ";
+        String sql = "INSERT into concert ( id_artiste, lieu, date,prix) " +
+                "values (?,?,?,?) ";
         try {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, mourad.getText());
             preparedStatement.setString(2, lieuconcert.getText());
             preparedStatement.setString(3, dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            preparedStatement.setString(4, txtprix_concert.getText());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
@@ -662,6 +680,7 @@ public class artisteController implements Initializable {
             idconcert.setText(String.valueOf(c.getId_concert()));
             lieuconcert.setText(c.getLieu());
             dateconcert.setValue(LocalDate.parse(format.format(c.getDate())));
+            txtprix_concert.setText(String.valueOf(c.getPrix()));
         }
     }
 
@@ -680,13 +699,14 @@ public class artisteController implements Initializable {
 
 
     private void modifierconcert() throws SQLException {
-        String sql = "UPDATE concert set  id_artiste= ? , lieu= ? , date = ?  where id_concert= ?";
+        String sql = "UPDATE concert set  id_artiste= ? , lieu= ? , date = ? ,prix = ? where id_concert= ?";
         try {
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, "2");
+            preparedStatement.setString(1, mourad.getText());
             preparedStatement.setString(2, lieuconcert.getText());
             preparedStatement.setString(3, dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            preparedStatement.setString(4, idconcert.getText());
+            preparedStatement.setString(4, txtprix_concert.getText());
+            preparedStatement.setString(5, idconcert.getText());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
