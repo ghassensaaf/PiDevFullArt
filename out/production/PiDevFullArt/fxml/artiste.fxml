@@ -62,29 +62,33 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="491.0" prefWidth="723.0">
                             <children>
-                                <VBox layoutX="57.0" layoutY="66.0" prefHeight="212.0" prefWidth="113.0" spacing="25.0">
+                                <VBox layoutX="59.0" layoutY="72.0" prefHeight="212.0" prefWidth="113.0" spacing="50.0">
                                     <children>
                                         <Label text="Type publication" />
                                         <Label text="Titre" />
                                         <Label text="Contenu" />
                                     </children>
                                 </VBox>
-                                <VBox layoutX="207.0" layoutY="65.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0">
+                                <VBox layoutX="206.0" layoutY="72.0" prefHeight="200.0" prefWidth="186.0" spacing="10.0" AnchorPane.topAnchor="72.0">
                                     <children>
                                         <ComboBox fx:id="txttypepub" prefHeight="26.0" prefWidth="188.0" />
+                              <Label fx:id="lbltype" prefHeight="8.0" prefWidth="186.0" />
                                         <TextField fx:id="txttitrepub" promptText="Titre">
                                             <VBox.margin>
                                                 <Insets top="5.0" />
                                             </VBox.margin>
                                         </TextField>
-                                        <TextArea fx:id="txtcontenupub" prefHeight="67.0" prefWidth="186.0" promptText="Contenu">
+                              <Label fx:id="lbltitre" prefHeight="18.0" prefWidth="190.0" />
+                                        <TextArea fx:id="txtcontenupub" prefHeight="0.0" prefWidth="186.0" promptText="Contenu">
                                             <VBox.margin>
                                                 <Insets top="10.0" />
                                             </VBox.margin>
                                         </TextArea>
+                              <Label fx:id="lblcontenu" prefHeight="18.0" prefWidth="197.0" />
+                              <Label text="Label" />
                                     </children>
                                 </VBox>
-                                <TableView fx:id="tabpub" layoutX="70.0" layoutY="248.0" onMouseClicked="#click" prefHeight="234.0" prefWidth="593.0">
+                                <TableView fx:id="tabpub" layoutX="50.0" layoutY="312.0" onMouseClicked="#click" prefHeight="170.0" prefWidth="594.0">
                                     <columns>
                                         <TableColumn fx:id="colid" prefWidth="75.0" text="id" />
                                         <TableColumn fx:id="coltype" prefWidth="51.199951171875" text="type" />
@@ -100,8 +104,8 @@
                                 <Button fx:id="stat" layoutX="624.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #f1c232;" text="Statistique" />
                                 <TextField fx:id="search" layoutX="561.0" layoutY="14.0" onKeyPressed="#search" />
                                 <Label layoutX="481.0" layoutY="18.0" text="Rechercher" />
-                                <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="27.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
-                                <Text layoutX="79.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                                <TextField fx:id="idpub" disable="true" layoutX="208.0" layoutY="3.0" prefHeight="26.0" prefWidth="182.0" promptText="ID" />
+                                <Text layoutX="79.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -110,21 +114,23 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
+                                <VBox layoutX="58.0" layoutY="33.0" prefHeight="236.0" prefWidth="106.0" spacing="20.0">
                                     <children>
                                         <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
                                         <Label prefHeight="18.0" prefWidth="34.0" text="Lieu" />
                                         <Label prefHeight="18.0" prefWidth="38.0" text="Date" />
                                     </children>
                                 </VBox>
-                                <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
+                                <VBox layoutX="184.0" layoutY="36.0" prefHeight="159.0" prefWidth="150.0" spacing="10.0">
                                     <children>
                                         <TextField fx:id="idconcert" disable="true" editable="false" />
                                         <TextField fx:id="lieuconcert" prefHeight="24.0" prefWidth="150.0" promptText="Lieu" />
+                              <Label fx:id="lbllieu" prefHeight="18.0" prefWidth="170.0" />
                                         <DatePicker fx:id="dateconcert" promptText="Date" />
+                              <Label fx:id="lbldate" prefHeight="18.0" prefWidth="202.0" />
                                     </children>
                                 </VBox>
-                                <TableView fx:id="tabconcert" layoutX="31.0" layoutY="211.0" onMouseClicked="#click1" prefHeight="235.0" prefWidth="456.0">
+                                <TableView fx:id="tabconcert" layoutX="31.0" layoutY="241.0" onMouseClicked="#click1" prefHeight="205.0" prefWidth="456.0">
                                     <columns>
                                         <TableColumn fx:id="colconcert" prefWidth="96.7999267578125" text="id concert" />
                                         <TableColumn fx:id="colartiste" prefWidth="112.79998779296875" text="id_artiste" />

@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -49,6 +50,19 @@ public class artisteController implements Initializable {
     @FXML
     private TextField txttitrepub;
 
+
+    @FXML
+    private Label lbltype;
+    @FXML
+    private Label lbltitre;
+    @FXML
+    private Label lblcontenu;
+
+    @FXML
+    private Label lbllieu;
+
+    @FXML
+    private Label lbldate;
     @FXML
     private TextField idpub;
     @FXML
@@ -364,9 +378,52 @@ public class artisteController implements Initializable {
     }
 
     @FXML
-    void btnaction(ActionEvent event) throws SQLException {
+    void btnaction(ActionEvent event) throws SQLException, ParseException {
         if (event.getSource() == addpub) {
-            try {
+
+            if (txtcontenupub.getText().length()==0 ) {
+                txtcontenupub.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(txtcontenupub).play();
+                lblcontenu.setText("Champ Obligatoire");
+                lblcontenu.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lblcontenu).play();
+            }
+            else {
+                txtcontenupub.setStyle(null);
+                lblcontenu.setText("");
+            }
+            if (txttypepub.getSelectionModel().isEmpty())
+            {
+                txttypepub.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(txttypepub).play();
+                lbltype.setText("Champ Obligatoire");
+                lbltype.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lbltype).play();
+            }
+
+            else {
+                txttypepub.setStyle(null);
+                lbltype.setText("");
+            }
+
+
+            if (txttitrepub.getText().length()==0)
+            {
+                txttitrepub.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(txttitrepub).play();
+                lbltitre.setText("Champ Obligatoire");
+                lbltitre.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lbltitre).play();
+            }
+
+            else {
+                txttitrepub.setStyle(null);
+                lbltitre.setText("");
+            }
+
+
+
+                try {
                 addPub();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -399,14 +456,39 @@ public class artisteController implements Initializable {
                 txtcontenupub.setText("");
             }
         } else if (event.getSource() == addconcert) {
+
+            if (lieuconcert.getText().length()==0 ) {
+                lieuconcert.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(lieuconcert).play();
+                lbllieu.setText("Champ Obligatoire");
+                lbllieu.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lbllieu).play();
+            }
+            else {
+                lieuconcert.setStyle(null);
+                lbllieu.setText("");
+            }
+            if (dateconcert.getValue()==null)
+            {
+
+                dateconcert.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+                new animatefx.animation.Shake(dateconcert).play();
+                lbldate.setText("Champ Obligatoire");
+                lbldate.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lbldate).play();
+            }
+
+            else {
+                dateconcert.setStyle(null);
+                lbldate.setText("");
+            }
             try {
                 ajouterconcert();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } finally {
                 lieuconcert.setText("");
-                dateconcert.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-
+                dateconcert.setValue(null);
                 txtcontenupub.setText("");
             }
         } else if (event.getSource() == deleteconcert) {
