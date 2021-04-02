@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMouseMoved="#refresh" prefHeight="516.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Chatbox">
+   <children>
+      <TextField fx:id="id_client" disable="true" layoutX="543.0" layoutY="478.0" />
+      <TextField fx:id="txtid_art" disable="true" layoutX="321.0" layoutY="478.0" />
+      <ImageView fitHeight="525.0" fitWidth="870.0" layoutX="-12.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Untitled-55.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="send" layoutX="686.0" layoutY="457.0" mnemonicParsing="false" onAction="#Send" prefHeight="49.0" prefWidth="101.0">
+         <graphic>
+            <ImageView fitHeight="31.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/paper-plane.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <TextField fx:id="msg" layoutX="143.0" layoutY="457.0" opacity="0.9" prefHeight="49.0" prefWidth="530.0" />
+      <Label fx:id="clientlogin" layoutX="742.0" layoutY="101.0" text="Label" />
+      <ListView fx:id="affichage" layoutX="143.0" layoutY="122.0" opacity="0.91" prefHeight="331.0" prefWidth="643.0" />
+      <Label layoutX="16.0" layoutY="100.0" prefHeight="19.0" prefWidth="143.0" text="LISTE DES ARTISTE" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Comic Sans MS" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnretour" layoutX="10.0" layoutY="26.0" mnemonicParsing="false" onAction="#back_to_client_home" prefHeight="33.0" prefWidth="77.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/undo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="tb_art" layoutX="21.0" layoutY="122.0" onMouseClicked="#showselectedartiste" onMouseMoved="#refresh2" opacity="0.74" prefHeight="383.0" prefWidth="113.0">
+        <columns>
+          <TableColumn fx:id="id_art" prefWidth="32.0" text="ID" />
+            <TableColumn fx:id="Nom_art" prefWidth="81.0" text="Name" />
+        </columns>
+      </TableView>
+      <TextField fx:id="rech" layoutX="14.0" layoutY="122.0" onKeyPressed="#search1" prefHeight="25.0" prefWidth="125.0" promptText="recherche" />
+   </children>
+</AnchorPane>

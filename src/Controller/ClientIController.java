@@ -915,12 +915,13 @@ else {
     void btn_contacter(ActionEvent event) {
         try {
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/ChatView.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/Chatbox.fxml"));
 
             Parent p=loader.load();
 
             Scene scene=new Scene(p);
-
+            Chatbox controller = loader.getController();
+            controller.initData(Integer.parseInt(txtid_art.getText()),clientlogin.getText());
 
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
@@ -932,6 +933,8 @@ else {
             System.err.println(ex.getMessage());
         }
     }
+
+
 
     @FXML
     void btn_avis(ActionEvent event) {
@@ -978,6 +981,33 @@ else {
         SortedList sort = new SortedList(filter);
         sort.comparatorProperty().bind(tableReclamation.comparatorProperty());
         tableReclamation.setItems(sort);
+
+    }
+    @FXML
+    private TextField rech3;
+    @FXML
+    void search3(KeyEvent event) {
+        FilteredList filter = new FilteredList(list4, e->true);
+        rech3.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+            filter.setPredicate((Predicate<? super artiste>) (artiste artiste)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(artiste.getNom().contains(newValue)) {
+                    return true;
+                }
+                else if(artiste.getNom().contains(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tab_con_art.comparatorProperty());
+        tab_con_art.setItems(sort);
 
     }
     @FXML

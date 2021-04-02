@@ -420,6 +420,8 @@ public class adminController extends Component implements Initializable {
     final NumberAxis yAxis = new NumberAxis();
     final StackedAreaChart<String, Number> sbc =
             new StackedAreaChart<>(xAxis, yAxis);
+    final StackedBarChart<String, Number> sbc2 =
+            new StackedBarChart<>(xAxis, yAxis);
     final XYChart.Series<String, Number> series1 =
             new XYChart.Series<String, Number>();
     Stage stage = new Stage();
@@ -427,7 +429,7 @@ public class adminController extends Component implements Initializable {
     @FXML
     void Btn_stat(ActionEvent event) {
         stage.setTitle("Stat");
-        sbc.setTitle("Nb de rec par Date");
+        sbc2.setTitle("Nb de rec par Date");
         String sql = "SELECT date, COUNT(*) as lotfi FROM reclamation WHERE date >= DATE(NOW()) - INTERVAL 6 DAY GROUP by DAYOFWEEK(date)";
         try {
             preparedStatement = conn.prepareStatement(sql);
@@ -444,8 +446,8 @@ public class adminController extends Component implements Initializable {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        Scene scene = new Scene(sbc, 800, 600);
-        sbc.getData().addAll(series1);
+        Scene scene = new Scene(sbc2, 800, 600);
+        sbc2.getData().addAll(series1);
         stage.setScene(scene);
         stage.show();
     }

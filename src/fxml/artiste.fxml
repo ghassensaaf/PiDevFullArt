@@ -16,6 +16,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -168,18 +169,22 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <VBox layoutX="64.0" layoutY="46.0" prefHeight="236.0" prefWidth="106.0" spacing="30.0">
+                        <ImageView fitHeight="503.0" fitWidth="766.0" layoutX="-16.0" pickOnBounds="true" preserveRatio="true" />
+                                <Button fx:id="Btn_stat" layoutX="392.0" layoutY="370.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="Statistique" />
+                                <VBox layoutX="70.0" layoutY="14.0" prefHeight="236.0" prefWidth="106.0" spacing="40.0">
                                     <children>
-                                        <Label prefHeight="18.0" prefWidth="27.0" text="ID" />
+                                        <Label prefHeight="18.0" prefWidth="27.0" text="ID" textFill="#726262" />
                                         <Label prefHeight="18.0" prefWidth="34.0" text="Titre" />
                                         <Label prefHeight="18.0" prefWidth="50.0" text="Contenu" />
                                     </children>
                                 </VBox>
-                                <VBox layoutX="185.0" layoutY="46.0" prefHeight="159.0" prefWidth="150.0" spacing="22.0">
+                                <VBox layoutX="184.0" layoutY="14.0" prefHeight="173.0" prefWidth="150.0" spacing="18.0">
                                     <children>
                                         <TextField fx:id="txtid_rec" disable="true" editable="false" />
                                         <TextField fx:id="txttitre_rec" prefHeight="24.0" prefWidth="150.0" promptText="Titre" />
-                                        <TextArea fx:id="txtdesc_rec" prefHeight="200.0" prefWidth="200.0" promptText="Contenu.." />
+                              <Label fx:id="lblerreur1" prefHeight="17.0" prefWidth="150.0" text="Label" />
+                                        <TextArea fx:id="txtdesc_rec" prefHeight="53.0" prefWidth="150.0" promptText="Contenu.." />
+                              <Label fx:id="lblerreur2" prefHeight="0.0" prefWidth="150.0" text="Label" />
                                     </children>
                                 </VBox>
                                 <TableView fx:id="tableReclamation" layoutX="33.0" layoutY="234.0" onMouseClicked="#showselectedrec" prefHeight="213.0" prefWidth="658.0">
@@ -196,7 +201,6 @@
                                 <Button fx:id="btn_supprimer" layoutX="535.0" layoutY="198.0" mnemonicParsing="false" onAction="#Action_rec" prefHeight="26.0" prefWidth="111.0" style="-fx-background-color: #f1c232;" text="Supprimer" />
                                 <TextField fx:id="txtrecherche" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
                                 <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
-                                <Button fx:id="Btn_stat" layoutX="392.0" layoutY="198.0" mnemonicParsing="false" onAction="#Btn_stat" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #f1c232;" text="Statistique" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -215,7 +219,7 @@
                                         <TableColumn fx:id="tab_con_art_tel" prefWidth="92.0" text="Telephone" />
                                     </columns>
                                 </TableView>
-                                <TextField fx:id="txtrecherche1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
+                                <TextField fx:id="txtrecherche1" layoutX="535.0" layoutY="34.0" onKeyPressed="#search3" prefHeight="26.0" prefWidth="115.0" promptText="Recherche" />
                                 <Label layoutX="461.0" layoutY="38.0" text="Rechercher" />
                                 <TextField fx:id="txtid_art" editable="false" layoutX="109.0" layoutY="100.0" onKeyPressed="#search2" prefHeight="26.0" prefWidth="32.0" />
                                 <Label layoutX="97.0" layoutY="105.0" text="ID" />

@@ -133,10 +133,10 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="433.0" prefWidth="735.0">
+                        <AnchorPane layoutX="-1.0" layoutY="-3.0" minHeight="0.0" minWidth="0.0" prefHeight="520.0" prefWidth="735.0">
                            <children>
                               <Button fx:id="btn_pdf" layoutX="590.0" layoutY="204.0" mnemonicParsing="false" onAction="#Action_pdf" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: F1C232;" text="Imprimer PDF" />
-                              <ImageView fitHeight="521.0" fitWidth="763.0" layoutX="-9.0" layoutY="-1.0" pickOnBounds="true">
+                              <ImageView fx:id="" fitHeight="521.0" fitWidth="763.0" layoutX="-9.0" layoutY="-1.0" pickOnBounds="true">
                                  <image>
                                     <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/plein-cadre-du-disque-vinyle_23-2147889739.jpg" />
                                  </image>
@@ -208,7 +208,7 @@
                            </children>
                         </AnchorPane>
                         <Button fx:id="btn_avis" layoutX="409.0" layoutY="69.0" mnemonicParsing="false" onAction="#btn_avis" prefHeight="26.0" prefWidth="147.0" style="-fx-background-color: F1C232;" text="Donner un avis" />
-                        <TextField layoutX="551.0" layoutY="17.0" prefHeight="26.0" prefWidth="147.0" promptText="Recherche " />
+                        <TextField fx:id="rech3" layoutX="551.0" layoutY="17.0" onKeyPressed="#search3" prefHeight="26.0" prefWidth="147.0" promptText="Recherche " />
                      </children>
                   </AnchorPane>
                </content>

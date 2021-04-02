@@ -755,20 +755,46 @@ public class artisteController implements Initializable {
     }
     /*************************ACTION RECLAMATION*****************/
     @FXML
+    private Label lblerreur1;
+    @FXML
+    private Label lblerreur2;
+    @FXML
     void Action_rec(ActionEvent event) {
         if (event.getSource() == btn_ajouter) {
-            try {
-                ajouterReclamation();
-                Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
-                aa.setContentText("reclamation ajoutée");
-                aa.show();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                txttitre_rec.setText("");
-                txtdesc_rec.setText("");
-                txtdesc_rec.setText("");
+            if ( txttitre_rec.getText().length()==0 ) {
+                txttitre_rec.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                new animatefx.animation.Shake(txttitre_rec).play();
+                lblerreur1.setText("Veuillez saisir un Titre");
+                lblerreur1.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lblerreur1).play();
+            }
+            else {
+                txttitre_rec.setStyle(null);
+                lblerreur1.setText("");
+            }
+            if (txtdesc_rec.getText().length()==0)
+            {
+                txtdesc_rec.setStyle("-fx-border-color: red; -fx-border-width: 2px;");
+                new animatefx.animation.Shake(txtdesc_rec).play();
+                lblerreur2.setText("Veuillez saisir un Contenu");
+                lblerreur2.setStyle("-fx-text-fill: red");
+                new animatefx.animation.FadeInDown(lblerreur2).play();
+            }
 
+            else {
+                try {
+                    ajouterReclamation();
+                    Alert aa = new Alert(Alert.AlertType.CONFIRMATION);
+                    aa.setContentText("reclamation ajoutée");
+                    aa.show();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } finally {
+                    txttitre_rec.setText("");
+                    txtdesc_rec.setText("");
+                    txtdesc_rec.setText("");
+
+                }
             }
         }
         if (event.getSource() == btn_modifier) {
@@ -905,12 +931,12 @@ public class artisteController implements Initializable {
     void btn_contacter(ActionEvent event) {
         try {
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/fxml/ContacteArtiste.fxml"));
+            loader.setLocation(getClass().getResource("/fxml/Chatbox2.fxml"));
 
             Parent p=loader.load();
 
             Scene scene=new Scene(p);
-            ContacteArtiste controller = loader.getController();
+            Chatbox2 controller = loader.getController();
             controller.initData(Integer.parseInt(txtid_art.getText()),artistlogin.getText());
 
             Node node = (Node) event.getSource();
@@ -922,6 +948,38 @@ public class artisteController implements Initializable {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+
+    /**********************************SEARCH*******************************/
+
+
+    @FXML
+    private TextField txtrecherche1;
+    @FXML
+    void search3(KeyEvent event) {
+
+        FilteredList filter = new FilteredList(list4, e->true);
+        txtrecherche1.textProperty().addListener((observable, oldValue, newValue )-> {
+
+
+            filter.setPredicate((Predicate<? super client>) (client client)->{
+                if(newValue.isEmpty() || newValue==null) {
+                    return true;
+                }
+                else if(client.getNom().contains(newValue)) {
+                    return true;
+                }
+                else if(client.getPrenom().contains(newValue)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList sort = new SortedList(filter);
+        sort.comparatorProperty().bind(tab_con_art.comparatorProperty());
+        tab_con_art.setItems(sort);
+
     }
 
     /**************************** STAT REC  ***********************/
