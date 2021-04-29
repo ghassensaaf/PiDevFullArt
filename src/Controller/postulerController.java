@@ -172,7 +172,7 @@ public class postulerController implements Initializable {
              * with a few exceptions for e.g. Greek characters.  For a full list,
              * see:  https://www.bulksms.com/developer/eapi/submission/character-encoding/
              */
-            data += "username=" + URLEncoder.encode("trabelsim", "ISO-8859-1");
+            data += "username=" + URLEncoder.encode("ghassensms", "ISO-8859-1");
             data += "&password=" + URLEncoder.encode("Za3maettal3ou", "ISO-8859-1");
             data += "&message=" + URLEncoder.encode(clientlogin.getText()+" a postuler a votre annonce id "+txtidann.getText()+" !!Offre: "+txtprix.getText()+"!!Message: "+txtcontcan.getText(), "ISO-8859-1");
             data += "&want_report=1";

@@ -345,6 +345,19 @@ void btnaction(ActionEvent event) {
             txtprixmax.setStyle(null);
             erreur.setText("");
         }
+        if (txtdate.getValue()==null)
+        {
+            txtdate.setStyle("-fx-border-color: red; -fx-border-width: 3px;");
+            new animatefx.animation.Shake(txtdate).play();
+            erreur.setText("Champ Obligatoire");
+            erreur.setStyle("-fx-text-fill: red");
+            new animatefx.animation.FadeInDown(erreur).play();
+        }
+
+        else {
+            txtdate.setStyle(null);
+            erreur.setText("");
+        }
 
         if (txtadresse.getText().length()==0)
         {

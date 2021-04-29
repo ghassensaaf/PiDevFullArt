@@ -1555,7 +1555,7 @@ public class artisteController implements Initializable {
     @FXML
     private void serpro(ActionEvent event) throws IOException {
 
-     Parent stat_page = FXMLLoader.load(getClass().getResource("promoservice.fxml"));
+     Parent stat_page = FXMLLoader.load(getClass().getResource("/fxml/promoservice.fxml"));
 
             Scene stat_page_scene=new Scene(stat_page);
 

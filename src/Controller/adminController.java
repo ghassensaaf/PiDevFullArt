@@ -946,6 +946,32 @@ public class adminController extends Component implements Initializable {
         }
     }
 
+    @FXML
+    void stat_moemen(ActionEvent event) {
+        stage.setTitle("Stat");
+        sbc.setTitle("Nombre de publication par date");
+        String sql = "SELECT date_pub, COUNT(*) as mourad FROM publication WHERE date_pub >= DATE(NOW()) - INTERVAL 6 DAY GROUP by DAYOFWEEK(date_pub)";
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                series1.getData().add(new XYChart.Data<>(resultSet.getString(1), resultSet.getInt(2)));
+                System.out.println(resultSet.getDate(1));
+                System.out.println(resultSet.getInt(2));
+            }
+            System.out.println(resultSet);
+//            barChart.getData().add(data);
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        Scene scene = new Scene(sbc, 800, 600);
+        sbc.getData().addAll(series1);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     }
 
 

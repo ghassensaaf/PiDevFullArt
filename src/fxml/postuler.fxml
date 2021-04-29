@@ -6,6 +6,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
@@ -14,6 +16,11 @@
 
 <AnchorPane onMouseMoved="#refresh1" prefHeight="533.0" prefWidth="691.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.postulerController">
    <children>
+      <ImageView fitHeight="480.0" fitWidth="710.0" layoutX="-18.0" layoutY="56.0" pickOnBounds="true">
+         <image>
+            <Image url="file:/C:/Users/salma/Documents/GitHub/PiDevFullArt/images/casque-disque-vinyle-vintage-fond-noir_23-2147889878.jpg" />
+         </image>
+      </ImageView>
       <TableView fx:id="tabcandidature" layoutX="29.0" layoutY="292.0" onMouseClicked="#showselected" prefHeight="227.0" prefWidth="634.0" stylesheets="@../table.css">
          <columns>
             <TableColumn fx:id="colid" prefWidth="75.0" text="ID" />
@@ -38,13 +45,13 @@
       </Label>
       <VBox layoutX="96.0" layoutY="92.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
          <children>
-            <Label prefHeight="17.0" prefWidth="61.0" text="ID">
+            <Label prefHeight="17.0" prefWidth="61.0" text="ID" textFill="WHITE">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Label>
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="Contenu" />
-            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="prix" />
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="Contenu" textFill="WHITE" />
+            <Label layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="61.0" text="prix" textFill="WHITE" />
          </children>
       </VBox>
       <VBox layoutX="182.0" layoutY="92.0" prefHeight="200.0" prefWidth="100.0" spacing="12.0">
@@ -54,7 +61,7 @@
             <TextField fx:id="txtprix" />
          </children>
       </VBox>
-      <Label layoutX="322.0" layoutY="94.0" prefHeight="17.0" prefWidth="78.0" text="ID Annonce" />
+      <Label layoutX="322.0" layoutY="94.0" prefHeight="17.0" prefWidth="78.0" text="ID Annonce" textFill="WHITE" />
       <Button fx:id="btnaddann" layoutX="493.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Ajouter" />
       <Button fx:id="btneditann" layoutX="493.0" layoutY="179.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Modifier" />
       <Button fx:id="btndeleteann" layoutX="493.0" layoutY="226.0" mnemonicParsing="false" onAction="#btnaction" prefHeight="26.0" prefWidth="140.0" style="-fx-background-color: F1C232;" styleClass="v" text="Supprimer" />
